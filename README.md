@@ -71,5 +71,3 @@ Deployare i file compilati su server Apache
 Software rilasciato con licenza EUPL 1.2
 
 © Copyright Regione Piemonte – 2025
-
-© Copyright CSI-Piemonte – 2025
