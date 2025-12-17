@@ -1,0 +1,121 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card>
+
+
+<!-- il sistema non può popolare la prima tendina -->
+<mat-card-content
+  *ngIf="zeroAvviso"
+  class="alert card-body--danger">
+  <!--
+    Il sistema non può popolare la prima tendina della Tipologia PSO
+    perché nella base dati non è presente nessuna occorrenza relativa
+    all’associazione tra il Soggetto Attuatore a cui appartiene l’utente
+    e uno sportello delle PSO gestite.
+  -->
+  <h2 mat-card-title>Errore</h2>
+
+  <div class="card-body--content">
+    <p>Nessun Avviso disponibile per l'utente collegato</p>
+
+    <a class="btn btn-link--primary" [routerLink]="'/home'" aria-label="Torna alla pagina di selezione del ruolo">
+      Torna alla selezione del ruolo
+    </a>
+
+  </div>
+</mat-card-content>
+
+<!--widget error-->
+<app-widget-error
+  *ngIf="error"
+  class="mb-2"
+  [title]="'Errore'"
+  [message]="[error.message]"
+  [contentClass]="'card-body--danger'">
+</app-widget-error>
+
+
+    <!-- descrizione-->
+  <mat-card-content class="pt-2">
+    <span><strong>
+      Selezionare l'Avviso per il quale si intende operare.
+    </strong></span>
+  </mat-card-content>
+
+  <!-- selects -->
+  <mat-card-content class="w-100 ps-2 mb-0">
+    <form [formGroup]="avvisoForm">
+    <!-- 1 Tipologie PSO -->
+    <mat-form-field class="w-100 font-size-larger">
+      <mat-label>Selezionare una tipologia di PSO </mat-label>
+      <mat-select formControlName="tipologiaPsoForm">
+        <mat-option *ngFor="let tipologia of tipologiePSo$ | async; index as i"
+                    [value]="tipologia.tipologiaPsoId"
+                    (onSelectionChange)="onSelectionTipologia(tipologia, $event)">
+                    <!-- [value]="tipologia.tipologiaPsoId" -->
+          {{tipologia.descrizione}}
+          <!-- Avviso Regionale per l’attuazione della MISURA 1 “Azioni di orientamento a finalità educativa… -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- 2 Amministratore & Cicli-->
+    <mat-form-field class="w-100 font-size-larger">
+      <mat-label>Selezionare un'Amministrazione responsabile e ciclo finanziario </mat-label>
+      <mat-select required
+                  formControlName="ammECicloForm">
+        <mat-option *ngFor="let pso of psoAmmCicloList"
+                    [value]="pso.idPso?.toString()"
+                    (onSelectionChange)="onSelectionPso(pso, $event)">
+          {{pso.ammResponsabili?.descrizione}}-{{pso.cicliFinanziari?.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- 3 Sportello-->
+    <mat-form-field class="w-100 font-size-larger">
+      <mat-label>Selezionare uno sportello</mat-label>
+      <mat-select required
+                  formControlName="sportelloForm">
+
+        <mat-option *ngFor="let sportello of sportelloList"
+                    [value]="sportello.numProgrSportello?.toString()"
+                    (onSelectionChange)="onSelectionSportello(sportello, $event)">
+          {{sportello.dataInizio!|customDate}}
+          <ng-container *ngIf="sportello.dataFine"> - {{sportello.dataFine|customDate}} </ng-container>
+          - {{sportello.descrizioneSportello}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions [align]="'end'" class="pe-4 pb-2">
+      <button class="btn btn--primary"
+              aria-label="conferma scelta sportello"
+              (click)="onConferma()">CONFERMA</button>
+  </mat-card-actions>
+
+
+
+
+</mat-card>

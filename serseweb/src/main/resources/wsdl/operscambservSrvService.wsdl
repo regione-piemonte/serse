@@ -1,0 +1,1674 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://operscambserv.business.operserv.gamopera.csi.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://operscambserv.interfacews.operserv.gamopera.csi.it/" name="OperscambservSrvService" targetNamespace="http://operscambserv.business.operserv.gamopera.csi.it/">
+  <wsdl:import location="import/operscambservDefinitionImport.wsdl" namespace="http://operscambserv.interfacews.operserv.gamopera.csi.it/">
+    </wsdl:import>
+  <wsdl:binding name="OperscambservSrvServiceSoapBinding" type="ns1:Operscambserv">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="gestInterscMaterieConcludiServizioSerse">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieConcludiServizioSerse">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieConcludiServizioSerseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetDatiDemaConv">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetDatiDemaConv">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetDatiDemaConvResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSearchUC">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSearchUC">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSearchUCResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="bonifica">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="bonifica">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="bonificaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaGetAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaGetAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaGetAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieCalcolaVoucher">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieCalcolaVoucher">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieCalcolaVoucherResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="verificaBudget">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="verificaBudget">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="verificaBudgetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttoLiqSearchImportiLiquidQP">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttoLiqSearchImportiLiquidQP">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttoLiqSearchImportiLiquidQPResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieFinDirettoIstanzaAttivitaRep">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieFinDirettoIstanzaAttivitaRep">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieFinDirettoIstanzaAttivitaRepResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetBDGTDisponibileSF">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetBDGTDisponibileSF">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetBDGTDisponibileSFResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttoLiqSearchImportiLiquidazioniRate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttoLiqSearchImportiLiquidazioniRate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttoLiqSearchImportiLiquidazioniRateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchImportoFontiV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchImportoFontiV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchImportoFontiV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TooManyInputException">
+        <soap:fault name="TooManyInputException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieCalcPreventivoSerse">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieCalcPreventivoSerse">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieCalcPreventivoSerseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetBudgetDisponibileV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetBudgetDisponibileV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetBudgetDisponibileV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieCalPreventivoIstanzaCatalogo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieCalPreventivoIstanzaCatalogo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieCalPreventivoIstanzaCatalogoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSearchUCdiOperazione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSearchUCdiOperazione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSearchUCdiOperazioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSoppressioneEdizione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSoppressioneEdizione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSoppressioneEdizioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieRiapriIncontroDiServizio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieRiapriIncontroDiServizio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieRiapriIncontroDiServizioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="testResources">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="testResources">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="testResourcesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieModificaServizioSerse">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieModificaServizioSerse">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieModificaServizioSerseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieAvviaEdizione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieAvviaEdizione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieAvviaEdizioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="erogazioneAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="erogazioneAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="erogazioneAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetBudgetDisponibile">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetBudgetDisponibile">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetBudgetDisponibileResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieRitiraAllievo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieRitiraAllievo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieRitiraAllievoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieExcelSubCampioneOPEAttuazione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieExcelSubCampioneOPEAttuazione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieExcelSubCampioneOPEAttuazioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaGetClassificFromIdAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaGetClassificFromIdAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaGetClassificFromIdAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetEsitoIstanzaCatalogo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetEsitoIstanzaCatalogo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetEsitoIstanzaCatalogoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaInsertAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaInsertAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaInsertAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieCancellaVoucher">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieCancellaVoucher">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieCancellaVoucherResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSearchCodaDaElaborare">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSearchCodaDaElaborare">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSearchCodaDaElaborareResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestServTecGestFasciaSearch">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestServTecGestFasciaSearch">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestServTecGestFasciaSearchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestOperscambTabFinUpdateStato">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestOperscambTabFinUpdateStato">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestOperscambTabFinUpdateStatoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieNuovoServizioSerse">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieNuovoServizioSerse">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieNuovoServizioSerseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieElencoBuoniAutNonInEdizione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieElencoBuoniAutNonInEdizione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieElencoBuoniAutNonInEdizioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieExcelSubCampioneOPEGestione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieExcelSubCampioneOPEGestione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieExcelSubCampioneOPEGestioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="verificaBudgetImpegnoConsumo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="verificaBudgetImpegnoConsumo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="verificaBudgetImpegnoConsumoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieRiempiOperCatalogoFinDiretto">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieRiempiOperCatalogoFinDiretto">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieRiempiOperCatalogoFinDirettoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAsyncResult">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAsyncResult">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAsyncResultResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaDeleteAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaDeleteAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaDeleteAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchDestinatariAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchDestinatariAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchDestinatariAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAutorizzazioneSearchChiave">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAutorizzazioneSearchChiave">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAutorizzazioneSearchChiaveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieBuonoPersonaInSostituzione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieBuonoPersonaInSostituzione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieBuonoPersonaInSostituzioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieConcludiEdizione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieConcludiEdizione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieConcludiEdizioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieConcludiEdizioneV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieConcludiEdizioneV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieConcludiEdizioneV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieConcludiEdizioneV3">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieConcludiEdizioneV3">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieConcludiEdizioneV3Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchImportoFonti">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchImportoFonti">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchImportoFontiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TooManyInputException">
+        <soap:fault name="TooManyInputException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieQuadroEconomicoDomanda">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieQuadroEconomicoDomanda">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieQuadroEconomicoDomandaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetEsitoServizioAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetEsitoServizioAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetEsitoServizioAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieInsOperazioniIstanzaCatalogoAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieInsOperazioniIstanzaCatalogoAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieInsOperazioniIstanzaCatalogoAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieIscriviAllievoAEdizioneAvviata">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieIscriviAllievoAEdizioneAvviata">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieIscriviAllievoAEdizioneAvviataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchDettagliAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchDettagliAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchDettagliAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaTerminaAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaTerminaAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaTerminaAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetDataApprovCampione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetDataApprovCampione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetDataApprovCampioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSearchClassiTabFin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSearchClassiTabFin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSearchClassiTabFinResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestRataSearchDettagliRateSF">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestRataSearchDettagliRateSF">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestRataSearchDettagliRateSFResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieElencoBuoniAutorizzazione">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieElencoBuoniAutorizzazione">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieElencoBuoniAutorizzazioneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieAvviaEdizioneV3">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieAvviaEdizioneV3">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieAvviaEdizioneV3Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieAvviaEdizioneV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieAvviaEdizioneV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieAvviaEdizioneV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieAssegnaVoucher">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieAssegnaVoucher">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieAssegnaVoucherResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieEliminaServizioIncontri">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieEliminaServizioIncontri">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieEliminaServizioIncontriResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieRitiraAllievoV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieRitiraAllievoV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieRitiraAllievoV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetFlagPresenzaRev">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetFlagPresenzaRev">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetFlagPresenzaRevResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetInfoIstanzaCatalogo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetInfoIstanzaCatalogo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetInfoIstanzaCatalogoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="TooManyInputException">
+        <soap:fault name="TooManyInputException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieGetPraticaDomandaSoggFin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieGetPraticaDomandaSoggFin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieGetPraticaDomandaSoggFinResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieElencoBuoniAutNonInEdizioneV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieElencoBuoniAutNonInEdizioneV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieElencoBuoniAutNonInEdizioneV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaGetValEco">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaGetValEco">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaGetValEcoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSearchFontiTabFin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSearchFontiTabFin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSearchFontiTabFinResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieSoppressioneBuonoPersona">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieSoppressioneBuonoPersona">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieSoppressioneBuonoPersonaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestTabFinSearch">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestTabFinSearch">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestTabFinSearchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaCancellaErogazioneAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaCancellaErogazioneAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaCancellaErogazioneAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaGetDatoEconomico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaGetDatoEconomico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaGetDatoEconomicoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieCampionamento2127">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieCampionamento2127">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieCampionamento2127Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="processAsync">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="processAsync">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processAsyncResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaInsertAttivitaV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaInsertAttivitaV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaInsertAttivitaV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaInsertOreErogateAttivita">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaInsertOreErogateAttivita">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaInsertOreErogateAttivitaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaSearchCommittenti">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaSearchCommittenti">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaSearchCommittentiResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestAttivitaInsertAttivitaV3">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestAttivitaInsertAttivitaV3">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestAttivitaInsertAttivitaV3Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieNuovoIncontroSrvSerse">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieNuovoIncontroSrvSerse">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieNuovoIncontroSrvSerseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="gestInterscMaterieElencoBuoniAutorizzazioneV2">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="gestInterscMaterieElencoBuoniAutorizzazioneV2">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="gestInterscMaterieElencoBuoniAutorizzazioneV2Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnrecoverableException">
+        <soap:fault name="UnrecoverableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="OperScambServException">
+        <soap:fault name="OperScambServException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OperscambservSrvService">
+    <wsdl:port binding="tns:OperscambservSrvServiceSoapBinding" name="OperscambservSrvPort">
+      <soap:address location="/operservApplOperscambservWs/OperscambservSrv"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

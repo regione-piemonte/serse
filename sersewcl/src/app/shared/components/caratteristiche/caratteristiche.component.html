@@ -1,0 +1,110 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+<mat-card-header>
+  <h5 mat-card-title>
+    {{titolo}}
+  </h5>
+</mat-card-header>
+<mat-divider></mat-divider>
+
+<mat-card-content class="ps-5 pe-5 mt-3">
+  <ng-container *ngIf="!caratteristicheAssociate.length; else caratteristicheContent">
+    Nessun Caratteristica presente
+  </ng-container>
+  <ng-template #caratteristicheContent>
+    <div class="row pe-5" *ngFor="let caratteristica of caratteristicheAssociate">
+      {{caratteristica.descrCaratteristica}}
+      <hr>
+    </div>
+  </ng-template>
+</mat-card-content>
+
+<mat-divider></mat-divider>
+<mat-card-actions
+    [align]="'start'">
+  <ng-container *ngIf="isModificabile==true">
+    <button mat-button
+            class="btn-link--primary"
+            aria-label="modifica caratteristiche"
+            (click)="apriModale()">
+      GESTISCI CARATTERISTICHE
+    </button>
+  </ng-container>
+</mat-card-actions>
+
+</mat-card>
+
+
+<ng-template #caratteristiche>
+<h2 mat-dialog-title>Caratteristiche</h2>
+<hr>
+
+<!-- ------------------------------------- -->
+<section mat-dialog-content
+          class="dialog-content">
+  <mat-checkbox class="example-margin"
+                [checked]="allComplete"
+                [indeterminate]="someComplete()"
+                (change)="setAll($event.checked)">
+    <strong>Seleziona tutte</strong>
+  </mat-checkbox>
+  <hr>
+
+  <div class="container">
+
+    <div *ngFor="let caratteristica of caratteristicheChecked"
+          class="row">
+      <div class="col-12">
+      <mat-checkbox [(ngModel)]="caratteristica.completed"
+                      (ngModelChange)="updateAllComplete()">
+      </mat-checkbox>
+      {{caratteristica.descrCaratteristica}}
+      </div>
+      <hr>
+    </div>
+
+  </div>
+</section>
+
+<div  mat-dialog-actions
+      [align]="'end'"
+      class="d-flex border-top border-1 justify-content-between mt-3">
+  <div class="p-2">
+    <button mat-dialog-close
+            mat-button
+            class="btn btn--outline-primary"
+            aria-label="annulla modifica">
+          ANNULLA
+    </button>
+  </div>
+  <div class="p-2">
+    <button mat-dialog-close
+            mat-raised-button
+            class="btn btn--primary"
+            aria-label="conferma modifica"
+            (click)="aggiorna()">CONFERMA</button>
+  </div>
+</div>
+</ng-template>

@@ -1,0 +1,187 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<div style="width: 50vw;">
+<h2 mat-dialog-title>Ente coinvolto</h2>
+<hr>
+
+
+<!-- Dati Principali -->
+<div>
+  <!-- Enti da fonte dati-->
+  <mat-dialog-content>
+
+
+    <ng-container *ngIf="isEsterno && isModificabile; else regionaleNonModificabile">
+      <form class="row" [formGroup]="datiEnteEsternoForm">
+        <!-- Denominazione Ente-->
+        <div class="col-6 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Denominazione Ente</mat-label>
+            <input matInput formControlName="denominazione" maxlength="250">
+          </mat-form-field>
+        </div>
+        <!-- Denominazione Sede Principale -->
+        <div class="col-6">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Denominazione Sede Principale</mat-label>
+            <input matInput formControlName="denominazioneSedePrincipale" maxlength="250">
+          </mat-form-field>
+        </div>
+
+        <!-- Provincia -->
+        <div class="col-6 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare una Provincia</mat-label>
+            <mat-select formControlName="provincia" (selectionChange)="fetchComuni()">
+              <mat-option>---</mat-option>
+              <mat-option *ngFor="let provincia of provinciaList" [value]="provincia.codiceProvincia">
+                {{provincia.descrizione}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!--Comune -->
+        <div class="col-6">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare un Comune</mat-label>
+            <mat-select formControlName="comune">
+              <mat-option>---</mat-option>
+              <mat-option *ngFor="let comune of comuniList" [value]="comune.codiceIstatComune">
+                {{comune.descrizione}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Indirizzo -->
+        <div class="col-12 mb-3">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Indirizzo</mat-label>
+            <input matInput formControlName="indirizzo" maxlength="100">
+          </mat-form-field>
+        </div>
+      </form>
+    </ng-container>
+
+    <ng-template #regionaleNonModificabile>
+      <div class="row">
+        <!-- Fonte dati -->
+        <div *ngIf="enteInUse.descrizioneFonteDato" class="col-6 mb-2">
+          <span>Fonte dati: <strong>{{enteInUse.descrizioneFonteDato}}</strong> </span>
+        </div>
+        <!--  -->
+        <div *ngIf="enteInUse.codice1Soggetto" class="col-6">
+          <span>Codice originale
+            <strong>{{enteInUse.codice1Soggetto}}
+              <ng-container *ngIf="enteInUse.codice2Soggetto"> - {{enteInUse.codice2Soggetto}}</ng-container>
+            </strong>
+          </span>
+        </div>
+
+        <div class="col-12 mb-2">
+          <span>Denominazione: <strong>{{enteInUse.denominazione}}</strong></span>
+        </div>
+        <div class="col wrap" *ngIf="enteInUse?.idFonteDato == 1">
+          <div class="row">
+          <div class="col-6 mb-2" >
+            <span>Percorso: <strong>{{enteInUse.percorso ? enteInUse.percorso : "Dato non presente" }}</strong> </span>
+          </div>
+          <div class="col-6 mb-2" >
+            <span>Autonomia: <strong>{{enteInUse.autonomia ? enteInUse.autonomia : "Dato non presente"}}</strong> </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-2" >
+            <span>Cod. meccanografico: <strong>{{enteInUse.codMeccanografico ? enteInUse.codMeccanografico: "Dato non presente"}}</strong> </span>
+          </div>
+          <div class="col-6 mb-2" >
+            <span>Cod. meccanografico autonomia: <strong>{{enteInUse.codMeccanograficoAutonomia ? enteInUse.codMeccanograficoAutonomia : "Dato non presente"}}</strong> </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-2" >
+            <span>Grado scolastico: <strong>{{enteInUse.gradoScolastico ? enteInUse.gradoScolastico : "Dato non presente"}}</strong> </span>
+          </div>
+          <div class="col-6 mb-4" >
+            <span>Tipologia: <strong>{{enteInUse.tipologia ? enteInUse.tipologia : "Dato non presente"}}</strong> </span>
+          </div>
+        </div>
+        </div>
+        <div class="col-12">
+          <span *ngIf="enteInUse.denominazioneSedePrincipale">Denominazione sede principale:
+            <strong>{{enteInUse.denominazioneSedePrincipale}}</strong></span>
+        </div>
+        <div class="col-6 ">
+          <span>Provincia: <strong>{{enteInUse.comune?.provincia?.siglaProvincia}}</strong></span>
+        </div>
+        <div class="col-6">
+          <span>Comune: <strong>{{enteInUse.comune?.descrizioneComune}}</strong></span>
+        </div>
+        <div class="col-12 mb-3">
+          <span>Indirizzo: <strong>{{enteInUse.indirizzo}}</strong></span>
+        </div>
+      </div>
+
+    </ng-template>
+
+
+    <!--Ruolo-->
+    <div class="row" *ngIf="isModello">
+      <mat-form-field class="col-6" appearance="legacy">
+        <mat-label>Selezionare un Ruolo</mat-label>
+        <mat-select [formControl]="ruoloControl">
+          <mat-option>---</mat-option>
+          <mat-option *ngFor="let ruolo of  ruoliEnte" [value]="ruolo.idRuoloEnte|toString">
+            {{ruolo.descrRuoloEnte}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+
+</div>
+<hr>
+
+<!-- Riferimenti -->
+<app-dati-riferimento [formGrup]="riferimentoForm">
+</app-dati-riferimento>
+
+<div mat-dialog-action
+    [align]="'end'"
+    class="d-flex mt-3 justify-content-between">
+  <div class="p-2">
+    <button mat-dialog-close
+            mat-button
+            aria-label="chiudi finestra"
+            class="btn btn--outline-primary">
+        {{isModificabile? "ANNULLA":"CHIUDI"}}</button>
+  </div>
+  <div *ngIf="isModificabile" class="p-2">
+    <button mat-raised-button
+            class="btn btn--primary"
+            aria-label="salva ente"
+            (click)="onConferma()">
+        CONFERMA</button>
+  </div>
+</div>
+</div>

@@ -1,0 +1,198 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<div>
+<h2>Dati peculiari del {{target}}</h2>
+<mat-dialog-content>
+<!-- ---------------------------------------------------------------------------- -->
+<!-- ---------------------------Anagrafica--------------------------------------- -->
+
+<div class="row justify-content-center" *ngIf="errorNonCompilati" >
+  <div class="col-auto">
+    <mat-error>{{errorNonCompilati}}</mat-error>
+  </div>
+</div>
+  <ng-container *ngIf="destinatario">
+    <form [formGroup]="anagrafica">
+      <div class="row">
+      <!-- Cognome -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Cognome</mat-label>
+          <input matInput formControlName="cognome">
+          {{destinatario.cognomeDestinatario}}
+          <mat-error>
+            <app-control-messages [control]="anagrafica.controls['cognome']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- Nome -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome">
+          {{destinatario.nomeDestinatario}}
+          <mat-error>
+            <app-control-messages [control]="anagrafica.controls['nome']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- codice fiscale -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Codice fiscale</mat-label>
+          <input matInput formControlName="codFisc" maxlength="16" style="text-transform:uppercase">
+          {{destinatario.codiceFiscaleDestinatario}}
+          <mat-error>
+            <app-control-messages [control]="anagrafica.controls['codFisc']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- Data di nascia -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field appearance="legacy">
+          <mat-label>Data di nascita</mat-label>
+          <input matInput formControlName="dataNascita" >
+          {{destinatario.dNascita!|customDate}}
+          <mat-error>
+            <app-control-messages [control]="anagrafica.controls['dataNascita']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+    </form>
+  </ng-container>
+  <hr>
+
+  <form  [formGroup]="datiPeculiariForm">
+
+    <div class="row">
+    <div class="col-6 mb-2" *ngIf="destinatario">
+      <mat-form-field class="w-100" appearance="legacy" >
+        <mat-label>Nome ente</mat-label>
+        <mat-select formControlName="nomeEnte" >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let ente of entiDestinatario" [value]="ente.idEnteConvoltoServizio!.toString()">
+           {{ente.odice1Soggetto}} - <ng-container *ngIf="ente.codice2Soggetto"> {{ente.codice2Soggetto}} - </ng-container> {{ente.denominazione}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div calss="col-6 mb-3" *ngIf="destinatario" ></div>
+
+    <!-- <ng-container *ngIf="showDatoPeculiare1">
+    <div class="col-6 mb-3">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-label>{{labelDatoPeculiare1}}</mat-label>
+        <input matInput formControlName="datoPeculiare1" >
+      </mat-form-field>
+    </div>
+    </ng-container> -->
+
+    <ng-container *ngIf="showDatoPeculiare1">
+    <div class="col-6 mb-3">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-label>{{labelDatoPeculiare1}}</mat-label>
+        <mat-select formControlName="idPsoClasseDestinatario"  >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let classe of classiDestinatario" [value]="classe.idPsoClasseDestinatario">
+            {{classe.descrClasseDestinatario}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="showDatoPeculiare2">
+    <div class="col-6 mb-3">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-label>{{labelDatoPeculiare2}}</mat-label>
+        <input matInput formControlName="datoPeculiare2" >
+      </mat-form-field>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="showTitoloSt">
+    <div class="col-6 mb-3">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-label>Titolo di studio</mat-label>
+        <mat-select formControlName="titoloDiStudio"  >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let titolo of titoliDIStudio" [value]="titolo.codTitoloStudioIgrue">
+            {{titolo.descrTitoloStudioIgrue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="showCondOcc">
+    <div class="col-6 mb-3">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-label>Condizione occupazionale</mat-label>
+        <mat-select formControlName="condizioneOccupazionale"   >
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let condizioneOccupazionale of condizioniOcuppazionale" [value]="condizioneOccupazionale.codCondizioneOccupazionaleIgrue">
+            {{condizioneOccupazionale.descrCondizioneOccupazionaleIgrue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="showSvantAbitativo">
+    <div class="col-6 mb-3">
+      <mat-radio-group formControlName="svantaggioAbitativo"  labelPosition="before">
+        Svantaggio abitativo
+        <mat-radio-button value="N" class="m-2" >No</mat-radio-button>
+        <mat-radio-button value="S"  class="m-2" >Si</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="showDisab">
+    <div class="col-6 mb-3">
+      <mat-radio-group formControlName="disabilita"  labelPosition="before">
+        Disabilità
+        <mat-radio-button value="N"  class="m-2" >No</mat-radio-button>
+        <mat-radio-button value="S" class="m-2" >Si</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    </ng-container>
+
+    </div>
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions  [align]="'end'" class="d-flex justify-content-between">
+
+      <button class="btn btn--outline-primary"
+              mat-dialog-close=""
+              aria-label="annulla"
+              (click)="onAnnulla()"  >ANNULLA</button>
+      <button *ngIf="isModificabile && !esisteElaborazioneInCorso"
+              aria-label="conferma modifiche"
+              class="btn btn--primary"
+              (click)="onConferma()">CONFERMA</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.CaratteristicaDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.CaratteristicaDTO" id="caratteristica">
+		<id column="id_caratteristica" javaType="long" property="idCaratteristica"/>
+		<result column="descr_caratteristica" javaType="string" property="descrCaratteristica" />
+	</resultMap>
+	
+	<select id="getCaratteristicheForModello" parameterType="map" resultMap="caratteristica">
+		SELECT 	dc.id_caratteristica, 
+				dc.descr_caratteristica 
+		FROM 	
+				serse.serse_d_caratteristica dc
+				JOIN serse.serse_r_modello_intervento_pso_caratteristica mipc 
+				ON dc.id_caratteristica = mipc.id_caratteristica 
+		WHERE mipc.id_pso = #{idPso}
+		AND mipc.id_modello_di_intervento = #{idModelloIntervento}
+	
+	</select>
+	
+	<select id="getCaratteristicheForPso" parameterType="map" resultMap="caratteristica">
+		SELECT 	dc.id_caratteristica, 
+				dc.descr_caratteristica 
+		FROM 	
+				serse.serse_d_caratteristica dc
+				JOIN serse.serse_r_pso_caratteristica pc 
+				ON dc.id_caratteristica = pc.id_caratteristica 
+		WHERE pc.id_pso = #{idPso}
+	</select>
+	
+	<select id="getCaratteristicheForModelloServizioPso" parameterType="map" resultMap="caratteristica">
+		SELECT distinct dc.id_caratteristica,
+				dc.descr_caratteristica 
+		FROM 	
+				serse.serse_d_caratteristica dc
+				JOIN serse.serse_r_modello_intervento_pso_caratteristica mipc 
+				ON dc.id_caratteristica = mipc.id_caratteristica 
+				JOIN serse_t_intervento inter
+				ON inter.id_modello_di_intervento = mipc.id_modello_di_intervento
+				JOIN serse_t_servizio serv
+				ON serv.id_intervento = inter.id_intervento
+		WHERE mipc.id_pso = #{idPso}
+		AND mipc.id_modello_di_intervento = #{idModelloIntervento}
+	
+	</select>
+	
+	<select id="getCaratteristicheServizioForPSO" parameterType="map" resultMap="caratteristica">
+		SELECT distinct	dc.id_caratteristica,
+				dc.descr_caratteristica 
+		FROM 	
+				serse.serse_d_caratteristica dc
+				JOIN serse.serse_r_servizio_pso_caratteristica spc
+				ON dc.id_caratteristica = spc.id_caratteristica
+		WHERE spc.id_pso = #{idPso}
+	
+	</select>
+	
+	<select id="getCaratteristicheServizioForPSOServizio" parameterType="map" resultMap="caratteristica">
+		SELECT distinct	dc.id_caratteristica,
+				dc.descr_caratteristica 
+		FROM 	
+				serse.serse_d_caratteristica dc
+				JOIN serse.serse_r_servizio_pso_caratteristica spc
+				ON dc.id_caratteristica = spc.id_caratteristica
+		WHERE spc.id_pso = #{idPso}
+		AND spc.id_servizio = #{idServizio}
+	</select>
+
+	<select id="getCaratteristicheServizioForIdServizio" parameterType="map" resultMap="caratteristica">
+		SELECT distinct	dc.id_caratteristica,
+		dc.descr_caratteristica
+		FROM
+		serse.serse_d_caratteristica dc
+		JOIN serse.serse_r_servizio_pso_caratteristica spc
+		ON dc.id_caratteristica = spc.id_caratteristica
+		WHERE spc.id_servizio = #{idServizio}
+	</select>
+
+	<select id="getCaratteristicheServizioForIdIntervento" parameterType="map" resultMap="caratteristica">
+		SELECT distinct	dc.id_caratteristica,
+		dc.descr_caratteristica
+		FROM
+		serse.serse_d_caratteristica dc
+		JOIN serse.serse_r_servizio_pso_caratteristica spc
+		ON dc.id_caratteristica = spc.id_caratteristica
+		JOIN serse_t_servizio ser
+		ON spc.id_servizio = ser.id_servizio
+		WHERE ser.id_intervento = #{idIntervento}
+	</select>
+</mapper>

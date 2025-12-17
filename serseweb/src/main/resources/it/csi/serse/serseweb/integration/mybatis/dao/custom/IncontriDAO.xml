@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.IncontriDAO">
+    <resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.IncontroDTO" id="incontri">
+        <id column="id_incontro" javaType="long" property="idIncontro"/>
+        <result column="titolo_incontro" javaType="string" property="titoloIncontro" />
+        <result column="id_servizio" javaType="long" property="idServizio"/>
+        <result column="d_inizio" javaType="date" property="dInizio"/>
+        <result column="d_fine" javaType="date" property="dFine"/>
+        <result column="durata_ore" javaType="float" property="durataOre"/>
+        <result column="referente_nome" javaType="string" property="nomeReferente" />
+        <result column="referente_cognome" javaType="string" property="cognomeReferente" />
+        <result column="referente_email" javaType="string" property="referenteEmail" />
+        <result column="referente_telefono" javaType="string" property="referenteTelefono" />
+        <result column="note" javaType="string" property="note" />
+        <result column="cod_user_chiusura" javaType="string" property="codUserChiusura" />
+        <result column="d_chiusura" javaType="date" 			property="dChiusura"/>
+        <result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+        <result column="d_inserim" javaType="date" 			property="dInserim"/>
+        <result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+        <result column="d_aggiorn" javaType="date" 			property="dAggiorn"/>
+        <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.LuogoIncontroDTO" property="luogoIncontro">
+            <id column="id_luogo_incontro" javaType="long" property="idLuogoIncontro" />
+            <result column="denominazione_luogo" javaType="string" property="denominazioneLuogo"/>
+            <result column="indirizzo_luogo" javaType="string" property="indirizzoLuogo"/>
+            <result column="note_luogo" javaType="string" property="note"/>
+            <result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+            <result column="d_inserim" javaType="date" 			property="dInserim"/>
+            <result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+            <result column="d_aggiorn" javaType="date" 			property="dAggiorn"/>
+            <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvenienzaLuogoDTO" property="provenienzaLuogo">
+                <id column="id_provenienza_luogo" javaType="long" property="idProvenienzaLuogo" />
+                <result column="descr_provenienza_luogo" javaType="string" property="descrProvenienzaLuogo" />
+                <result column="id_pso" javaType="long" property="idPso"/>
+                <result column="id_fonte_dato" javaType="long" property="idFonteDato"/>
+                <result column="descr_fonte_dato" javaType="string" property="descrFonteDato" />
+            </association>
+            <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO" property="comuneIncontro">
+                <id column="comune" javaType="string" property="codiceIstatComune" />
+                <result column="descom" javaType="string" property="descrizioneComune" />
+                <result column="cap" javaType="integer" property="cap" />
+                <result column="codfisc" javaType="string" property="codiceFiscaleComune" />
+                <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.BacinoDTO" property="bacino">
+                    <id column="cod_bacino" javaType="long" property="codBacino" />
+                    <result column="descrizione" javaType="string" property="descrizione" />
+                    <result column="cod_prov" javaType="string" property="codProv" />
+                </association>
+                <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO" property="provincia">
+                    <id column="prov" javaType="string" property="codiceProvincia" />
+                    <result column="regione" javaType="string" property="codiceRegione" />
+                    <result column="desprov" javaType="string" property="descrizioneProvincia" />
+                    <result column="sigprov" javaType="string" property="siglaProvincia" />
+                </association>
+            </association>
+        </association>
+        <association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.StatoIncontroDTO" property="statoIncontro">
+            <id column="id_stato_incontro" javaType="long" property="idStatoIncontro" />
+            <result column="descr_stato_incontro" javaType="string" property="descrStatoIncontro" />
+        </association>
+    </resultMap>
+
+    <select id="getIncontriForIdServizio" parameterType="map" resultMap="incontri">
+        SELECT distinct	*, luoginc.note note_luogo
+        FROM
+        serse.serse_t_incontro inc
+        left JOIN serse.serse_t_luogo_incontro luoginc
+        ON inc.id_luogo_incontro = luoginc.id_luogo_incontro
+        left JOIN serse.serse_d_provenienza_luogo provluog
+        ON provluog.id_provenienza_luogo = luoginc.id_provenienza_luogo
+        left JOIN serse.serse_d_fonte_dato fondat
+        ON fondat.id_fonte_dato = provluog.id_fonte_dato
+        left JOIN serse.serse_d_stato_incontro statinc
+        ON inc.id_stato_incontro = statinc.id_stato_incontro
+        left JOIN serse.ext_tt_comune comu
+        ON luoginc.cod_istat_comune_incontro = comu.comune
+        left JOIN serse.ext_tt_bacino bac
+        ON bac.cod_bacino = comu.cod_bacino
+        left JOIN serse.ext_tt_provincia provi
+        ON comu.prov = provi.prov
+        WHERE inc.id_servizio = #{idServizio}
+    </select>
+
+    <select id="getIncontriForId" parameterType="map" resultMap="incontri">
+        SELECT distinct	*, luoginc.note note_luogo
+        FROM
+        serse.serse_t_incontro inc
+        left JOIN serse.serse_t_luogo_incontro luoginc
+        ON inc.id_luogo_incontro = luoginc.id_luogo_incontro
+        left JOIN serse.serse_d_provenienza_luogo provluog
+        ON provluog.id_provenienza_luogo = luoginc.id_provenienza_luogo
+        left JOIN serse.serse_d_fonte_dato fondat
+        ON fondat.id_fonte_dato = provluog.id_fonte_dato
+        left JOIN serse.serse_d_stato_incontro statinc
+        ON inc.id_stato_incontro = statinc.id_stato_incontro
+        left JOIN serse.ext_tt_comune comu
+        ON luoginc.cod_istat_comune_incontro = comu.comune
+        left JOIN serse.ext_tt_bacino bac
+        ON bac.cod_bacino = comu.cod_bacino
+        left JOIN serse.ext_tt_provincia provi
+        ON comu.prov = provi.prov
+        WHERE inc.id_incontro = #{idIncontro}
+    </select>
+
+  <update id="riapriIncontri" parameterType="map">
+    update serse.serse_t_incontro
+    set id_stato_incontro=10, cod_user_aggiorn='GAM', d_aggiorn=current_timestamp, d_chiusura=null, cod_user_chiusura=null
+    where id_servizio = #{idServizio} and id_stato_incontro = 40
+  </update>
+</mapper>

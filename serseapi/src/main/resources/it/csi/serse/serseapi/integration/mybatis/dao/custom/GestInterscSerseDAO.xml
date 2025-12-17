@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseapi.integration.mybatis.dao.custom.GestInterscSerseDAO">
+    <update id="updateVociSpesa" parameterType="java.util.List">
+           <foreach collection="vociSpesa" item="voceSpesa" index="index" separator=";">
+                UPDATE serse.serse_r_servizio_voce_spesa
+                SET cod_natura_spesa=#{voceSpesa.codNaturaSpesa},
+                    parametro_economico=#{voceSpesa.parametroEconomico},
+                    parametro_fisico=#{voceSpesa.parametroFisico},
+                    parametro_temporale=#{voceSpesa.parametroTemporale},
+                    importo_voce_spesa=#{voceSpesa.importoVoceSpesa},
+                    cod_user_inserim=#{voceSpesa.codUserInserim},
+                    d_inserim=#{voceSpesa.dInserim},
+                    cod_user_aggiorn=#{voceSpesa.codUserAggiorn},
+                    d_aggiorn=now()
+                WHERE id_servizio=#{voceSpesa.idServizio} AND id_pso=#{voceSpesa.idPso} AND cod_voce_spesa=#{voceSpesa.codVoceSpesa};
+           </foreach>
+    </update>
+
+    <update id="updateServizioFonte" parameterType="java.util.List" >
+        <foreach collection="serviziFonte" item="servizioFonte" index="index" separator=";">
+            UPDATE serse.serse_r_servizio_fonte
+            SET descr_fonte=#{servizioFonte.descrFonte},
+                cod_tipologia_fonte=#{servizioFonte.codTipologiaFonte},
+                importo_fonte=#{servizioFonte.importoFonte},
+                perc_fonte=#{servizioFonte.percFonte},
+                cod_user_inserim=#{servizioFonte.codUserInserim},
+                d_inserim=#{servizioFonte.dInserim},
+                cod_user_aggiorn=#{servizioFonte.codUserAggiorn},
+                d_aggiorn=now()
+            WHERE id_servizio=#{servizioFonte.idServizio} AND id_fonte=#{servizioFonte.idFonte};
+        </foreach>
+    </update>
+
+    <insert id="saveVoceSpesaServizio" parameterType="java.util.List" >
+        INSERT INTO serse.serse_r_servizio_voce_spesa
+        (id_servizio,
+        id_pso,
+        cod_voce_spesa,
+        cod_natura_spesa,
+        parametro_economico,
+        parametro_fisico,
+        parametro_temporale,
+        importo_voce_spesa,
+        cod_user_inserim,
+        d_inserim,
+        cod_user_aggiorn,
+        d_aggiorn)
+        VALUES
+        <foreach collection="vociSpesa" item="voceSpesa" index="index" open="" separator="," close="">
+        (#{voceSpesa.idServizio,jdbcType=INTEGER},
+            #{voceSpesa.idPso,jdbcType=INTEGER},
+            #{voceSpesa.codVoceSpesa,jdbcType=VARCHAR},
+            #{voceSpesa.codNaturaSpesa,jdbcType=VARCHAR},
+            #{voceSpesa.parametroEconomico,jdbcType=NUMERIC},
+            #{voceSpesa.parametroFisico,jdbcType=NUMERIC},
+            #{voceSpesa.parametroTemporale,jdbcType=NUMERIC},
+            #{voceSpesa.importoVoceSpesa,jdbcType=NUMERIC},
+            #{voceSpesa.codUserInserim,jdbcType=VARCHAR},
+            now(),
+            #{voceSpesa.codUserInserim,jdbcType=VARCHAR},
+            now())
+        </foreach>
+    </insert>
+    <insert id="saveServiziFonte" parameterType="java.util.List">
+        INSERT INTO serse.serse_r_servizio_fonte
+        (
+            id_servizio,
+            id_fonte,
+            descr_fonte,
+            cod_tipologia_fonte,
+            importo_fonte,
+            perc_fonte,
+            cod_user_inserim,
+            d_inserim,
+            cod_user_aggiorn,
+            d_aggiorn
+        )
+        VALUES
+        <foreach collection="serviziFonte" item="servizioFonte" index="index"  open="" separator="," close="">
+        (
+            #{servizioFonte.idServizio,jdbcType=INTEGER},
+            #{servizioFonte.idFonte,jdbcType=INTEGER},
+            #{servizioFonte.descrFonte,jdbcType=VARCHAR},
+            #{servizioFonte.codTipologiaFonte,jdbcType=VARCHAR},
+            #{servizioFonte.importoFonte,jdbcType=NUMERIC},
+            #{servizioFonte.percFonte,jdbcType=NUMERIC},
+            #{servizioFonte.codUserInserim,jdbcType=VARCHAR},
+            now(),
+            #{servizioFonte.codUserAggiorn,jdbcType=VARCHAR},
+            now()
+        );
+
+        </foreach>
+    </insert>
+</mapper>

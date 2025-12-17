@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.AreeTerritorialiDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.generated.dto.ExtGmopDAreaTerritorialeDTO" id="areaTerritoriale">
+		<id column="cod_area_territoriale" javaType="string" property="codAreaTerritoriale"/>
+		<result column="descr_area_territoriale" javaType="string" property="descrAreaTerritoriale" />
+	</resultMap>
+	<select id="getAreaTerritorialeFor" parameterType="map" resultMap="areaTerritoriale">
+		SELECT 	distinct aterr.cod_area_territoriale, 
+				aterr.descr_area_territoriale 
+		FROM 	
+				ext_gmop_d_area_territoriale aterr
+				JOIN serse.serse_t_sede_soggetto_attuatore sedsogat 
+				ON aterr.cod_area_territoriale = sedsogat.cod_area_territoriale_finanziamento 
+				JOIN serse.serse_t_soggetto_attuatore sogat 
+				ON sogat.id_soggetto_attuatore = sedsogat.id_soggetto_attuatore 
+		WHERE sogat.gruppo_operatore = #{gruppoOperatore}
+			AND sogat.cod_operatore = #{codOperatore}
+			AND sogat.model_id = #{modelId}
+	</select>
+
+	<select id="getAreaTerritorialeForNumSportello" parameterType="map" resultMap="areaTerritoriale">
+		SELECT 	distinct aterr.cod_area_territoriale,
+		aterr.descr_area_territoriale
+		FROM
+		ext_gmop_d_area_territoriale aterr
+		JOIN serse.serse_t_sede_soggetto_attuatore sedsogat
+		ON aterr.cod_area_territoriale = sedsogat.cod_area_territoriale_finanziamento
+		JOIN serse.serse_t_soggetto_attuatore sogat
+		ON sogat.id_soggetto_attuatore = sedsogat.id_soggetto_attuatore
+		WHERE sogat.gruppo_operatore = #{gruppoOperatore}
+		AND sogat.cod_operatore = #{codOperatore}
+		AND sogat.num_progr_sportello = #{numProgrSportello}
+	</select>
+</mapper>

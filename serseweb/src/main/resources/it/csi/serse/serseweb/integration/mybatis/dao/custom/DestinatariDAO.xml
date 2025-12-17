@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.DestinatariDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.generated.dto.SerseTDestinatarioDTO" id="destinatario">
+		<id column="id_destinatario" javaType="long" property="idDestinatario"/>
+		<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+		<result column="flg_forzatura_ctrl_cf" javaType="string" property="flgForzaturaCtrlCf"/>
+		<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+		<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+		<result column="d_nascita" javaType="date" property="dNascita"/>
+		<result column="cod_istat_comune_nascita" javaType="string" property="codIstatComuneNascita"/>
+		<result column="cod_stato_estero_nascita" javaType="long" property="codStatoEsteroNascita"/>
+		<result column="descr_citta_estera_nascita" javaType="string" property="descrCittaEsteraNascita"/>
+		<result column="cod_istat_comune_residenza" javaType="string" property="codIstatComuneResidenza"/>
+		<result column="cod_stato_estero_residenza" javaType="long" property="codStatoEsteroResidenza"/>
+		<result column="descr_citta_estera_residenza" javaType="string" property="descrCittaEsteraResidenza"/>
+		<result column="indirizzo_residenza" javaType="string" property="indirizzoResidenza"/>
+		<result column="cap_residenza" javaType="long" property="capResidenza"/>
+		<result column="cod_istat_comune_domicilio" javaType="string" property="codIstatComuneDomicilio"/>
+		<result column="indirizzo_domicilio" javaType="string" property="indirizzoDomicilio"/>
+		<result column="cap_domicilio" javaType="long" property="capDomicilio"/>
+		<result column="recapito_email" javaType="string" property="recapitoEmail"/>
+		<result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+		<result column="cod_cittadinanza" javaType="string" property="codCittadinanza"/>
+		<result column="gruppo_operatore_inserimento" javaType="string" property="gruppoOperatoreInserimento"/>
+		<result column="cod_operatore_inserimento" javaType="long" property="codOperatoreInserimento"/>
+		<result column="gruppo_operatore_modifica" javaType="string" property="gruppoOperatoreModifica"/>
+		<result column="cod_operatore_modifica" javaType="long" property="codOperatoreModifica"/>
+		<result column="cod_user_inserim" javaType="string" property="codUserInserim"/>
+		<result column="d_inserim" javaType="date" property="dInserim"/>
+		<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn"/>
+		<result column="d_aggiorn" javaType="date" property="dAggiorn"/>
+	</resultMap>
+
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.PartecipantiDTO" id="partecipanti">
+		<result column="id_destinatario_servizio" javaType="long" property="idDestinatarioServizio"/>
+		<result column="numerazione_destinatario" javaType="long" property="numerazioneDestinatario"/>
+		<result column="d_inserim" javaType="date" property="dtInserimentoDestinatarioServizio"/>
+		<association property="destinatario" javaType="it.csi.serse.serseweb.integration.mybatis.generated.dto.SerseTDestinatarioDTO">
+			<id column="id_destinatario" javaType="long" property="idDestinatario"/>
+			<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+			<result column="flg_forzatura_ctrl_cf" javaType="string" property="flgForzaturaCtrlCf"/>
+			<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+			<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+			<result column="d_nascita" javaType="date" property="dNascita"/>
+			<result column="cod_istat_comune_nascita" javaType="string" property="codIstatComuneNascita"/>
+			<result column="cod_stato_estero_nascita" javaType="long" property="codStatoEsteroNascita"/>
+			<result column="descr_citta_estera_nascita" javaType="string" property="descrCittaEsteraNascita"/>
+			<result column="cod_istat_comune_residenza" javaType="string" property="codIstatComuneResidenza"/>
+			<result column="cod_stato_estero_residenza" javaType="long" property="codStatoEsteroResidenza"/>
+			<result column="descr_citta_estera_residenza" javaType="string" property="descrCittaEsteraResidenza"/>
+			<result column="indirizzo_residenza" javaType="string" property="indirizzoResidenza"/>
+			<result column="cap_residenza" javaType="long" property="capResidenza"/>
+			<result column="cod_istat_comune_domicilio" javaType="string" property="codIstatComuneDomicilio"/>
+			<result column="indirizzo_domicilio" javaType="string" property="indirizzoDomicilio"/>
+			<result column="cap_domicilio" javaType="long" property="capDomicilio"/>
+			<result column="recapito_email" javaType="string" property="recapitoEmail"/>
+			<result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+			<result column="cod_cittadinanza" javaType="string" property="codCittadinanza"/>
+			<result column="gruppo_operatore_inserimento" javaType="string" property="gruppoOperatoreInserimento"/>
+			<result column="cod_operatore_inserimento" javaType="long" property="codOperatoreInserimento"/>
+			<result column="gruppo_operatore_modifica" javaType="string" property="gruppoOperatoreModifica"/>
+			<result column="cod_operatore_modifica" javaType="long" property="codOperatoreModifica"/>
+			<result column="cod_user_inserim" javaType="string" property="codUserInserim"/>
+			<result column="d_inserim" javaType="date" property="dInserim"/>
+			<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn"/>
+			<result column="d_aggiorn" javaType="date" property="dAggiorn"/>
+		</association>
+		<association property="incontroDestinatarioServizio" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.IncontroDestinatarioServizioDTO">
+			<id column="id_incontro" javaType="long" property="idIncontro"/>
+			<result column="id_destinatario_servizio" javaType="long" property="idDestinatarioServizio"/>
+			<result column="id_ente_convolto_servizio" javaType="long" property="idEnteCoinvoltoServizio"/>
+			<result column="ore_presenza" javaType="bigdecimal" property="orePresenza"/>
+			<result column="recapito_email" javaType="string" property="codUserInserimento"/>
+			<result column="cod_user_inserim" javaType="string" property="codUserInserimento"/>
+			<result column="d_inserim" javaType="date" property="dataInserimento"/>
+			<result column="cod_user_aggiorn" javaType="string" property="codUserAggiornamento"/>
+			<result column="d_aggiorn" javaType="date" property="dataAggiornamento"/>
+		</association>
+	</resultMap>
+
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.generated.dto.SerseRIncontroDestinatarioServizioDTO" id="incontroDestinatarioServizio">
+		<id column="id_incontro" javaType="long" property="idIncontro"/>
+		<id column="id_destinatario_servizio" javaType="long" property="idDestinatarioServizio"/>
+		<result column="id_ente_convolto_servizio" javaType="long" property="idEnteConvoltoServizio"/>
+		<result column="ore_presenza" javaType="long" property="orePresenza"/>
+		<result column="cod_user_inserim" javaType="string" property="codUserInserim"/>
+		<result column="d_inserim" javaType="date" property="dInserim"/>
+		<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn"/>
+		<result column="d_aggiorn" javaType="date" property="dAggiorn"/>
+	</resultMap>
+
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.IncontroDTO" id="incontri">
+		<id column="id_incontro" javaType="long" property="idIncontro"/>
+		<result column="titolo_incontro" javaType="string" property="titoloIncontro" />
+		<result column="id_servizio" javaType="long" property="idServizio"/>
+		<result column="d_inizio" javaType="date" property="dInizio"/>
+		<result column="d_fine" javaType="date" property="dFine"/>
+		<result column="durata_ore" javaType="float" property="durataOre"/>
+		<result column="referente_nome" javaType="string" property="nomeReferente" />
+		<result column="referente_cognome" javaType="string" property="cognomeReferente" />
+		<result column="referente_email" javaType="string" property="referenteEmail" />
+		<result column="referente_telefono" javaType="string" property="referenteTelefono" />
+		<result column="note" javaType="string" property="note" />
+		<result column="cod_user_chiusura" javaType="string" property="codUserChiusura" />
+		<result column="d_chiusura" javaType="date" 			property="dChiusura"/>
+		<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+		<result column="d_inserim" javaType="date" 			property="dInserim"/>
+		<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+		<result column="d_aggiorn" javaType="date" 			property="dAggiorn"/>
+		<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.LuogoIncontroDTO" property="luogoIncontro">
+			<id column="id_luogo_incontro" javaType="long" property="idLuogoIncontro" />
+			<result column="denominazione_luogo" javaType="string" property="denominazioneLuogo"/>
+			<result column="indirizzo_luogo" javaType="string" property="indirizzoLuogo"/>
+			<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+			<result column="d_inserim" javaType="date" 			property="dInserim"/>
+			<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+			<result column="d_aggiorn" javaType="date" 			property="dAggiorn"/>
+			<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvenienzaLuogoDTO" property="provenienzaLuogo">
+				<id column="id_provenienza_luogo" javaType="long" property="idProvenienzaLuogo" />
+				<result column="descr_provenienza_luogo" javaType="string" property="descrProvenienzaLuogo" />
+				<result column="id_pso" javaType="long" property="idPso"/>
+				<result column="id_fonte_dato" javaType="long" property="idFonteDato"/>
+				<result column="descr_fonte_dato" javaType="string" property="descrFonteDato" />
+			</association>
+			<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO" property="comuneIncontro">
+				<id column="comune" javaType="string" property="codiceIstatComune" />
+				<result column="descom" javaType="string" property="descrizioneComune" />
+				<result column="cap" javaType="integer" property="cap" />
+				<result column="codfisc" javaType="string" property="codiceFiscaleComune" />
+				<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.BacinoDTO" property="bacino">
+					<id column="cod_bacino" javaType="long" property="codBacino" />
+					<result column="descrizione" javaType="string" property="descrizione" />
+					<result column="cod_prov" javaType="string" property="codProv" />
+				</association>
+				<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO" property="provincia">
+					<id column="prov" javaType="string" property="codiceProvincia" />
+					<result column="regione" javaType="string" property="codiceRegione" />
+					<result column="desprov" javaType="string" property="descrizioneProvincia" />
+					<result column="sigprov" javaType="string" property="siglaProvincia" />
+				</association>
+			</association>
+		</association>
+		<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.StatoIncontroDTO" property="statoIncontro">
+			<id column="id_stato_incontro" javaType="long" property="idStatoIncontro" />
+			<result column="descr_stato_incontro" javaType="string" property="descrStatoIncontro" />
+		</association>
+	</resultMap>
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.generated.dto.SerseRDestinatarioServizioMonitoraggioDTO" id="destServizioMon">
+		<id column="id_destinatario_servizio" jdbcType="INTEGER" property="idDestinatarioServizio" />
+		<result column="cod_livello_istruzione" jdbcType="VARCHAR" property="codLivelloIstruzione" />
+		<result column="cod_condizione_occupazionale" jdbcType="VARCHAR" property="codCondizioneOccupazionale" />
+		<result column="flg_disabilita" jdbcType="VARCHAR" property="flgDisabilita" />
+		<result column="flg_svantaggio_abitativo" jdbcType="VARCHAR" property="flgSvantaggioAbitativo" />
+		<result column="cod_user_inserim" jdbcType="VARCHAR" property="codUserInserim" />
+		<result column="d_inserim" jdbcType="TIMESTAMP" property="dInserim" />
+		<result column="cod_user_aggiorn" jdbcType="VARCHAR" property="codUserAggiorn" />
+		<result column="d_aggiorn" jdbcType="TIMESTAMP" property="dAggiorn" />
+		<result column="cod_cittadinanza" jdbcType="VARCHAR" property="codCittadinanza" />
+	</resultMap>
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ClasseDestinatarioDTO" id="classeDestinatario">
+		<id column="id_pso_classe_destinatario" javaType="long" property="idPsoClasseDestinatario" />
+		<result column="descr_classe_destinatario" javaType="string" property="descrClasseDestinatario" />
+	</resultMap>
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.DettaglioClasseDestinatarioServizioDTO" id="dettaglioClasseDestinatarioServizioForDestinatario">
+		<id column="id_pso_classe_destinatario" javaType="long" property="idPsoClasseDestinatario" />
+		<result column="descr_classe_destinatario" javaType="string" property="descrClasseDestinatario" />
+		<result column="valore_dato_peculiare_1" javaType="string" property="valoreDatoPeculiare1" />
+	</resultMap>
+
+
+	<select id="getDestinatarioForIdServizio" parameterType="map" resultMap="destinatario">
+		SELECT distinct	dest.*
+		FROM 	
+			serse.serse_t_destinatario dest
+			JOIN serse.serse_r_destinatario_servizio destser ON dest.id_destinatario = destser.id_destinatario
+			JOIN serse.serse_t_servizio ser ON ser.id_servizio = destser.id_servizio
+		WHERE ser.id_intervento = (SELECT id_intervento FROM serse.serse_t_servizio WHERE id_servizio = #{idServizio})
+			AND ser.id_servizio != #{idServizio}
+	</select>
+
+	<select id="getIncontroDestinatarioServizio" parameterType="map" resultMap="incontroDestinatarioServizio">
+		SELECT distinct	incdestser.*
+		FROM
+		serse.serse_r_incontro_destinatario_servizio incdestser
+		JOIN serse.serse_r_destinatario_servizio destser ON incdestser.id_destinatario_servizio = destser.id_destinatario_servizio
+		WHERE destser.id_servizio = #{idServizio}
+			AND destser.id_destinatario = #{idDestinatario}
+	</select>
+
+	<select id="getDestinatariIntervento" parameterType="map" resultMap="destinatario">
+		SELECT distinct	dest.*
+		FROM
+		serse.serse_t_destinatario dest
+		JOIN serse.serse_r_destinatario_servizio destser ON dest.id_destinatario = destser.id_destinatario
+		JOIN serse.serse_t_servizio serv ON serv.id_servizio = destser.id_servizio
+		WHERE serv.id_intervento = #{idIntervento}
+	</select>
+
+	<select id="getDestinatarioServizio" parameterType="map" resultMap="destinatario">
+		SELECT distinct	dest.*
+		FROM
+		serse_t_destinatario dest
+		JOIN serse_r_destinatario_servizio destser ON dest.id_destinatario = destser.id_destinatario
+		WHERE destser.id_servizio = ${idServizio}
+	</select>
+
+	<select id="getPartecipantiForIdIncontro" parameterType="map" resultMap="partecipanti">
+		SELECT distinct	destser.id_destinatario_servizio, destser.numerazione_destinatario, destser.d_inserim, dest.*, incdesser.* 
+		FROM
+		serse_t_destinatario dest
+		JOIN serse_r_destinatario_servizio destser ON dest.id_destinatario = destser.id_destinatario
+		JOIN serse_r_incontro_destinatario_servizio incdesser ON incdesser.id_destinatario_servizio = destser.id_destinatario_servizio
+		WHERE incdesser.id_incontro = #{idIncontro}
+		order by destser.d_inserim ,numerazione_destinatario
+	</select>
+
+	<select id="getPartecipantiForIdServizio" parameterType="map" resultMap="partecipanti">
+		SELECT distinct	destser.id_destinatario_servizio, destser.numerazione_destinatario, destser.d_inserim, dest.*, incdesser.*
+		FROM
+		serse_t_destinatario dest
+		JOIN serse_r_destinatario_servizio destser ON dest.id_destinatario = destser.id_destinatario
+		LEFT OUTER JOIN serse_r_incontro_destinatario_servizio incdesser ON incdesser.id_destinatario_servizio = destser.id_destinatario_servizio
+		WHERE destser.id_servizio = #{idServizio}
+		order by destser.d_inserim ,numerazione_destinatario
+	</select>
+
+	<select id="getIncontriForDestinatario" parameterType="map" resultMap="incontri">
+		select sti.*
+		from serse_t_incontro sti join serse_r_incontro_destinatario_servizio srids
+		on sti.id_incontro =srids.id_incontro join serse_r_destinatario_servizio srds
+		on srids.id_destinatario_servizio = srds.id_destinatario_servizio join serse_t_destinatario std
+		on std.id_destinatario = srds.id_destinatario
+		left JOIN serse.serse_t_luogo_incontro luoginc
+		ON sti.id_luogo_incontro = luoginc.id_luogo_incontro
+		left JOIN serse.serse_d_provenienza_luogo provluog
+		ON provluog.id_provenienza_luogo = luoginc.id_provenienza_luogo
+		left JOIN serse.serse_d_fonte_dato fondat
+		ON fondat.id_fonte_dato = provluog.id_fonte_dato
+		left JOIN serse.serse_d_stato_incontro statinc
+		ON sti.id_stato_incontro = statinc.id_stato_incontro
+		left JOIN serse.ext_tt_comune comu
+		ON luoginc.cod_istat_comune_incontro = comu.comune
+		left JOIN serse.ext_tt_bacino bac
+		ON bac.cod_bacino = comu.cod_bacino
+		left JOIN serse.ext_tt_provincia provi
+		ON comu.prov = provi.prov
+		where std.id_destinatario= #{idDestinatario}
+	</select>
+	<select id="getElencoPartecipantiIncontro" parameterType="map" resultMap="destServizioMon">
+		SELECT *
+		FROM SERSE_R_DESTINATARIO_SERVIZIO_MONITORAGGIO srdsm JOIN SERSE_R_DESTINATARIO_SERVIZIO srds
+		ON srdsm.id_destinatario_servizio = srds.id_destinatario_servizio JOIN SERSE_R_INCONTRO_DESTINATARIO_SERVIZIO srids
+		ON srids.id_destinatario_servizio = srds.id_destinatario_servizio
+		WHERE srds.id_servizio = #{idServizio} AND srids.id_incontro = #{idIncontro}
+	</select>
+	<select id="getClassiDestinatario" parameterType="map" resultMap="classeDestinatario">
+ 		SELECT srpcd.id_pso_classe_destinatario, sdcd.descr_classe_destinatario 
+ 		FROM serse_d_classe_destinatario sdcd
+		JOIN serse_r_pso_classe_destinatario srpcd ON sdcd.id_classe_destinatario = srpcd.id_classe_destinatario 
+		WHERE srpcd.id_pso = #{idPso}
+		AND CURRENT_DATE between srpcd.d_inizio AND coalesce(srpcd.d_fine, TO_DATE('31/12/9999', 'DD/MM/YYYY'))
+		ORDER BY sdcd.id_classe_destinatario ASC
+	</select>
+	<update id="rinumeraDestinatari">
+		WITH CTE AS (
+			select id_destinatario_servizio,
+				row_number() over(order by id_destinatario_servizio) AS RN
+			from serse_r_destinatario_servizio
+			where ID_SERVIZIO = #{idServizio}
+		)
+		UPDATE serse_r_destinatario_servizio
+		SET numerazione_destinatario = RN
+		FROM CTE
+		WHERE serse_r_destinatario_servizio.id_destinatario_servizio = CTE.id_destinatario_servizio
+		AND ID_SERVIZIO = #{idServizio}
+	</update>
+	<select id="getDettaglioClasseServizioForDestinatario" parameterType="map" resultMap="dettaglioClasseDestinatarioServizioForDestinatario">
+		SELECT 
+				srds.id_pso_classe_destinatario 
+				,sdcd.descr_classe_destinatario
+				,srds.valore_dato_peculiare_1 
+		FROM serse_t_servizio sts 
+		LEFT JOIN serse_r_destinatario_servizio 	srds 		ON sts.id_servizio 					= srds.id_servizio
+		LEFT JOIN serse_r_pso_classe_destinatario 	srpcd 		ON srds.id_pso_classe_destinatario	= srpcd.id_pso_classe_destinatario 
+		LEFT JOIN serse_d_classe_destinatario 		sdcd 		ON srpcd.id_classe_destinatario 	= sdcd.id_classe_destinatario 
+		WHERE 	sts.id_servizio = #{idServizio} 
+		AND 	sts.id_pso = #{idPso}
+		AND 	srds.id_destinatario = #{idDestinatarioServizio}
+	</select>
+</mapper>

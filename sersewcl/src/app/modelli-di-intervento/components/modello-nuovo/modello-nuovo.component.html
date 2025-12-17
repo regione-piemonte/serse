@@ -1,0 +1,156 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Handle  Back to search -->
+<app-back-to-bar
+    [backUrl]="'/dashboard/modello/gestione'"
+    [statoFor]="'modello'"
+    [stato]="statoDescrizione ? statoDescrizione : ''"
+    [statoClass]="''">
+</app-back-to-bar>
+
+<!-- mat tab -->
+<mat-tab-group class="mt-3"
+              [selectedIndex]="selectedTab"
+              appTabClickInterceptor
+              (tabClick)="onTabClick($event)">
+
+
+<!-- Handle dati identificativi -->
+<mat-tab label="Dati identificativi">
+
+<app-dati-identificativi
+  [title]="'modello'"
+  [nIdentificativi]="{modello:identificativoModello}">
+</app-dati-identificativi>
+
+  <form [formGroup]="form">
+
+    <mat-card class="pe-5">
+
+    <app-dati-generali
+      [riferimentoA]="riferimentoA"
+      [formGrup]="datiForm"
+      [identificativo]="identificativoModello"
+      [candidaturaList]="istanzaCandidaturaList"
+      [tipoList]="tipoModelloList">
+
+    </app-dati-generali>
+
+    <mat-divider></mat-divider>
+    <div class="mt-5"></div>
+
+    <app-dati-riferimento
+      [riferimentoA]="riferimentoA"
+      [formGrup]="riferimentoForm">
+
+    </app-dati-riferimento>
+
+
+
+    <app-info-salvataggio *ngIf="isSaved"
+          [soggettoAttuatoreCompetente]="soggettoAttuatoreCompetente"
+          [codiceFiscaleIns]="codiceFiscaleIns"
+          [codiceFiscaleAgg]="codiceFiscaleAgg"
+          [dataIns]="dataIns"
+          [dataAgg]="dataAgg">
+    </app-info-salvataggio>
+
+
+    </mat-card>
+  </form>
+</mat-tab>
+
+<!-- #################################################### -->
+<!-- ##################-DATI CORRELATI-################## -->
+<mat-tab label="Dati correlati" [disabled]="!isSaved" >
+
+<app-dati-identificativi
+  [title]="'modello'"
+  [nIdentificativi]="{modello:identificativoModello}">
+</app-dati-identificativi>
+
+  <app-modello-correlati
+        *ngIf="isSaved"
+        [isModificabile]="isModificabile"
+        [modelloIntervento]="modelloIntervento"></app-modello-correlati>
+</mat-tab>
+
+<!-- #################################################### -->
+<!-- ##################-INTERVENTI-################## -->
+<mat-tab label="Interventi" [disabled]="!isSaved">
+<app-dati-identificativi
+  [title]="'modello'"
+  [nIdentificativi]="{modello:identificativoModello}">
+</app-dati-identificativi>
+
+  <app-modello-interventi
+      *ngIf="isSaved"
+      [modello]="modelloIntervento"
+      [stato]="stato">
+  </app-modello-interventi>
+</mat-tab>
+
+</mat-tab-group>
+
+
+
+
+<div *ngIf="isProprietario && !isSuperUser" class="btn--group-card">
+
+  <div *ngIf="stato==20"
+        class="p-2">
+    <button mat-button
+            aria-label="chiudi modello"
+            class="btn--plain-text--danger"
+            (click)="updateStatoModelloDialog(40)">CHIUDI MODELLO</button>
+  </div>
+  <div *ngIf="stato==40 && canReopen"
+        class="p-2">
+    <button mat-button
+            aria-label="annulla chiusura"
+            class="btn--plain-text--primary"
+            (click)="updateStatoModelloDialog(20)">ANNULLA CHIUSURA MODELLO</button>
+  </div>
+  <div class="me-auto"></div>
+  <div class="p-2 me-2 mb-2" *ngIf="stato==10">
+    <button mat-button
+            aria-label="pubblica modello"
+            class="btn--success"
+            (click)="updateStatoModelloDialog(20)">PUBBLICA</button>
+  </div>
+  <div class="p-2 me-2 mb-2"
+    *ngIf="stato==20">
+    <button mat-button
+      aria-label="annulla pubblicazione"
+      class="btn--plain-text--primary"
+      (click)="updateStatoModelloDialog(10)">ANNULLA PUBBLICAZIONE</button>
+  </div>
+  <div *ngIf="isModificabile" class="p-2">
+    <button mat-button *ngIf="selectedTab==0"
+            aria-label="salva modello"
+            class="btn btn--primary"
+            (click)="onSalva()">SALVA</button>
+  </div>
+
+</div>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.IstitutiScolasticiDAO">
+<resultMap id="istitutoScolasticoMap" type="it.csi.serse.serseweb.integration.mybatis.dto.custom.IstitutoScolasticoDTO">
+    <id column="id_istituto_scolastico" javaType="long" property="idIstitutoScolastico"/>
+    <result column="cod_regionale_scuola" javaType="string" property="codRegionaleScuola"/>
+    <result column="cod_regionale_autonomia" javaType="string" property="codRegionaleAutonomia"/>
+    <result column="cod_meccanografico_scuola" javaType="string" property="codMeccanograficoScuola"/>
+    <result column="cod_meccanografico_autonomia" javaType="string" property="codMeccanograficoAutonomia"/>
+    <result column="denominazione" javaType="string" property="denominazione"/>
+    <result column="indirizzo" javaType="string" property="indirizzo"/>
+    <result column="recapito_mail" javaType="string" property="recapitoMail"/>
+    <result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+    <result column="url_sito_web" javaType="string" property="urlSitoWeb"/>
+    <result column="d_apertura" javaType="date" property="dataApertura"/>
+    <result column="d_chiusura" javaType="date" property="dataChiusura"/>
+    <result column="d_modifica" javaType="date" property="dataModifica"/>
+    <association property="comuneScuola" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO">
+        <id column="comune" javaType="string" property="codiceIstatComune" />
+        <result column="descom" javaType="string" property="descrizioneComune"/>
+        <result column="cap" javaType="int" property="cap"/>
+        <result column="codfisc" javaType="string" property="codiceFiscaleComune"/>
+        <association property="provincia" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO">
+            <id column="prov" javaType="string" property="codiceProvincia"/>
+            <result column="regione" javaType="string" property="codiceRegione" />
+            <result column="desprov" javaType="string" property="descrizioneProvincia"/>
+            <result column="sigprov" javaType="string" property="siglaProvincia"/>
+        </association>
+    </association>
+    <association property="tipologiaIstituto" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipologiaIstitutoScolasticoDTO">
+        <id column="id_tipologia" javaType="long" property="idTipologia"/>
+        <result column="descr_tipologia" javaType="string" property="descrTipologia"/>
+    </association>
+    <association property="percorsoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.PercorsoScolasticoDTO">
+        <id column="id_percorso" javaType="long" property="idPercorso"/>
+        <result column="id_tipo_istituz" javaType="long" property="idTipoIstituz"/>
+        <result column="descr_percorso" javaType="string" property="descrPercorso"/>
+    </association>
+    <association property="tipoSezione" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoSezioneDTO">
+        <id column="id_tipo_sezione" javaType="long" property="idTipoSezione"/>
+        <result column="descr_tipo_sezione" javaType="string" property="descrTipoSezione"/>
+    </association>
+    <association property="gradoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.GradoScolasticoDTO">
+        <id column="id_grado_scolastico" javaType="string" property="idGradoScolastico"/>
+        <result column="descr_grado_scolastico" javaType="string" property="descrGradoScolastico"/>
+    </association>
+    <association property="tipoUnita" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoUnitaScolasticaDTO">
+        <id column="id_tipo_unita" javaType="long" property="idTipoUnita"/>
+        <result column="descr_tipo_unita" javaType="string" property="descrTipoUnita"/>
+        <result column="id_grado_scolastico" javaType="string" property="idGradoScolastico"/>
+    </association>
+    <association property="annoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.AnnoScolasticoDTO">
+        <id column="id_anno_scolastico" javaType="long" property="idAnnoScolastico"/>
+        <result column="descr_anno_scolastico" javaType="string" property="descrAnnoScolastico"/>
+        <result column="d_inzizio_val" javaType="date" property="dataInizioVal"/>
+        <result column="d_fine_val" javaType="date" property="dataFineVal"/>
+    </association>
+</resultMap>
+<select id="getIstitutiScolastici" resultMap="istitutoScolasticoMap"  parameterType="map">
+    SELECT *
+        FROM
+            serse_d_istituto_scolastico sdis JOIN
+            ext_tt_comune etc ON etc.comune = sdis.cod_comune_scuola JOIN
+            ext_tt_provincia etp ON etp.prov = etc.prov JOIN
+            ext_sispro_d_tipologia esdt ON esdt.id_tipologia = sdis.id_tipologia LEFT JOIN
+            ext_sispro_d_percorso esdp ON sdis.id_percorso = esdp.id_percorso LEFT JOIN
+            ext_sispro_d_tipo_unita esdtu ON sdis.id_tipo_unita=esdtu.id_tipo_unita LEFT JOIN
+            ext_sispro_d_grado_scolastico esdgs ON esdgs.id_grado_scolastico = esdtu.id_grado_scolastico
+
+    WHERE
+        1=1
+        <if test="idPercorsoScolastico!=null ">
+            AND   esdp.id_percorso= #{idPercorsoScolastico}
+        </if>
+        <if test="idGradoScolastico!=null ">
+            AND   esdgs.id_grado_scolastico= #{idGradoScolastico}
+        </if>
+        <if test="idTipologiaIstituto!=null ">
+            AND   esdt.id_tipologia= #{idTipologiaIstituto}
+        </if>
+        <if test="codiceComune!=null and codiceComune!= ''">
+            AND etc.comune=#{codiceComune}
+        </if>
+        <if test="codiceProvincia!=null and  codiceProvincia!=''">
+            AND etp.prov=#{codiceProvincia}
+        </if>
+        <if test="codiceRegionale!=null and  codiceRegionale!=''">
+            AND sdis.cod_regionale_scuola=#{codiceRegionale}
+        </if>
+        <if test="codiceMeccanografico!=null and  codiceMeccanografico!=''">
+            AND sdis.cod_meccanografico_scuola=#{codiceMeccanografico}
+        </if>
+        <if test="denominazioneEnte!=null and  denominazioneEnte!=''">
+            AND lower(sdis.denominazione) like lower(#{denominazioneEnte})
+        </if>
+</select>
+<select id="getAutonomiaForIstituto" parameterType="map" resultMap="istitutoScolasticoMap">
+    <!--SELECT distinct sdis.denominazione , sdis.cod_regionale_autonomia
+    FROM serse_d_istituto_scolastico sdis
+        JOIN (
+            SELECT distinct sdis2.cod_regionale_autonomia
+            FROM serse_d_istituto_scolastico sdis2
+            WHERE sdis2.id_istituto_scolastico=#{idIstitutoScolastico}
+        ) as tmp ON tmp.cod_regionale_autonomia = sdis.cod_regionale_scuola-->
+    select *
+    from serse_d_istituto_scolastico sdis
+    join (
+    select distinct sdis2.cod_regionale_autonomia
+    from serse_d_istituto_scolastico sdis2
+    where sdis2.id_istituto_scolastico=#{idIstitutoScolastico}
+    ) as tmp on tmp.cod_regionale_autonomia  = sdis.cod_regionale_scuola
+
+
+</select>
+</mapper>

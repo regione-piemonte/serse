@@ -1,0 +1,87 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- -------------------------------Destinatario------------------------------- -->
+<app-destinatario-intervento
+  *ngIf="isIndividuale"
+  [destinatario]="destinatario"
+  [isModificabile]="isModificabileCorrelati"
+  [stato]="stato"
+  [backTo]="backToURl">
+</app-destinatario-intervento>
+
+<!-- -------------------------------Enti coinvolti------------------------------- -->
+<app-enti-coinvolti
+  *ngIf="!hideEntiCoinvolti"
+  [entiCoinvoltiAssociati$]="entCoinvoltiAssociati$"
+  [isModificabile]="isModificabileCorrelati"
+  [isEliminabile]="isEliminabile"
+  [isEliminabileDaModello]="isEliminabileDaModello"
+  [canAddEnte]="isEnteCoinvoltoModificabile"
+  [userCase]="'INT'"
+  [isIndividuale]="isIndividuale=='S'"
+  [backTo]="backToURl"
+
+  (enteDaAggiornare)="updateEnteCoinvolto($event)"
+  (enteDaCancellare)="deleteEnteCoinvolto($event)">
+</app-enti-coinvolti>
+
+
+<!-- -------------------------------Target destinatari------------------------------- -->
+<app-target-destinatari
+[titolo]="'Riepilogo target destinatari nei Servizi associati'"
+[targetDestinatariAssociatiElenco$]="targetDestinatariAssociatiElenco$"
+[isModificabile]="false"
+>
+
+</app-target-destinatari>
+
+
+<!-- -------------------------------Caretteristiche------------------------------- -->
+<app-caratteristiche
+[titolo]="'Riepilogo caratteristiche nei Servizi associati'"
+[caratteristicheAssociate$]="caratteristicheAssociateElenco$"
+[isModificabile]="false"
+>
+
+</app-caratteristiche>
+
+
+<!-- ------------------------Destinatari intervento non individuale---------------  -->
+<mat-card *ngIf="!isIndividuale">
+  <mat-card-header>
+    <h5 mat-card-title>
+      Riepilogo Destinatari nei Servizi associati
+    </h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="mt-3">
+    <app-table
+      [rowData]="rowDataDestinatari"
+      [columnList]="columnList"
+      [tableSettings]="tableSettings"
+      [keepPagination]="true">
+    </app-table>
+  </mat-card-content>
+</mat-card>

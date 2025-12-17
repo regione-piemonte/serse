@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.ComuniDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO" id="comune">
+		<id column="comune" javaType="string" property="codiceIstatComune" />
+		<result column="descom" javaType="string" property="descrizioneComune"/>
+		<result column="cap" javaType="int" property="cap"/>
+		<result column="codfisc" javaType="string" property="codiceFiscaleComune"/>
+		<association property="provincia" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO">
+			<id column="prov" javaType="string" property="codiceProvincia"/>
+			<result column="regione" javaType="string" property="codiceRegione" />
+			<result column="desprov" javaType="string" property="descrizioneProvincia"/>
+			<result column="sigprov" javaType="string" property="siglaProvincia"/>
+		</association>
+		<association property="bacino">
+			<id column="cod_bacino" jdbcType="NUMERIC" property="codBacino" />
+			<result column="des_bacino" jdbcType="VARCHAR" property="descrizione" />
+			<result column="prov_bacino" jdbcType="CHAR" property="codProv" />
+		</association>
+	</resultMap>
+	
+	<select id="getComune" parameterType="map" resultMap="comune">
+		select
+			c.comune,
+			c.descom,
+			c.cap,
+			c.codfisc,
+			c.prov,
+			p.regione,
+			p.desprov,
+			p.sigprov,
+			c.cod_bacino,
+			coalesce(b.descrizione, 'DescProv') as des_bacino,
+			coalesce(b.prov, c.prov) as prov_bacino
+		from ext_tt_comune c
+		left join ext_tt_provincia p on p.prov = c.prov 
+		left join ext_tt_bacino b on b.cod_bacino = c.cod_bacino 
+		where c.comune = #{codComune}
+	</select>
+	
+</mapper>

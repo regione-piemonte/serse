@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.GestioneSportelloDAO">
+<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.SportelloDTO" id="MapSportello">
+ <id column="num_progr_sportello" jdbcType="NUMERIC" property="numProgrSportello" />
+    <result column="id_pso" jdbcType="INTEGER" property="idPso" />
+    <result column="descr_sportello" jdbcType="VARCHAR" property="descrizioneSportello" />
+    <result column="d_inizio" jdbcType="TIMESTAMP" property="dataInizio" />
+    <result column="d_fine" jdbcType="TIMESTAMP" property="dataFine" />
+</resultMap>	
+
+<!-- Algoritmo – Valorizza lista Sportelli
+	Mettere in relazione le tabelle EXT_BDGT_T_PSO e EXT_BDGT_T_PSO_SPORTELLO in questo modo:
+	EXT_BDGT_T_PSO_SPORTELLO.id_pso = EXT_BDGT_T_PSO.id_pso
+	(EXT_BDGT_T_PSO.id_atto_indirizzo, EXT_BDGT_T_PSO.cod_tipol_pso) = 
+	<elenco ricavato dall’Algoritmo – Ricerca Tipologie PSO di competenza)
+	(EXT_BDGT_T_PSO.cod_ar, EXT_BDGT_T_PSO.cod_ciclo_finanziario) = 
+	<elenco ricavato dall’Algoritmo – Valorizza Amministrazione Responsabile e Ciclo Finanziario)
+	Popolare la lista di selezione degli Sportelli con l’elenco ricavato al passo precedente, visualizzando:
+	“<data_inizio> - <data_fine> - <descr_sportello>”
+	ordinandolo per:
+	<data_inizio> decrescente (il più recente visualizzato in alto)
+	<data_fine> decrescente
+	<descr_sportello> crescente alfabeticammente -->
+<select id="getSportelliForPso" parameterType="map"  resultMap="MapSportello">
+	select distinct sport.d_inizio,sport.d_fine, sport.descr_sportello, sport.num_progr_sportello
+	FROM
+		SERSE_T_SOGGETTO_ATTUATORE sa join 
+		EXT_BDGT_T_PSO_SPORTELLO sport on sa.num_progr_sportello=sport.num_progr_sportello  join
+		EXT_BDGT_T_PSO pso on sport.id_pso=pso.id_pso 
+		WHERE 
+			sa.cod_operatore=#{codOperatore}
+			AND sa.gruppo_operatore=#{gruppoOperatore}
+		    AND pso.id_pso =#{idPso}
+		ORDER BY sport.d_inizio desc,sport.d_fine desc,sport.descr_sportello
+	
+	
+	<!--   select sport.d_inizio,sport.d_fine, sport.descr_sportello as descrizioneSportello, sport.num_progr_sportello as numProgrSportello
+	from ext_bdgt_t_pso pso join ext_bdgt_t_pso_sportello sport on pso.id_pso =sport.id_pso 
+	where (pso.cod_ar ,pso.cod_ciclo_finanz)
+	in 
+	(SELECT pso.cod_ar as ammResponsabili,pso.cod_ciclo_finanz as codCicloFinanziario
+		FROM EXT_BDGT_T_PSO pso join EXT_BDGT_T_TIPOL_PSO tpso on pso.cod_tipol_pso=tpso.cod_tipol_pso and pso.id_atto_indirizzo=tpso.id_atto_indirizzo
+		WHERE (tpso.id_atto_indirizzo,tpso.cod_tipol_pso) 
+		in (
+		SELECT tpso.id_atto_indirizzo , tpso.cod_tipol_pso 
+			FROM
+				SERSE_T_SOGGETTO_ATTUATORE sa join 
+				EXT_BDGT_T_PSO_SPORTELLO spo on sa.num_progr_sportello=spo.num_progr_sportello  join
+				EXT_BDGT_T_PSO pso on spo.id_pso=pso.id_pso  join 
+				EXT_BDGT_T_TIPOL_PSO tpso on pso.cod_tipol_pso=tpso.cod_tipol_pso and pso.id_atto_indirizzo=tpso.id_atto_indirizzo
+				WHERE sa.cod_operatore=1
+				)
+	) and pso.id_pso =#{idPso}
+	order by sport.d_inizio desc,sport.d_fine desc,sport.descr_sportello -->
+</select>
+	
+	
+	
+	<select id="getGestioniSportello" parameterType="map"  resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoGestioneSportelloDTO"> 
+		select spo.tipo_gestione_soggetti_rt as tipoGestioneSoggettiRt, 
+			   spo.flg_gestione_modello as flagGestioneModello, 
+			   spo.tipo_gestione_intervento as tipoGestioneIntervento, 
+			   spo.tipo_gestione_servizio as tipoGestioneServizio
+		
+		from SERSE_D_REG_COMPORT_PSO_SPORT spo
+		where spo.num_progr_sportello=#{sportelloNumProgr}
+	</select>
+</mapper>

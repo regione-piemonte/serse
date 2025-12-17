@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.GestionePsoDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.PsoDTO" id="PsoResultMap">
+		<id column="id_pso" javaType="Long"  property="idPso" />
+    		<result column="descrizione" javaType="String" property="descrizione" />
+    		<result column="sigla_ente" javaType="String" property="siglaEnte" />
+    		<result column="cod_ciclo_finanz" javaType="String" property="codCicloFinanziario" />
+        	<association property="amministrazioneResponsabile" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.AmministrazioneResponsabileDTO">
+        		<id column="cod_ar" javaType="Integer"  property="codAr" />
+    			<result column="descrizione_ar" javaType="String" property="descrizione" />
+    			<result column="sigla_ente_ar" javaType="String" property="siglaEnte" />
+        	</association>
+        	<association property="tipologiaPso" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipologiaPsoDTO">
+        		<id column="cod_tipol_pso" javaType="String" property="tipologiaPso" />
+    			<id column="id_atto_indirizzo" javaType="Integer" property="idAttoIndirizzo" />
+    			<result column="descrizione_tp" javaType="String" property="descrizione" />
+    			<result column="cod_programmazione" javaType="Integer" property="codProgrammazione" />
+    			<result column="cod_classificazione_adi" javaType="String" property="codClassificazioneAdi" />
+    			<result column="anno_approv" javaType="Integer" property="annoApprovazione" />
+        	</association>
+    </resultMap>
+    
+    <!-- Algoritmo – Valorizza Amministrazione Responsabile e Ciclo Finanziario
+		Mettere in relazione le tabelle EXT_BDGT_T_TIPOL_PSO e EXT_BDGT_T_PSO in questo modo:
+		EXT_BDGT_T_PSO.cod_tipol_pso = EXT_BDGT_T_TIPOL_PSO.cod_tipo_pso
+		EXT_BDGT_T_PSO.id_atto_indirizzo = EXT_BDGT_T_TIPOL_PSO.id_atto_indirizzo
+		filtrando però in base alle coppie distinte (id_atto_indirizzo, cod_tipo_pso) 
+		recuperate nell’Algoritmo – Ricerca Tipologie PSO di competenza
+		Recuperare da EXT_BDGT_T_PSO l’elenco distinto delle coppie (cod_ar, cod_ciclo_finanz) 
+		decodificandole in questo modo:
+		la descrizione dei cod_ar viene recuperata dal servizio SearcAllAmmResponsabili di GAM (vedi §7.1), 
+		la descrizione del cod_ciclo_finanziario dal servizio searchGestCicliFin di GAM (vedi §7.2)
+		Popolare la lista di selezione dell’Amministrazione Responsabile e Ciclo Finanziario con l’elenco 
+		formato da: “descrizione AR – descrizione ciclo finanziario” ordinato per descrizione AR crescente e descrizione ciclo finanziario crescente 
+		(i codici non devono essere visibili)
+ -->
+	<select id="getPsoForTipologia" parameterType="map" resultMap="PsoResultMap">
+		SELECT  
+		pso.id_pso, 
+		pso.cod_ciclo_finanz,
+		pso.cod_ar
+		FROM
+			SERSE_T_SOGGETTO_ATTUATORE sa join 
+			EXT_BDGT_T_PSO_SPORTELLO spo on sa.num_progr_sportello=spo.num_progr_sportello  join
+			EXT_BDGT_T_PSO pso on spo.id_pso=pso.id_pso  join 
+			EXT_BDGT_T_TIPOL_PSO tpso on pso.cod_tipol_pso=tpso.cod_tipol_pso and pso.id_atto_indirizzo=tpso.id_atto_indirizzo 
+			WHERE sa.cod_operatore=#{codOperatore}
+			and tpso.cod_tipol_pso = #{tipologiaPsoId}
+			and tpso.id_atto_indirizzo=#{idAttoIndirizzo}
+		</select>
+	<!-- Algoritmo – Ricerca Tipologie PSO di competenza
+		Il sistema deve visualizzare nel menu a tendina Tipologia PSO 
+		(vedi Interfaccia Pagina  e Informazioni trasmesse tra attore e sistema – ) l’elenco delle Tipologie PSO 
+		per le quali l’utente è abilitato ad operare in qualità di dipendente del Soggetto Attuatore di Competenza.
+		
+		Mettere in relazione le tabelle SERSE_T_SOGGETTO_ATTUATORE, EXT_BDGT_T_PSO_SPORTELLO, EXT_BDGT_T_PSO, 
+		EXT_BDGT_T_TIPOL_PSO in questo modo:
+		SERSE_T_SOGGETTO_ATTUATORE.num_progr_sportello = EXT_BDGT_T_PSO_SPORTELLO.num_progr_sportello
+		EXT_BDGT_T_PSO_SPORTELLO.id_pso = EXT_BDGT_T_PSO.num_progr_sportello
+		EXT_BDGT_T_PSO.cod_tipol_pso = EXT_BDGT_T_TIPOL_PSO.cod_tipo_pso
+		EXT_BDGT_T_PSO.id_atto_indirizzo = EXT_BDGT_T_TIPOL_PSO.id_atto_indirizzo
+		SERSE_T_SOGGETTO_ATTUATORE.gruppo_operatore || SERSE_T_SOGGETTO_ATTUATORE.cod_operatore = <idOperatore>
+		(dove <idOperatore> è l’identificativo dell’Ente di appartenenza dell’utente, come da profilazione)
+		d ricavate tutte le coppie distinte (id_atto_indirizzo, cod_tipo_pso) con la relativa descrizione da 
+		EXT_BDGT_T_TIPOL_PSO
+		
+		Popolare la lista di selezione delle Tipologie PSO con l’elenco delle descrizione distinte recuperate (passo precedente), 
+		ordinate in ordine alfabetico crescente; codTipologiaPSO e idAttoIndirizzo non devono essere visibili ma presenti nella lista. -->
+	
+	<select id="getTipologiePsoForSoggettoAttuatore" parameterType="map"  resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipologiaPsoDTO"> 
+		SELECT  distinct
+		tpso.descrizione,
+		tpso.cod_tipol_pso as tipologiaPsoId,
+		tpso.cod_programmazione as codProgrammazione,
+		tpso.cod_classificazione_adi as codClassificazioneAdi,
+		tpso.anno_approv as annoApprovazione,
+		tpso.id_atto_indirizzo as idAttoIndirizzo
+		FROM
+			SERSE_T_SOGGETTO_ATTUATORE sa join 
+			EXT_BDGT_T_PSO_SPORTELLO spo on sa.num_progr_sportello=spo.num_progr_sportello  join
+			EXT_BDGT_T_PSO pso on spo.id_pso=pso.id_pso  join 
+			EXT_BDGT_T_TIPOL_PSO tpso on pso.cod_tipol_pso=tpso.cod_tipol_pso and pso.id_atto_indirizzo=tpso.id_atto_indirizzo 
+			WHERE sa.cod_operatore=#{codOperatore}
+				and sa.gruppo_operatore=#{gruppoOperatore}
+	</select>
+</mapper>

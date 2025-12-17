@@ -1,0 +1,90 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- <mat-card class="border mb-3"> -->
+
+<mat-card-header>
+  <mat-card-title>
+  <!-- Titolo2 -->
+  <ng-container *ngIf="riferimentoA; else Referente">
+    <h3>Riferimento {{riferimentoA==='intervento' || riferimentoA==="incontro" ? "dell'":"del " }}{{riferimentoA}}</h3>
+  </ng-container>
+  <ng-template #Referente>
+    <h3>Referente</h3>
+  </ng-template>
+
+  </mat-card-title>
+</mat-card-header>
+
+
+<mat-card-content>
+<!-- Form -->
+<form [formGroup]="formGrup">
+<div class="container-fluid">
+  <!-- cognome | nome -->
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="legacy" style="width: 100%;">
+        <mat-label>Cognome</mat-label>
+        <input matInput formControlName="cognome" maxlength="100">
+        <mat-error>
+          <app-control-messages [control]="formGrup.controls['cognome']|castFromControl"></app-control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field appearance="legacy" style="width: 100%;">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" maxlength="100">
+        <mat-error>
+          <app-control-messages [control]="formGrup.controls['nome']|castFromControl"></app-control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- telefono | email -->
+  <div class="row">
+  <div class="col-6">
+    <mat-form-field appearance="legacy" style="width: 100%;">
+      <mat-label>Telefono</mat-label>
+      <input  matInput formControlName="telefono" type="text" maxlength="50">
+      <mat-error>
+        <app-control-messages [control]="formGrup.controls['telefono']|castFromControl"></app-control-messages>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-6">
+    <mat-form-field appearance="legacy" style="width: 100%;">
+      <mat-label>Email/PEC</mat-label>
+      <input matInput formControlName="email_pec" maxlength="100">
+      <mat-error>
+        <app-control-messages [control]="formGrup.controls['email_pec']|castFromControl"></app-control-messages>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  </div>
+</div>
+</form>
+</mat-card-content>
+
+<!-- </mat-card> -->

@@ -1,0 +1,160 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+
+<mat-card-header>
+  <h5 mat-card-title>{{titolo}} </h5>
+</mat-card-header>
+<mat-divider></mat-divider>
+
+<mat-card-content class="p-3">
+
+  <!-- Dati aggiornamento dal sistema -->
+
+  <app-info-gam
+    [datiToken]="datiToken"
+    [visibilityAggiorna]="visibilityAggiorna"
+    (onAggiornaProposta)="onAggiorna()">
+  </app-info-gam>
+
+  <!-- Voce Spesa -->
+  <ng-container *ngIf="isVisibileSpesaPreventivo">
+    <!-- Header -->
+    <div class="row border-bottom p-3">
+      <div class="col-4"><strong>Voce di spesa</strong></div>
+      <div class="col-2"><strong>Parametro economico</strong></div>
+      <div class="col-2"><strong>Durata</strong></div>
+      <div class="col-2"><strong>Destinatari</strong></div>
+      <div class="col-2"><strong>Totale</strong></div>
+    </div>
+    <!-- Body -->
+    <div *ngFor="let voce of vociSpesaList"
+        class="row border-bottom p-3">
+      <div class="col-4">{{voce.voceSpesa!.descrVoceSpesa}}</div>
+      <div class="col-2">{{voce.parametroEconomico! | currency:"EUR"}}</div>
+      <div class="col-2">{{voce.parametroTemporale}}</div>
+      <div class="col-2">{{voce.parametroFisico}}</div>
+      <div class="col-2">{{voce.importoVoceSpesa| currency:"EUR"}}</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="row border-bottom p-3">
+      <div class="col-10"><strong>TOTALE PUBBLICO</strong></div>
+      <div class="col-2">{{totalePubblico|currency:"EUR"}}</div>
+    </div>
+    <div class="row border-bottom p-3">
+      <div class="col-10"><strong>TOTALE PRIVATO</strong></div>
+      <div class="col-2">{{totalePrivato|currency:"EUR"}}</div>
+    </div>
+    <div class="row border-bottom p-3">
+      <div class="col-10"><strong>TOTALE SERVIZIO</strong></div>
+      <div class="col-2">{{totaleServizio|currency:"EUR"}}</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isVisibileFinanziamento">
+    <h5 class="mt-3">Finanziamento</h5>
+    <hr>
+    <!-- Header -->
+    <div class="row border-bottom p-3">
+      <div class="col-4"><strong>Fonte</strong></div>
+      <div class="col-2"><strong>Tipo</strong></div>
+      <div class="col-4"><strong>Percentuale</strong></div>
+      <div class="col-2"><strong>Totale</strong></div>
+    </div>
+    <!-- Body -->
+    <div *ngFor="let fonte of fonteFinanzList"
+        class="row border-bottom p-3">
+      <div class="col-4">{{fonte.descrFonte}}</div>
+      <div class="col-2">{{fonte.codTipologiaFonte == "PB" ?"Pubblico":"Privato"}}</div>
+      <div class="col-4">{{fonte.percFonte}}</div>
+      <div class="col-2">{{fonte.importoFonte|currency:"EUR"}}</div>
+    </div>
+  </ng-container>
+
+
+</mat-card-content>
+
+<mat-card-actions class="justify-content-between">
+  <button *ngIf="visibilityCalcFin"
+    mat-button
+    class="btn btn--outline-primary"
+    aria-label="calcola preventivo"
+    (click)="onCalcolaPreventivo()"
+    [disabled]="disablePulsanti">
+    CALCOLA PREVENTIVO
+  </button>
+  <button *ngIf="storicoServizio.length"
+    mat-button
+    (click)="onOpenStorico()"
+    aria-label="storico variazioni"
+    class="btn btn--outline-primary">
+    STORICO VARIAZIONI
+  </button>
+  <button *ngIf="visibilityCalcFin"
+    mat-button
+    class="btn btn--primary"
+    (click)="onRichiediFinanziamento()"
+    aria-label="richiedi finanziamento"
+    [disabled]="disablePulsanti">
+    RICHIEDI FINANZIAMENTO
+  </button>
+</mat-card-actions>
+
+</mat-card>
+
+
+<ng-template #storico>
+  <h5 mat-dialog-title>Storico variazioni</h5>
+  <hr>
+
+  <section mat-dialog-content>
+    <div class="row border-bottom p-3">
+      <div class="col-3"><strong>Data richiesta</strong></div>
+      <div class="col-4"><strong>Codice fiscale</strong></div>
+      <div class="col-2"><strong>Tipo richiesta</strong></div>
+      <div class="col-3"><strong>Preventivo precedente</strong></div>
+    </div>
+    <!-- Body -->
+    <div *ngFor="let storico of storicoServizio"
+        class="row border-bottom p-3">
+      <div class="col-3">{{storico.dVariazione! |customDate}}</div>
+      <div class="col-4">{{storico.utenteVariazione}}</div>
+      <div class="col-2">{{storico.tipoVariazione == 'A' ?'Aumento'
+                                  :(storico.tipoVariazione == 'R' ?'Riduzione' : 'Invariato')}}</div>
+      <div class="col-3">{{storico.preventivoPrecedente! | localString}}&euro;</div>
+    </div>
+  </section>
+
+  <div  mat-dialog-actions
+        [align]="'end'">
+    <button mat-dialog-close
+            mat-button
+            class="btn btn--outline-primary"
+            aria-label="chiusura servizio">
+        CHIUDI
+    </button>
+  </div>
+</ng-template>
+

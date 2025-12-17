@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.GestioneEntiCoinvoltiDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.EnteCoinvoltoModelloDTO" id="enteCoinvoltoModelloMap">
+	<id column="id_ente_coinvolto_modello" javaType="long" property="idEnteCoinvoltoModello" />
+	    <result column="denominazione" javaType="string" property="denominazione" />
+	    <result column="denominazione_sede_principale" javaType="string" property="denominazioneSedePrincipale" />
+	    <result column="id_pso" javaType="long" property="idPso" />
+	    <result column="id_fonte_dato" javaType="long" property="idFonteDato" />
+		<result column="descr_fonte_dato" javaType="string" property="descrizioneFonteDato" />
+		<result column="codice_1_soggetto" javaType="string" property="codice1Soggetto" />
+	    <result column="codice_2_soggetto" javaType="string" property="codice2Soggetto" />
+	    <result column="id_ruolo_ente" javaType="long" property="idRuoloEnte" />
+		<result column="descr_ruolo_ente" javaType="string" property="descrizioneRuoloEnte" />
+	    <result column="indirizzo" javaType="string" property="indirizzo" />
+	    <result column="id_modello_di_intervento" javaType="long" property="idModelloDiIntervento" />
+		<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+	    <result column="d_inserim" javaType="date" property="dInserim" />
+	    <result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+	    <result column="d_aggiorn" javaType="date" property="dAggiorn" />
+		<result column="cod_user_cessazione" javaType="string" property="codUserCessazione" />
+		<result column="d_cessazione" javaType="date" property="dataCessazione" />
+		<association property="comune" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO">
+	    	<id column="cod_istat_comune" javaType="string" property="codiceIstatComune" />
+	    	<result column="descom" javaType="string" property="descrizioneComune"/>
+	    	<result column="cap" javaType="int" property="cap"/>
+	    	<result column="codfisc" javaType="string" property="codiceFiscaleComune"/>
+	    	<association property="provincia" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO">
+	    		<id column="prov" javaType="string" property="codiceProvincia"/>
+	    		<result column="regione" javaType="string" property="codiceRegione" />
+	    		<result column="desprov" javaType="string" property="descrizioneProvincia"/>
+	    		<result column="sigprov" javaType="string" property="siglaProvincia"/>
+	    	</association>
+	    	<association property="bacino" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.BacinoDTO">
+	    		<id column="cod_bacino" javaType="long" property="codBacino"/>
+	    		<result column="descr_bacino" javaType="string" property="descrizione" />
+	    		<result column="prov" javaType="string" property="codProv"/>
+	    	</association>
+	    </association>
+	    <association property="referente" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ReferenteDTO">
+			<result column="referente_nome" javaType="string" property="referenteNome"/>
+			<result column="referente_cognome" javaType="string" property="referenteCognome"/>
+			<result column="referente_email" javaType="string" property="referenteEmail"/>
+			<result column="referente_telefono" javaType="string" property="referenteTelefono"/>
+		</association>
+	    <association property="istitutoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.IstitutoScolasticoDTO">
+			<id column="id_istituto_scolastico" javaType="long" property="idIstitutoScolastico"/>
+			<result column="cod_regionale_scuola" javaType="string" property="codRegionaleScuola"/>
+			<result column="cod_regionale_autonomia" javaType="string" property="codRegionaleAutonomia"/>
+			<result column="cod_meccanografico_scuola" javaType="string" property="codMeccanograficoScuola"/>
+			<result column="cod_meccanografico_autonomia" javaType="string" property="codMeccanograficoAutonomia"/>
+			<result column="denom_scuola" javaType="string" property="denominazione"/>
+			<result column="denom_autonomia" javaType="string" property="denominazioneAutonomia"/>
+			<!--association property="comuneScuola" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO">
+				<id column="comune" javaType="string" property="codiceIstatComune" />
+				<result column="descom" javaType="string" property="descrizioneComune"/>
+				<result column="cap" javaType="int" property="cap"/>
+				<result column="codfisc" javaType="string" property="codiceFiscaleComune"/>
+				<association property="provincia" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO">
+					<id column="prov" javaType="string" property="codiceProvincia"/>
+					<result column="regione" javaType="string" property="codiceRegione" />
+					<result column="desprov" javaType="string" property="descrizioneProvincia"/>
+					<result column="sigprov" javaType="string" property="siglaProvincia"/>
+				</association>
+			</association-->
+			<association property="tipologiaIstituto" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipologiaIstitutoScolasticoDTO">
+				<id column="id_tipologia" javaType="long" property="idTipologia"/>
+				<result column="descr_tipologia" javaType="string" property="descrTipologia"/>
+			</association>
+			<association property="percorsoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.PercorsoScolasticoDTO">
+				<id column="id_percorso" javaType="long" property="idPercorso"/>
+				<result column="id_tipo_istituz" javaType="long" property="idTipoIstituz"/>
+				<result column="descr_percorso" javaType="string" property="descrPercorso"/>
+			</association>
+			<association property="gradoScolastico" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.GradoScolasticoDTO">
+				<id column="id_grado_scolastico" javaType="string" property="idGradoScolastico"/>
+				<result column="descr_grado_scolastico" javaType="string" property="descrGradoScolastico"/>
+			</association>
+		</association>
+	</resultMap>
+	<select id="getEntiCoinvoltiForModelloIntervento" parameterType="map" resultMap="enteCoinvoltoModelloMap">
+		SELECT *
+		<!--SELECT  id_ente_coinvolto_modello,
+				denominazione,
+				denominazione_sede_principale,
+				id_pso,
+				id_fonte_dato,
+				codice_1_soggetto,
+				codice_2_soggetto,
+				stecm .id_ruolo_ente,
+				sdre.descr_ruolo_ente,
+				indirizzo,
+				cod_istat_comune,
+				descom,
+				referente_nome,
+				referente_cognome,
+				referente_email,
+				referente_telefono,
+				id_modello_di_intervento,
+				cod_user_inserim,
+				d_inserim,
+				cod_user_aggiorn,
+				d_aggiorn,
+				etp.desprov-->
+		FROM    serse_t_ente_coinvolto_modello stecm join
+				ext_tt_comune etc on etc.comune = stecm.cod_istat_comune join
+				ext_tt_provincia etp on etc.prov = etp.prov join
+				serse_d_ruolo_ente sdre on sdre.id_ruolo_ente = stecm.id_ruolo_ente full join
+				serse_d_fonte_dato sdfd on sdfd.id_fonte_dato =stecm.id_fonte_dato
+		WHERE  id_modello_di_intervento=#{idModelloIntervento}
+	</select>
+	<select id="getEntiCoinvoltiForModelloInterventoV2" parameterType="map" resultMap="enteCoinvoltoModelloMap">
+		select stecm.*,
+			sdre.descr_ruolo_ente,
+			etc.descom,
+			etc.prov,
+			etc.cap,
+			etc.codfisc,
+			etc.cod_bacino,
+			etp.sigprov,
+			etp.desprov,
+			etp.regione,
+			etb.descrizione as descr_bacino,
+			sdfd.descr_fonte_dato,
+			sdis.cod_meccanografico_scuola,
+			sdis.cod_meccanografico_autonomia,
+			sdis.denominazione as denom_scuola,
+			esdp.descr_percorso,
+			esdt.descr_tipologia,
+			esdgs.descr_grado_scolastico,
+			sdis.cod_regionale_autonomia,
+			sdis2.denominazione as denom_autonomia
+		FROM serse_t_ente_coinvolto_modello stecm
+		join ext_tt_comune etc on etc.comune = stecm.cod_istat_comune
+		join ext_tt_provincia etp on etc.prov = etp.prov
+		left join ext_tt_bacino etb on etb.cod_bacino = etc.cod_bacino
+		left join serse_d_ruolo_ente sdre on sdre.id_ruolo_ente = stecm.id_ruolo_ente
+		left join serse_d_fonte_dato sdfd on sdfd.id_fonte_dato = stecm.id_fonte_dato
+		left join serse_d_istituto_scolastico sdis on sdis.cod_regionale_scuola = stecm.codice_1_soggetto and stecm.id_fonte_dato=1
+		left join ext_sispro_d_tipologia esdt on esdt.id_tipologia = sdis.id_tipologia
+		full join ext_sispro_d_percorso esdp on sdis.id_percorso = esdp.id_percorso
+		full join ext_sispro_d_tipo_unita esdtu on sdis.id_tipo_unita=esdtu.id_tipo_unita
+		full join ext_sispro_d_grado_scolastico esdgs on esdgs.id_grado_scolastico = esdtu.id_grado_scolastico
+		left join serse_d_istituto_scolastico sdis2 on sdis2.cod_regionale_scuola = sdis.cod_regionale_autonomia
+		WHERE  id_modello_di_intervento=#{idModelloIntervento}
+	</select>
+	<select id="getEnteCoinvoltoModelloForId" parameterType="map" resultMap="enteCoinvoltoModelloMap">
+		SELECT  id_ente_coinvolto_modello, 
+			denominazione, 
+			denominazione_sede_principale, 
+			id_pso, 
+			stecm.id_fonte_dato,
+			codice_1_soggetto, 
+			codice_2_soggetto,
+			stecm.id_ruolo_ente,
+			sdre.descr_ruolo_ente,
+			indirizzo, 
+			cod_istat_comune,
+			etc.descom,
+			referente_nome, 
+			referente_cognome, 
+			referente_email, 
+			referente_telefono, 
+			id_modello_di_intervento, 
+			cod_user_inserim, 
+			d_inserim, 
+			cod_user_aggiorn, 
+			d_aggiorn,
+			d_cessazione,
+			cod_user_cessazione,
+			etp.desprov,
+			sdfd.descr_fonte_dato,
+			etp.prov
+		FROM    serse_t_ente_coinvolto_modello stecm join 
+			ext_tt_comune etc on etc.comune = stecm.cod_istat_comune join 
+			ext_tt_provincia etp on etc.prov = etp.prov left join
+			serse_d_fonte_dato sdfd on sdfd.id_fonte_dato= stecm.id_fonte_dato join
+			serse_d_ruolo_ente sdre on sdre.id_ruolo_ente = stecm.id_ruolo_ente
+		WHERE  id_ente_coinvolto_modello=#{idEnteCoinvoltoModello}
+	</select>
+</mapper>

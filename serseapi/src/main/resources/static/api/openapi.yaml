@@ -1,0 +1,403 @@
+openapi: 3.0.1
+info:
+  title: SERSE API
+  description: API serse esposte per terze parti
+  contact:
+    name: Piergiorgio Chirotti
+    email: piergiorgio.chiriotti@consulenti.csi.it
+  version: 2.0.0
+servers:
+- url: http://localhost:8080/serseapi/api/v1
+  description: Localhost
+- url: http://dv-serse-fe.regione.piemonte.it/serseapi/api/v1
+  description: Dev
+- url: http://ts-serse-fe.regione.piemonte.it/serseapi/api/v1
+  description: Test
+- url: http://xp-serse-fe.regione.piemonte.it/serseapi/api/v1
+  description: Integrazione
+- url: http://cl-serse-fe.regione.piemonte.it/serseapi/api/v1
+  description: Collaudo
+- url: http://serse-fe.regione.piemonte.it/serseapi/api/v1
+  description: Produzione
+paths:
+  /gest-intersc-serse/test:
+    get:
+      tags:
+      - Test
+      summary: test
+      operationId: test
+      responses:
+        "200":
+          description: esito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        "400":
+          description: usata quando i campi non sono validati correttamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+        "403":
+          description: utente non autorizzato al caso d'uso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+        default:
+          description: errore generico
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+      security:
+      - basicAuth: []
+  /gest-intersc-serse/acquisisci-elaborazione-GAM:
+    put:
+      tags:
+      - GAM
+      summary: verifica elaborazione GAM
+      operationId: acquisisciElaborazioneGAM
+      requestBody:
+        description: "i campi obbligatori all'interno dell'oggetto sono token, codStatoElaborazione,\
+          \ descrStatoElaborazione, codEsito, descrEsito"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcquisisciElaborazioneGAMInput'
+        required: true
+      responses:
+        "200":
+          description: esito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcquisisciElaborazioneGAMOutput'
+        "400":
+          description: usata quando i campi non sono validati correttamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+        "403":
+          description: utente non autorizzato al caso d'uso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+        default:
+          description: errore generico
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+      x-codegen-request-body-name: inputElaborazioneGAM
+      security:
+      - basicAuth: []
+  /gest-intersc-serse/esposizione-anagrafica-destinatario:
+    get:
+      tags:
+      - Query
+      summary: Esposizione delle anagrafiche per terze parti
+      operationId: esposizioneAnagraficaDestinatario
+      parameters:
+      - name: cfDestinatario
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: esito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneAnagrafiche'
+        "400":
+          description: usata quando i campi non sono validati correttamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneAnagrafiche'
+        "404":
+          description: CF non presente in SERSE 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneAnagrafiche'
+        "403":
+          description: utente non autorizzato al caso d'uso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+      security:
+      - basicAuth: []
+  /gest-intersc-serse/esposizione-servizi-destinatario:
+    get:
+      tags:
+      - Query
+      summary: Esposizione dei servizi somministrati a un dato destinatario, per terze parti
+      operationId: esposizioneServiziDestinatario
+      parameters:
+      - name: cfDestinatario
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: esito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneServizi'
+        "400":
+          description: usata quando i campi non sono validati correttamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneServizi'
+        "404":
+          description: CF non presente in SERSE 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputEsposizioneServizi'
+        "403":
+          description: utente non autorizzato al caso d'uso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errore'
+      security:
+      - basicAuth: []
+components:
+  schemas:
+    AcquisisciElaborazioneGAMInput:
+      type: object
+      properties:
+        token:
+          type: integer
+          format: int64
+        codTipoRichiesta:
+          type: string
+        codStatoElaborazione:
+          type: string
+        descrStatoElaborazione:
+          type: string
+        codEsito:
+          type: string
+        descrEsito:
+          type: string
+        responseGam:
+          $ref: '#/components/schemas/ResponseGAM'
+    ResponseGAM:
+      type: object
+      properties:
+        vociSpesa:
+          type: array
+          items:
+            $ref: '#/components/schemas/VociSpesaServizio'
+        fontiServizio:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServizioFonte'
+    VociSpesaServizio:
+      type: object
+      properties:
+        codVoceSpesa:
+          type: string
+        naturaSpesa:
+          type: string
+        ucs:
+          type: number
+        durata:
+          type: number
+        nrDest:
+          type: integer
+          format: int64
+        importoVS:
+          type: number
+    ServizioFonte:
+      type: object
+      properties:
+        idFonte:
+          type: integer
+          format: int64
+        descrFonte:
+          type: string
+        tipologiaFonte:
+          type: string
+        importoFonte:
+          type: number
+        percFonte:
+          type: number
+    AcquisisciElaborazioneGAMOutput:
+      type: object
+      properties:
+        codiceEsito:
+          type: string
+        descrizioneEsito:
+          type: string
+    GenericResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Contiene il messaggio eventuale del servizio chiamato
+          example: Il servizio ha risposto correttamente
+      description: Risposta di un servizio generico
+    Errore:
+      type: object
+      properties:
+        code:
+          type: integer
+        errorMessage:
+          type: string
+        fields:
+          type: string
+          nullable: true
+    OutputParent:
+      type: object
+      properties:
+        codiceEsito:
+          type: string
+        descrizioneEsito:
+          type: string
+    OutputEsposizioneAnagrafiche:
+      allOf:
+        - $ref: "#/components/schemas/OutputParent"
+        - $ref: "#/components/schemas/OutputEsposizioneAnagraficheItem"
+    OutputEsposizioneAnagraficheItem:
+      type: object
+      properties:
+        idDestinatarioSerse:
+          type: integer
+          format: int64
+        codiceFiscale:
+          type: string
+        cognome:
+          type: string
+        nome:
+          type: string
+        dataNascita:
+          type: string
+          format: date
+        codIstatComuneNascita:
+          type: string
+        descrComuneNascita:
+          type: string
+        siglaProvinciaNascita:
+          type: string
+        codStatoEsteroNascita:
+          type: integer
+          format: int32
+        descrStatoEsteroNascita:
+          type: string
+        descrCittaEsteraNascita:
+          type: string
+        codIstatComuneResidenza:
+          type: string
+        descrComuneResidenza:
+          type: string
+        siglaProvinciaResidenza:
+          type: string
+        codStatoEsteroResidenza:
+          type: integer
+          format: int32
+        descrStatoEsteroResidenza:
+          type: string
+        descrCittaEsteraResidenza:
+          type: string
+        indirizzoResidenza:
+          type: string
+        capResidenza:
+          type: string
+        codIstatComuneDomicilio:
+          type: string
+        descrComuneDomicilio:
+          type: string
+        siglaProvinciaDomicilio:
+          type: string
+        indirizzoDomicilio:
+          type: string
+        capDomicilio:
+          type: string
+        recapitoEmail:
+          type: string
+        recapitoTelefonico:
+          type: string
+        codIstatCittadinanza:
+          type: string
+        descrIstatCittadinanza:
+          type: string
+    OutputEsposizioneServizi:
+      allOf:
+        - $ref: "#/components/schemas/OutputParent"
+        - type: object
+          properties:
+            codFiscaleDestinatario:
+              type: string
+            cognomeDestinatario:
+              type: string
+            nomeDestinatario:
+              type: string
+            dataNascitaDestinatario:
+              type: string
+              format: date
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/OutputEsposizioneServiziItem"
+    OutputEsposizioneServiziItem:
+      type: object
+      properties:
+        idServizioSerse:
+          type: integer
+          format: int64
+        titoloServizio:
+          type: string
+        codServizioRegionale:
+          type: integer
+          format: int32
+        descrServizioRegionale:
+          type: string
+        codFinalitaServizio:
+          type: string
+        descrFinalitaServizio:
+          type: string
+        gruppoSoggettoAttuatore:
+          type: string
+        codiceSoggettoAttuatore:
+          type: integer
+          format: int32
+        denominazioneSoggettoAttuatore:
+          type: string
+        gruppoSoggettoBeneficiario:
+          type: string
+        codiceSoggettoBeneficiario:
+          type: integer
+          format: int32
+        denominazioneSoggettoBeneficiario:
+          type: string
+        statoServizio:
+          type: string
+  responses:
+    InvalidParameter:
+      description: usata quando i campi non sono validati correttamente
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Errore'
+    Forbidden:
+      description: utente non autorizzato al caso d'uso
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Errore'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

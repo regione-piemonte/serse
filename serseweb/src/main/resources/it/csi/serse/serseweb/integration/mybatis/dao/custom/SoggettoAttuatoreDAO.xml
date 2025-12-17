@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.SoggettoAttuatoreDAO">
+<!-- Accedere alla tabella SERSE_T_SOGGETTO_ATTUATORE, per:
+	SERSE_T_SOGGETTO_ATTUATORE.num_progr_sportello = <num_progr_sportello>
+	SERSE_T_SOGGETTO_ATTUATORE.gruppo_operatore = <gruppo_operatore>
+	SERSE_T_SOGGETTO_ATTUATORE.gruppo_operatore = <cod_operatore>
+	e recuperare tutti i model_id, gruppo_operatore e cod_operatore distinti.
+	Visualizzare nella lista il model_id, gruppo_operatore e cod_operatore nel formato:
+	“<model_id> - <gruppo_operatore><cod_operatore> -->
+
+<select id="getIstanzeCandidatura" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+	SELECT DISTINCT
+		stsa.id_soggetto_attuatore,
+		stsa.gruppo_operatore,
+		stsa.cod_operatore ,
+		stsa.model_id,
+		aterr.descr_area_territoriale
+	FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+	JOIN serse.serse_t_sede_soggetto_attuatore sedsogat
+	ON stsa.id_soggetto_attuatore = sedsogat.id_soggetto_attuatore
+	join serse.ext_gmop_d_area_territoriale aterr
+	ON aterr.cod_area_territoriale = sedsogat.cod_area_territoriale_finanziamento
+		WHERE stsa.model_id
+		in(
+		SELECT DISTINCT stsa.model_id
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE
+			stsa.num_progr_sportello=#{numProgrSportello} and
+			stsa.gruppo_operatore=#{gruppoOperatore} and
+			stsa.cod_operatore =#{codOperatore}
+			<if test="soloCapofila">
+				and stsa.flg_capofila ='S'
+			</if>
+		)
+	AND stsa.flg_capofila ='S'
+	ORDER BY
+	  stsa.model_id ASC
+</select>
+
+	<select id="getIstanzeCandidaturaPerCodAreaTerritoriale" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+		SELECT DISTINCT
+		stsa.id_soggetto_attuatore,
+		stsa.gruppo_operatore,
+		stsa.cod_operatore ,
+		stsa.model_id
+
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE stsa.model_id
+		in(
+		SELECT DISTINCT stsa.model_id
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		JOIN serse.serse_t_sede_soggetto_attuatore sedsogat
+		ON stsa.id_soggetto_attuatore = sedsogat.id_soggetto_attuatore
+		join serse.ext_gmop_d_area_territoriale aterr
+		ON aterr.cod_area_territoriale = sedsogat.cod_area_territoriale_finanziamento
+		WHERE
+		aterr.cod_area_territoriale = #{codAreaTerritoriale}
+		)
+		AND stsa.flg_capofila ='S'
+		ORDER BY
+		stsa.model_id ASC
+	</select>
+<!-- Algoritmo – Soggetti beneficiari
+	Accedere alla tabella SERSE_T_SOGGETTO_ATTUATORE, per:
+	SERSE_T_SOGGETTO_ATTUATORE.num_progr_sportello = <num_progr_sportello>
+	SERSE_T_SOGGETTO_ATTUATORE.gruppo_operatore = <gruppo_operatore>
+	SERSE_T_SOGGETTO_ATTUATORE.gruppo_operatore = <cod_operatore>
+	e recuperare tutti i model_id distinti.
+	
+	Con i model_id recuperati al passo precedente, accedere sempre alla SERSE_T_SOGGETTO_ATTUATORE e 
+	recuperare tutte le coppie distinte di 
+	gruppo_operatore
+	cod_operatore
+	
+	Con la lista di coppie recuperata, richiamare il Servizio FLAIANAG-getElencoPG_GCO
+	e recuperare per ogni Operatore la Denominazione (denominazionePersonaGiuridica) da visualizzare nella lista. -->
+<select id="getSoggettoBeneficiario" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+	SELECT DISTINCT stsa.id_soggetto_attuatore,
+	stsa.gruppo_operatore,
+	stsa.cod_operatore ,
+	stsa.model_id, stsa.flg_capofila
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE stsa.model_id 
+		in(
+		SELECT distinct stsa.model_id 
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE id_soggetto_attuatore=#{idSoggettoAttuatore} )
+	and stsa.flg_capofila='S'
+</select>
+
+<select id="getSoggettiBeneficiari" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+		SELECT DISTINCT
+			stsa.gruppo_operatore,
+			stsa.cod_operatore ,
+			stsa.model_id,
+			stsa.flg_capofila
+	FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE stsa.model_id 
+		in(
+			SELECT DISTINCT stsa.model_id
+			FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+			WHERE 
+				stsa.num_progr_sportello=#{numProgrSportello} and
+				stsa.gruppo_operatore=#{grOperatore} and
+				stsa.cod_operatore =#{codOperatore}
+			)
+		AND stsa.flg_capofila ='S'
+	ORDER BY
+		stsa.gruppo_operatore, stsa.cod_operatore ASC
+
+</select>
+<select id="getSoggettoAttuatore" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+	SELECT gruppo_operatore, cod_operatore
+	FROM serse_t_soggetto_attuatore
+	WHERE id_soggetto_attuatore=#{idSoggettoAttuatore}
+</select>
+	<select id="getSoggettiAttuatori" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+		SELECT DISTINCT
+		stsa.gruppo_operatore,
+		stsa.cod_operatore
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE stsa.model_id
+			in(
+			SELECT DISTINCT stsa.model_id
+			FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+				WHERE
+				<if test="numProgrSportello != null">
+					stsa.num_progr_sportello=#{numProgrSportello} and
+				</if>
+				stsa.gruppo_operatore=#{grOperatore} and
+				stsa.cod_operatore =#{codOperatore}
+			)
+	ORDER BY
+	stsa.gruppo_operatore, stsa.cod_operatore ASC
+
+</select>
+
+<select id="getSoggettiAttuatoriRicerca" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+	SELECT
+		stsa.id_soggetto_attuatore,
+		stsa.gruppo_operatore,
+		stsa.cod_operatore,
+		stsa.model_id
+	FROM
+		SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE
+		stsa.model_id IN (
+			SELECT DISTINCT
+				stsa_inner.model_id
+			FROM
+				SERSE_T_SOGGETTO_ATTUATORE stsa_inner
+				WHERE
+					1 = 1
+					<if test="numProgrSportello != null">
+						AND stsa_inner.num_progr_sportello = #{numProgrSportello}
+					</if>
+					AND stsa_inner.gruppo_operatore = #{grOperatore}
+					AND stsa_inner.cod_operatore = #{codOperatore}
+		)
+	ORDER BY
+		stsa.gruppo_operatore,
+		stsa.cod_operatore ASC
+
+</select>
+</mapper>

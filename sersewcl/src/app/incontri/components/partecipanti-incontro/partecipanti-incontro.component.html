@@ -1,0 +1,204 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+  <mat-card-header>
+    <h5 mat-card-title>
+      Destinatari partecipanti all'incontro
+    </h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="ps-5 mt-3">
+    <dl>
+      <dd *ngIf="partecipantiList.length > 0">
+        ({{partecipantiList.length}} risultati trovati)
+      </dd>
+    </dl>
+    <ng-container *ngIf="!partecipantiList.length; else partecipantiContent">
+      Nessun partecipante selezionato
+    </ng-container>
+    <ng-template #partecipantiContent>
+      <div class="row  justify-content-center pe-5" *ngFor="let partecipante of partecipantiList; index as i">
+        <div class="col-1 text-center-l50" >
+          {{partecipante.numerazioneDestinatario}}
+        </div>
+        <div class="col-2 text-center-l50" >
+          {{partecipante.destinatario!.codiceFiscaleDestinatario}}
+        </div>
+        <div class="col-2 text-center-l50" >
+          {{partecipante.destinatario!.cognomeDestinatario}}
+          {{partecipante.destinatario!.nomeDestinatario}}
+        </div>
+        <div class="col-2 text-center-l50" >
+          {{partecipante.destinatario!.dNascita! |customDate}}
+        </div>
+        <div class="col-2 text-center-l50" >
+          <mat-form-field class="w-75" appearance="legacy">
+            <mat-select
+                [formControl]="presAssArray[i]"
+                (selectionChange)="onPresenteAssente(partecipante, $event.value)">
+              <mat-option value="1">Presente</mat-option>
+              <mat-option value="2">Assente</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-1 text-center-l50" >
+          <div *ngIf="presAssArray[i].value == 1" >
+            <mat-form-field appearance="legacy">
+              <input matInput [formControl]="numrOreArray[i]">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-2 text-center-l50" >
+          <ng-container *ngIf="presAssArray[i].disabled; else onContrEnable">
+            <button *ngIf="isModificabile"
+                (click)="onModifica(i)"
+                mat-icon-button
+                matTooltip="Modifica"
+                aria-label="modifica dati partecipante"
+                [ngClass]="'btn btn--plain-text--primary'">
+              <mat-icon>{{penIcon}}</mat-icon>
+            </button>
+            <button *ngIf="isModificabile"
+                (click)="onElimina(partecipante)"
+                mat-icon-button
+                matTooltip="Elimina"
+                aria-label="rimuovi partecipante"
+                [ngClass]="'btn btn--plain-text--danger'">
+              <mat-icon>{{trashIcon}}</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #onContrEnable>
+            <button *ngIf="true"
+                (click)="onSalvaModifica(i)"
+                aria-label="salva modifiche"
+                mat-icon-button
+                matTooltip="Salva"
+                [ngClass]="'btn btn--plain-text--primary'">
+              <mat-icon>{{saveIcon}}</mat-icon>
+            </button>
+            <button *ngIf="true"
+                (click)="onAnnullaModifica()"
+                mat-icon-button
+                matTooltip="Annulla"
+                aria-label="annulla modifiche"
+                [ngClass]="'btn btn--plain-text--danger'">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+          </ng-template>
+
+
+        </div>
+        <hr>
+      </div>
+    </ng-template>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+  <mat-card-actions
+      [align]="'start'">
+    <ng-container *ngIf="visibleIcon">
+      <button mat-button
+              class="btn-link--primary"
+              aria-label="aggiungi partecipanti all'incontro"
+              (click)="apriModale()">
+        AGGIUNGI PARTECIPANTI
+      </button>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>
+
+
+<!-- Modale Lista partecipanti -->
+<ng-template #partecipanti>
+<h2 mat-dialog-title>Destinatari del servizio</h2>
+<hr>
+
+<!-- ---------------------------- -->
+<section mat-dialog-content
+          class="example-section">
+
+  <ng-container *ngIf="partecipantiChecked.length; else noDestinatari">
+    <span class="example-list-section">
+      <mat-checkbox class="example-margin"
+                    [checked]="allComplete"
+                    [indeterminate]="someComplete()"
+                    (change)="setAll($event.checked)">
+        <strong>Seleziona tutte</strong>
+      </mat-checkbox>
+    </span>
+    <hr>
+    <span class="example-list-section">
+        <div *ngFor="let partecipante of partecipantiChecked" class="row">
+          <div class="col-1">
+            {{partecipante.numerazioneDestinatario}}
+          </div>
+          <mat-checkbox class="col-4"
+            [(ngModel)]="partecipante.completed"
+                        (ngModelChange)="updateAllComplete()">
+              {{partecipante.codFisc}}
+          </mat-checkbox>
+          <div class="col-4">
+            {{partecipante.nome}}
+            {{partecipante.cognome}}
+          </div>
+          <div class="col-3">
+            {{partecipante.data}}
+          </div>
+          <hr>
+        </div>
+    </span>
+  </ng-container>
+  <ng-template #noDestinatari>
+    <span>Nessun destinatario disponibile</span>
+  </ng-template>
+
+
+</section>
+
+<div  mat-dialog-actions
+      [align]="'end'"
+      class="d-flex justify-content-between mt-3">
+
+  <div class="p-2">
+    <button mat-dialog-close
+            mat-button
+            aria-label="Annulla"
+            class="btn btn--outline-primary">
+          ANNULLA
+    </button>
+  </div>
+  <div class="p-2">
+    <button mat-dialog-close
+            mat-raised-button
+            class="btn btn--primary"
+            aria-label="salva"
+            (click)="aggiorna()">CONFERMA</button>
+  </div>
+</div>
+
+</ng-template>
+
+
+
+

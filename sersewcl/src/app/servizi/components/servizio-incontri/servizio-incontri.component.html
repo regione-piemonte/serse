@@ -1,0 +1,79 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+  <mat-card-header>
+    <h5 mat-card-title>Incontri</h5>
+    <mat-divider></mat-divider>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="ps-5 pe-5 mt-3">
+      <ng-container *ngIf="!incontri.length; else incontriContent">
+        Nessun incontro programmato
+      </ng-container>
+      <ng-template #incontriContent>
+        <div class="row pe-5 align-items-center mb-3 " >
+          <div class="col"><strong >Presso</strong></div>
+          <div class="col"><strong >Indirizzo</strong></div>
+          <div class="col"><strong >Durata</strong></div>
+          <div class="col"><strong >Data(dal/al)</strong></div>
+          <div class="col"><strong >Stato</strong></div>
+          <div class="col"></div>
+
+        </div>
+        <hr>
+        <div class="row pe-5 align-items-center" *ngFor="let incontro of incontri">
+          <div class="col">{{incontro.incontro.luogoIncontro?.denominazioneLuogo}}</div>
+          <div class="col">{{incontro.incontro.luogoIncontro?.indirizzoLuogo}}</div>
+          <div class="col">{{incontro.incontro.durataOre}} h</div>
+          <div class="col">{{incontro.incontro.dInizio!|customDate}}-{{incontro.incontro.dFine!|customDate}} </div>
+          <div class="col">{{incontro.incontro.statoIncontro?.descrStatoIncontro}} </div>
+
+
+          <div class="col">
+            <button mat-icon-button *ngFor="let icon of incontro.icons" [matTooltip]="icon.matTooltip"
+              attr.aria-label={{icon.ariaLabel}}
+              (click)="icon?.actionClick(incontro)" [ngClass]="'btn btn--plain-text--' + (icon.matIcon === 'delete_forever' ? 'danger' : 'primary')">
+              <mat-icon> {{icon.matIcon}} </mat-icon>
+            </button>
+          </div>
+
+          <hr>
+        </div>
+      </ng-template>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+  <mat-card-actions
+      [align]="'start'">
+      <button mat-button
+      *ngIf="isModificabile"
+      class="btn btn--plain-text--primary"
+      aria-label="aggiungi incontro"
+      [disabled]="disabled"
+      (click)="aggiungiIncontro()">
+      AGGIUNGI INCONTRO
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,95 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+  <mat-card-header>
+    <h5 mat-card-title>
+      Enti coinvolti
+    </h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="ps-5 mt-3">
+    <ng-container *ngIf="!(entiList.length+entiCessatiList.length); else entiContent">
+      Nessun Ente selezionato
+    </ng-container>
+    <ng-template #entiContent>
+      <div class="row pe-5 align-items-center" *ngFor="let enteCoinvolto of entiList">
+        <div class="col">{{enteCoinvolto.denominazione}}</div>
+        <div class="col">{{enteCoinvolto.denominazioneSedePrincipale ?? ""}}</div>
+        <div class="col">{{enteCoinvolto.codice1Soggetto}} <ng-container *ngIf="enteCoinvolto.idFonteDato==3"> - {{enteCoinvolto.codice2Soggetto}}</ng-container></div>
+        <div class="col">{{enteCoinvolto.comune?.descrizioneComune}}</div>
+
+        <div *ngIf="enteCoinvolto.descrizioneRuoloEnte" class="col">{{enteCoinvolto.descrizioneRuoloEnte}}</div>
+
+        <div class="col">
+          <button mat-icon-button
+                  *ngFor="let icon of icons"
+                  [matTooltip]="icon.matTooltip"
+                  attr.aria-label={{icon.ariaLabel}}
+                  (click)="icon?.actionClick(enteCoinvolto)" [ngClass]="icon.cssClass">
+            <mat-icon> {{icon.matIcon}} </mat-icon>
+          </button>
+
+        </div>
+
+        <hr>
+      </div>
+      <ng-container *ngIf="entiCessatiList.length">
+        <div class="row pe-5 align-items-center" *ngFor="let enteCoinvolto of entiCessatiList">
+          <div class="col">{{enteCoinvolto.denominazione}}</div>
+          <div class="col">{{enteCoinvolto.denominazioneSedePrincipale ?? ""}}</div>
+          <div class="col">{{enteCoinvolto.codice1Soggetto}} <ng-container *ngIf="enteCoinvolto.idFonteDato==3"> - {{enteCoinvolto.codice2Soggetto}}</ng-container></div>
+          <div class="col">{{enteCoinvolto.comune?.descrizioneComune}}</div>
+
+          <div *ngIf="enteCoinvolto.descrizioneRuoloEnte" class="col">{{enteCoinvolto.descrizioneRuoloEnte}}</div>
+
+          <div class="col">
+            <button mat-icon-button
+
+                    *ngFor="let icon of iconsCessati"
+                    [matTooltip]="icon.matTooltip"
+                    attr.aria-label={{icon.ariaLabel}}
+                    (click)="icon?.actionClick(enteCoinvolto)" [ngClass]="icon.cssClass">
+              <mat-icon> {{icon.matIcon}} </mat-icon>
+            </button>
+          </div>
+
+          <hr>
+        </div>
+      </ng-container>
+    </ng-template>
+
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions [align]="'start'">
+    <ng-container *ngIf="canAdd">
+      <button mat-button
+              class="btn-link--primary"
+              aria-label="aggiungi ente"
+              (click)="onAggiungiEnteButton()">
+        AGGIUNGI ENTE
+      </button>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>

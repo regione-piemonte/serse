@@ -1,0 +1,525 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<app-back-to-bar
+  [backUrl]="backTo"
+
+  [statoFor]="'servizio'"
+  [stato]="statoDescrizione ? statoDescrizione : ''"
+  [statoClass]="''">
+</app-back-to-bar>
+
+
+<!-- Handle pso selected -->
+
+<ng-container *ngIf="periodoValido; else sportelloScaduto">
+<mat-tab-group class="mt-3"
+              [selectedIndex]="selectedTab"
+              appTabClickInterceptor
+              (tabClick)="onTabClick($event)"
+>
+
+
+<!-- ----------------------------------------------------------------- -->
+  <!-- DATI IDENTIFICATIVI -->
+<mat-tab label="Dati identificativi">
+<app-dati-identificativi
+  [title]="'servizio'"
+  [nIdentificativi]="{
+                      modello: identificativoModello,
+                      intervento: identificativoIntervento,
+                      servizio: identificativoServizio
+                       }">
+</app-dati-identificativi>
+
+    <mat-card class="pe-5">
+      <mat-card-header>
+        <mat-card-title>
+          <!-- Titolo -->
+            <h5 class="mb-5">Dati generali</h5>
+        </mat-card-title>
+      </mat-card-header>
+
+      <!-- ----------------------------------------------------------------- -->
+      <mat-card-content>
+      <form [formGroup]="form">
+        <!-- Form -->
+        <div class="container-fluid">
+          <!-- istanza candidatura -->
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field
+                    appearance="legacy"
+                    style="width: 100%;">
+                <mat-label>Selezionare un'istanza di candidatura</mat-label>
+
+                <mat-select formControlName ="candidatura"
+                            (selectionChange)="onSelectedCandidatura()">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let istanza of istanzeCandidatura;
+                                      index as i;" [value]="i.toString()">
+                    {{istanza.modelId}} - {{istanza.gruppoOperatore}}{{istanza.codOperatore}} - {{istanza.denominazioneGiuridica}} - {{istanza.descrAreaTerritoriale}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+            <div class="col-6"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field
+                    appearance="legacy"
+                    style="width: 100%;">
+                <mat-label>Selezionare una sede di riferimento</mat-label>
+                <mat-select formControlName ="sedeRiferimento">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let sede of sediRiferimentoList;
+                                      index as i;" [value]="sede.idSede?.toString()">
+                     {{sede.idSede}} - {{sede.indirizzoSede}} - {{sede.comune?.descrizioneComune}} ({{sede.comune?.provincia?.siglaProvincia}})
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+            <div class="col-6"></div>
+          </div>
+
+          <div class="row">
+            <!-- Tipologia -->
+            <div class="col-12">
+              <mat-form-field
+                    appearance="legacy"
+                    style="width: 100%;">
+                <mat-label>Selezionare una tipologia di servizio</mat-label>
+
+                <mat-select formControlName ="tipologia"
+                            (selectionChange)="onSelectedTipolgia()">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let tipo of tipologieServizio;
+                                      index as i;" [value]="i.toString()">
+                    {{tipo.codiceServizioRegionale}}
+                    {{tipo.descrServizioRegionale}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <!-- Area territoriale -->
+            <div class="col-6">
+              <mat-form-field
+                    appearance="legacy"
+                    style="width: 100%;">
+                <mat-label>Selezionare un'area territoriale</mat-label>
+
+                <mat-select formControlName ="territorio">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let area of areeTerritoriali" [value]="area.codAreaTerritoriale">
+                    {{area.descrAreaTerritoriale}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+            <!-- Finalità -->
+            <div class="col-1" style="padding-top: 20px;">
+              <span>Finalità: <strong>{{selectedTipologiaServizio ?selectedTipologiaServizio.descrFinalitaServizio :"N.D."}}</strong></span>
+            </div>
+
+            <!-- Titolo -->
+            <div class="col-12">
+              <mat-form-field appearance="legacy" class="w-100">
+                <mat-label>Titolo servizio</mat-label>
+                <input matInput formControlName ="titolo" maxlength="100">
+              </mat-form-field>
+            </div>
+
+          <!-- Durata in ore & Numero destinatari & numero famiglie -->
+          <div class="row mb-3">
+            <div class="col-4">
+              <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="legacy" class="w-100">
+                  <mat-label>Durata in ore</mat-label>
+                  <input matInput type="text" formControlName="durataOre" [disabled]="servizio.statoServizio?.idStatoServizio == 22">
+                  <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="toolTipDurataOre">info</mat-icon>
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['durataOre']"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6" style="padding-top: 10px;">
+                <button *ngIf="canPropostaOre"
+                        mat-button
+                        class="btn-link--primary"
+                        aria-label="proposta modifica ore servizio"
+                        [disabled]="esisteElaborazioneInCorso || !!oreProposte"
+                        (click)="apriModale(true)">PROPOSTA MODIFICA
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="legacy" class="w-100" >
+                  <mat-label>Numero destinatari</mat-label>
+                  <input matInput type="text" formControlName="numDestinatari" maxlength="3" [disabled]="servizio.statoServizio?.idStatoServizio == 22">
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['numDestinatari']"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-6" style="padding-top: 10px;">
+                <button *ngIf="canPropostaDest"
+                        mat-button
+                        class="btn-link--primary"
+                        aria-label="proposta modifica numero destinatari servizio"
+                        [disabled]="esisteElaborazioneInCorso || !!desProposte"
+                        (click)="apriModale()">PROPOSTA MODIFICA
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="col-4" *ngIf="!numeroFamiglieIsNull && showNumeroFamiglie">
+              <div class="roe">
+                <div class="col-6">
+                  <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>{{ labaleCampoAggiuntivo }}</mat-label>
+                    <input matInput formControlName ="numeroFamiglie" maxlength="50">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <div class="row" *ngIf="oreProposte">
+              <span>Durata proposta: <strong>{{oreProposte}} ore</strong></span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row" *ngIf="desProposte">
+              <span> numero destinatari proposti: <strong>{{desProposte}}</strong></span>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!-- Informazione ultima richiesta -->
+          <app-info-gam
+            [datiToken]="datiToken"
+            [visibilityAggiorna]="visibilityAggiorna"
+            (onAggiornaProposta)="onAggiornaProposta($event)">
+          </app-info-gam>
+
+          <!-- classificazione -->
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field
+                    appearance="legacy"
+                    style="width: 100%;">
+                <mat-label>Selezionare una classificazione</mat-label>
+
+                <mat-select formControlName ="classificazione">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let classificazione of classificazioniPor;
+                                      index as i;" [value]="i.toString()">
+                    {{classificazione.livello1}}.{{classificazione.livello2}}.{{classificazione.livello3}}
+                    {{classificazione.livello4}} - {{classificazione.descrFinalita}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+        </div>
+      </form>
+      </mat-card-content>
+
+    <mat-divider></mat-divider>
+    <div class="mt-5"></div>
+
+    <!-- ----------------------------------------------------------------- -->
+    <!-- Dati Referente -->
+    <app-dati-riferimento [formGrup]="riferimentoForm">
+    </app-dati-riferimento>
+
+    <!-- ----------------------------------------------------------------- -->
+    <!-- isSaved -->
+    <app-info-salvataggio *ngIf="isSaved"
+          [soggettoAttuatoreCompetente]="soggettoAttuatoreCompetente"
+          [codiceFiscaleIns]="codiceFiscaleIns"
+          [codiceFiscaleAgg]="codiceFiscaleAgg"
+          [dataIns]="dataIns"
+          [dataAgg]="dataAgg">
+    </app-info-salvataggio>
+
+    </mat-card>
+
+  <!-- ----------------------------------------------------------------- -->
+  <!--!!!Modale proposta modifica -->
+  <ng-template #propostaModifica>
+    <h2>Modifica {{isOre ?"durata":"numero destinatari"}}</h2>
+    <hr>
+    <form [formGroup]="formProposta">
+    <ng-container *ngIf="isOre; else numDest">
+      <div class="row mb-2">
+        <span>Indicare una durata compresa tra {{selectedTipologiaServizio!.oreConsentiteMin}}-{{selectedTipologiaServizio!.oreConsentiteMax}} ore </span>
+      </div>
+      <div class="row">
+        <mat-form-field style="width: 50%;" appearance="legacy">
+          <mat-label>Durata in ore</mat-label>
+          <input matInput type="text" [formControl]="formProposta.controls['ore']" maxlength="10">
+          <mat-error>
+            <app-control-messages [control]="formProposta.controls['ore']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <ng-template #numDest>
+      <div class="row mb-2">
+        <span>Indicare un numero dei destinatari </span>
+      </div>
+      <div class="row">
+        <mat-form-field style="width: 50%;" appearance="legacy">
+          <mat-label>Numero destinatari</mat-label>
+          <input matInput type="text" [formControl]="formProposta.controls['dest']" maxlength="3">
+          <mat-error>
+            <app-control-messages [control]="formProposta.controls['dest']"></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </ng-template>
+    </form>
+    <hr>
+
+    <!-- Pulsanti -->
+    <div class="d-flex mt-3">
+      <div class="ms-auto p-2">
+        <button matDialogClose class="btn btn--outline-primary" aria-label="annulla">ANNULLA</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn--primary" (click)="onConfermaProposta()" aria-label="conferma proposta">CONFERMA</button>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <!-- ----------------------------------------------------------------- -->
+  <!--!!!Modale chiusura-->
+  <ng-template #chiusura>
+    <h2 mat-dialog-title class="mb-5">Chiusura Servizio</h2>
+    <div class="row mb-2">
+      {{testoDialogChiusura}}
+    </div>
+
+    <div class="row">
+      <form [formGroup]="formChiusura">
+      <mat-form-field style="width: 150px;" appearance="legacy"  >
+        <mat-label>Data Chiusura</mat-label>
+                <input #date matInput
+                      [matDatepicker]="picker"
+                      formControlName="dataChiusura"
+                      required="true">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- Pulsanti -->
+    <div class="d-flex mt-3">
+      <div class="me-auto p-2">
+      </div>
+      <div class="p-2">
+        <button matDialogClose class="btn btn--outline-primary" aria-label="annulla">ANNULLA</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn--primary"  (click)="handleChiusura()" aria-label="conferma proposta">CONFERMA</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--modale dati particolari mancanti -->
+  <ng-template #datiCorr>
+    <h5 matDialogTitle> Destinatari con dati peculiari obbligatori mancanti</h5>
+    <hr>
+      <app-table
+            [rowData]="rowData"
+            [tableSettings]="tableSettings"
+            [columnList]="columnList"
+            [keepPagination]="true">
+      </app-table>
+      <div matDialogActions class="p-2" [align]="'end'">
+        <button matDialogClose class="btn btn--outline-primary">CHIUDI</button>
+      </div>
+  </ng-template>
+
+</mat-tab>
+
+
+<!-- ----------------------------------------------------------------- -->
+  <!-- DATI CORRELATI -->
+  <mat-tab label="Dati correlati" [disabled]="!isSaved">
+  <app-dati-identificativi
+    [title]="'servizio'"
+    [nIdentificativi]="{
+                        modello: identificativoModello,
+                        intervento: identificativoIntervento,
+                        servizio: identificativoServizio
+                        }">
+  </app-dati-identificativi>
+
+    <!-- mettere *ngIf selectedTab==1,2,3,... mi permette di ricaricare i component quando si cambia tab -->
+
+    <app-servizio-correlati *ngIf="isSaved && selectedTab == 1"
+      [servizio]="servizio"
+      [isModificabile]="isModificabile && !esisteElaborazioneInCorso && !propostaFattaDaSalvare">
+    </app-servizio-correlati>
+  </mat-tab>
+
+
+<!-- ----------------------------------------------------------------- -->
+  <!-- DESTINATARI -->
+  <mat-tab label="Destinatari" [disabled]="!isSaved">
+  <app-dati-identificativi
+    [title]="'servizio'"
+    [nIdentificativi]="{
+                        modello: identificativoModello,
+                        intervento: identificativoIntervento,
+                        servizio: identificativoServizio
+                        }">
+  </app-dati-identificativi>
+
+   <app-servizio-destinatari *ngIf="isSaved && selectedTab == 2"
+   [isModificabile]="isModificabile && !esisteElaborazioneInCorso && !propostaFattaDaSalvare"
+   >
+  </app-servizio-destinatari>
+  </mat-tab>
+
+
+<!-- ----------------------------------------------------------------- -->
+  <!-- SPESA -->
+  <mat-tab label="Spesa" [disabled]="!isSaved">
+  <app-dati-identificativi
+    [title]="'servizio'"
+    [nIdentificativi]="{
+                        modello: identificativoModello,
+                        intervento: identificativoIntervento,
+                        servizio: identificativoServizio
+                        }">
+  </app-dati-identificativi>
+
+    <!-- in questo tab non guardo esisteElaborazioneInCorso altrimenti mi scompare il bottone aggiorna -->
+    <app-servizio-spesa #spesaTab
+      *ngIf="isSaved && selectedTab == 3"
+      [servizio]="servizio"
+      [isModificabile]="isModificabile"
+      [periodoValido]="periodoValido"
+      >
+    </app-servizio-spesa>
+  </mat-tab>
+
+
+
+<!-- ----------------------------------------------------------------- -->
+  <!-- INCONTRI -->
+  <mat-tab label="Incontri" [disabled]="!isSaved">
+  <app-dati-identificativi
+    [title]="'servizio'"
+    [nIdentificativi]="{
+                        modello: identificativoModello,
+                        intervento: identificativoIntervento,
+                        servizio: identificativoServizio
+                        }">
+  </app-dati-identificativi>
+
+    <app-servizio-incontri #incontriTab
+      *ngIf="isSaved && selectedTab == 4"
+      [isModificabile]="isModificabile"
+      [disabled]="esisteElaborazioneInCorso || propostaFattaDaSalvare"
+    ></app-servizio-incontri>
+  </mat-tab>
+
+
+  <!-- Icona -->
+  <mat-icon #IconaP [matTooltip]="'Individuale'" aria-hidden="true">person</mat-icon>
+  <mat-icon #IconaG [matTooltip]="'Di gruppo'" aria-hidden="true">group</mat-icon>
+</mat-tab-group>
+
+
+<div *ngIf="isModificabile" class="d-flex mt-3">
+  <div class="p-2">
+    <button *ngIf="selectedTab==0 && chiudibile && isSaved"
+            mat-button
+            class="btn btn--plain-text--danger"
+            (click)="onChiudi()"
+            [disabled]="esisteElaborazioneInCorso || propostaFattaDaSalvare"
+            aria-label="chiudi servizio">
+      CHIUDI SERVIZIO
+    </button>
+  </div>
+  <div class="p-2">
+    <button *ngIf="selectedTab==0 && riportaInDefinizione && isSaved"
+            mat-button
+            class="btn btn--plain-text--danger"
+            (click)="onRiportaInDefinizione()"
+            [disabled]="esisteElaborazioneInCorso || propostaFattaDaSalvare"
+            aria-label="riapri servizio">
+      RIPORTA SERVIZIO IN DEFINIZIONE
+    </button>
+  </div>
+  <div class="me-auto"></div>
+  <div class="p-2">
+    <button *ngIf="selectedTab==0 && periodoValido"
+            [disabled]="esisteElaborazioneInCorso"
+            class="btn btn--primary"
+            aria-label="salva servizio"
+            (click)="onSalva()">
+      SALVA
+    </button>
+  </div>
+</div>
+</ng-container>
+
+
+
+<ng-template #sportelloScaduto>
+  <mat-card class="mt-5 card-body card-body--warning">
+    <!-- Tipologia PSO -->
+    <mat-card-content >
+      <dl>
+        <dt>
+          Non è più possibile creare nuovi servizi:
+        </dt>
+        <dd>
+          sportello scaduto
+        </dd>
+      </dl>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+

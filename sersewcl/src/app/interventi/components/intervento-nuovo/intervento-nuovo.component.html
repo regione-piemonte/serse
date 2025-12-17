@@ -1,0 +1,165 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Handle  Back to search -->
+ <app-back-to-bar
+  [backUrl]="'/dashboard/intervento/gestione'"
+
+  [statoFor]="'intervento'"
+  [stato]="statoDescrizione ? statoDescrizione : ''"
+  [statoClass]="''">
+</app-back-to-bar>
+
+<!-- Handle pso selected -->
+
+<mat-tab-group class="mt-3"
+              [selectedIndex]="selectedTab"
+              appTabClickInterceptor
+              (tabClick)="onTabClick($event)">
+<!-- -------------------------Dati identificativi----------------------------------- -->
+<mat-tab label="Dati identificativi">
+
+<app-dati-identificativi
+  [title]="'intervento'"
+  [nIdentificativi]="{modello: identificativoModelloIntervento,
+                      intervento: identificativoIntervento }">
+</app-dati-identificativi>
+
+<form [formGroup]="form">
+  <mat-card class="pe-5">
+  <app-dati-generali
+    [riferimentoA]="riferimentoA"
+    [formGrup]="datiForm"
+    [identificativo]="identificativoIntervento"
+    [candidaturaList]="istanzeCandidaturaList"
+    [tipoList]="tipologieInterventoList">
+  </app-dati-generali>
+
+  <mat-divider></mat-divider>
+  <div class="mt-5"></div>
+
+  <app-associazione-modello-intervento
+    [canAssoccia]="canAssoccia"
+    [canDisassocia]="canDisassocia"
+    [idPso]="idPso"
+    [modelloAssociato]="modelloAssociato"
+    [istanzaCandidatura]="istanzaCandidatura"
+    [tipoIntervento]="tipo"
+    (associaModello)="onAssociaModello($event)"
+    (disassociaModello)="onDisassociaModello()">
+  </app-associazione-modello-intervento>
+
+  <mat-divider></mat-divider>
+  <div class="mt-5"></div>
+
+  <app-dati-riferimento
+    [riferimentoA]="riferimentoA"
+    [formGrup]="riferimentoForm">
+  <!-- [isModificabile] -->
+
+  </app-dati-riferimento>
+
+
+
+  <!-- isSaved -->
+  <app-info-salvataggio *ngIf="isSaved"
+        [soggettoAttuatoreCompetente]="soggettoAttuatoreCompetente"
+        [codiceFiscaleIns]="codiceFiscaleIns"
+        [codiceFiscaleAgg]="codiceFiscaleAgg"
+        [dataIns]="dataIns"
+        [dataAgg]="dataAgg">
+  </app-info-salvataggio>
+
+  </mat-card>
+</form>
+
+</mat-tab>
+<!-- -------------------------Dati correlati---------------------------------------- -->
+<mat-tab label="Dati correlati" [disabled]="!isSaved">
+<app-dati-identificativi
+  [title]="'intervento'"
+  [nIdentificativi]="{modello: identificativoModelloIntervento,
+                      intervento: identificativoIntervento }">
+</app-dati-identificativi>
+
+  <app-intervento-correlati  #correlati
+      *ngIf="isSaved"
+      [intervento]="intervento"
+      [isModificabile]="isModificabile">
+  </app-intervento-correlati>
+</mat-tab>
+<!-- -------------------------Servizi----------------------------------------------- -->
+<mat-tab label="Servizi" [disabled]="!isSaved">
+<app-dati-identificativi
+  [title]="'intervento'"
+  [nIdentificativi]="{modello: identificativoModelloIntervento,
+                      intervento: identificativoIntervento }">
+</app-dati-identificativi>
+
+  <app-intervento-servizi
+      *ngIf="isSaved"
+      [intervento]="intervento"
+      [stato]="stato">
+  </app-intervento-servizi>
+</mat-tab>
+</mat-tab-group>
+
+
+<!-- Button -->
+<div *ngIf="isProprietario && canReopen" class="d-flex mt-3">
+
+  <div *ngIf="stato==20"
+        class="p-2">
+    <button mat-button
+            class="btn--plain-text--danger"
+            aria-label="chiudi intervento"
+            (click)="updateStatoIntervento(40)">CHIUDI INTERVENTO</button>
+  </div>
+  <div *ngIf="stato==40 && canReopen"
+        class="p-2">
+    <button mat-button
+            class="btn--plain-text--primary"
+            aria-label="annulla chiusura"
+            (click)="updateStatoIntervento(20)">ANNULLA CHIUSURA INTERVENTO</button>
+  </div>
+  <div class="me-auto"></div>
+  <div class="p-2 me-2 mb-2"
+      *ngIf="stato==10">
+    <button class="btn btn--success"
+            aria-label="attiva intervento"
+            (click)="updateStatoIntervento(20)">ATTIVA</button>
+  </div>
+  <div class="p-2 me-2 mb-2"
+      *ngIf="stato==20">
+    <button mat-button
+            class="btn--plain-text--primary"
+            aria-label="disattiva intervento"
+            (click)="updateStatoIntervento(10)">DISATTIVA</button>
+  </div>
+  <div *ngIf="isModificabile" class="p-2">
+    <button *ngIf="selectedTab==0"
+            class="btn btn--primary"
+            aria-label="salva intervento"
+            (click)="onSalva()">SALVA</button>
+  </div>
+</div>

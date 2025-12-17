@@ -1,0 +1,132 @@
+/**
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ */
+
+#app-serse {
+  background-color: $grey-300;
+
+  .mat-sidenav-container {
+    min-height: calc(100vh - 100px);
+    background-color: $grey-300;
+  }
+
+  .mat-sidenav {
+    .mat-nav-list {
+      .chevron-button {
+        transition: 300ms ease-in-out;
+        transform: rotate(0deg);
+      }
+      .chevron-button.rotated {
+        transform: rotate(180deg);
+      }
+
+      .categoriaSideMenu{
+        text-decoration: solid;
+      }
+
+
+      .categoriaSideMenu:hover{
+        background-color: rgba($primary-color, .1);
+      }
+    }
+  }
+
+  .status-container{
+    padding-top: 0.5rem;
+    margin-left: auto;
+    margin-right: 0.5rem;
+  }
+
+  .info-container{
+    @extend .card-body--info;
+    border-radius: 5px;
+    padding: 1.5rem;
+  }
+
+
+
+
+
+
+  // Help Section
+  .mt-30 {
+    margin-top: 30px !important;
+  }
+  @media (min-width: 576px){
+    .mt-sm-60 {
+        margin-top: 60px !important;
+    }
+  }
+  .hk-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+
+  /* Category Section */
+  .list-group-item.active {
+    background-color: #00acf0;
+    border-color: #00acf0;
+  }
+  .badge {
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-size: 72%;
+    letter-spacing: 0.3px;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    text-transform: capitalize;
+
+    background: #eaecec;
+    color: #324148;
+  }
+
+
+
+
+  .mr-15 {
+    margin-right: 15px !important;
+  }
+  .ml-15 {
+    margin-left: 15px !important;
+  }
+
+
+
+
+
+  .ok{
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .vertical-image{
+    width: auto;
+    cursor: pointer;
+  }
+}
+

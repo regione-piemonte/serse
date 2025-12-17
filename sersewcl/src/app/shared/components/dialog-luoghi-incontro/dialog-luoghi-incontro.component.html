@@ -1,0 +1,102 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<h2 mat-dialog-title>Luogo dell'incontro</h2>
+<hr>
+<div>
+  <mat-dialog-content>
+    <form class="row" [formGroup]="formLuogo">
+      <div class="col-12 mb-2">
+        <mat-label>Luogo derivato da:  </mat-label>
+        <span><strong>  {{selectionFrom}}</strong></span>
+      </div>
+      <div class="col-6 mb-2">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Selezionare una Provincia</mat-label>
+          <mat-select formControlName="provincia" (selectionChange)="onSelectedProvincia()">
+            <mat-option>---</mat-option>
+            <mat-option *ngFor="let provincia of provinciaList" [value]="provincia.codiceProvincia">
+              {{provincia.descrizione}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--Comune -->
+      <div class="col-6">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Selezionare un Bacino</mat-label>
+          <mat-select formControlName="bacino" (selectionChange)="onSelectedBacino()">
+            <mat-option>---</mat-option>
+             <mat-option *ngFor="let bacino of baciniList" [value]="bacino.codBacino">
+              {{bacino.descrizione}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+        <div class="col-6 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare un Comune</mat-label>
+            <mat-select formControlName="comune">
+              <mat-option>---</mat-option>
+              <mat-option *ngFor="let comune of comuniList" [value]="comune.codiceIstatComune">
+                {{comune.descrizioneComune}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Indirizzo: </mat-label>
+            <input matInput formControlName="indirizzo" maxlength="100">
+          </mat-form-field>
+        </div>
+        <div class="col-12 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Presso: </mat-label>
+            <input matInput formControlName="presso" maxlength="250">
+          </mat-form-field>
+        </div>
+        <div class="col-12 mb-2">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Note: </mat-label>
+            <textarea matInput formControlName="note" maxlength="4000"></textarea>
+          </mat-form-field>
+        </div>
+    </form>
+    <mat-dialog-actions class="d-flex justify-content-between">
+          <button mat-raised-button
+                  class="btn btn--outline-primary"
+                  aria-label="annulla"
+                  mat-dialog-close>
+            ANNULLA
+          </button>
+          <button mat-raised-button
+                  class="btn btn--primary"
+                  aria-label="salva luogo inocntro"
+                  *ngIf="isModificabile"
+                  (click)="onSalva()"
+                  >
+            SALVA
+          </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>
+

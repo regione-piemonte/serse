@@ -1,0 +1,3424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://anagrafepg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://anagrafepg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:intf="http://anagrafepg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Nov 13, 2013 (09:13:21 GMT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://anagrafepg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="testResources">
+    <complexType/>
+   </element>
+   <element name="testResourcesResponse">
+    <complexType>
+     <sequence>
+      <element name="testResourcesReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CSIException">
+    <sequence>
+     <element name="nestedExcClassName" nillable="true" type="xsd:string"/>
+     <element name="nestedExcMsg" nillable="true" type="xsd:string"/>
+     <element name="stackTraceMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault" type="impl:CSIException"/>
+   <element name="getElencoPG">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:string"/>
+      <element minOccurs="0" name="in6" type="xsd:string"/>
+      <element maxOccurs="unbounded" minOccurs="0" name="in7" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoPGResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoPGReturn" type="impl:ResultElencoPG"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AkOperatore">
+    <sequence>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="TipoOperatore">
+    <sequence>
+     <element name="codiceTipoOperatore" nillable="true" type="xsd:string"/>
+     <element name="descrizioneTipoOperatore" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SintesiOperatore">
+    <sequence>
+     <element name="operatore" nillable="true" type="impl:AkOperatore"/>
+     <element name="tipoOperatore" nillable="true" type="impl:TipoOperatore"/>
+    </sequence>
+   </complexType>
+   <complexType name="AttivitaEconomica">
+    <sequence>
+     <element name="codice" type="xsd:int"/>
+     <element name="codiceAteco" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Comune">
+    <sequence>
+     <element name="codiceComune" nillable="true" type="xsd:string"/>
+     <element name="denominazioneComune" nillable="true" type="xsd:string"/>
+     <element name="siglaProvincia" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="StatoEstero">
+    <sequence>
+     <element name="codiceStatoEstero" nillable="true" type="xsd:string"/>
+     <element name="denominazioneStatoEstero" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TipoStrada">
+    <sequence>
+     <element name="codiceTipoStrada" nillable="true" type="xsd:string"/>
+     <element name="descrizioneTipoStrada" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SintesiSede">
+    <sequence>
+     <element name="attivitaEconomica" nillable="true" type="impl:AttivitaEconomica"/>
+     <element name="cap" nillable="true" type="xsd:string"/>
+     <element name="civicoSede" nillable="true" type="xsd:string"/>
+     <element name="codBacino" nillable="true" type="xsd:int"/>
+     <element name="codiceAteco" nillable="true" type="xsd:string"/>
+     <element name="comune" nillable="true" type="impl:Comune"/>
+     <element name="denominazioneBacino" nillable="true" type="xsd:string"/>
+     <element name="denominazioneSede" nillable="true" type="xsd:string"/>
+     <element name="fax" nillable="true" type="xsd:string"/>
+     <element name="idSede" nillable="true" type="xsd:int"/>
+     <element name="indirizzoSede" nillable="true" type="xsd:string"/>
+     <element name="statoEstero" nillable="true" type="impl:StatoEstero"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+     <element name="tipoStrada" nillable="true" type="impl:TipoStrada"/>
+    </sequence>
+   </complexType>
+   <complexType name="SintesiPersonaGiuridica">
+    <sequence>
+     <element name="codiceFiscale" nillable="true" type="xsd:string"/>
+     <element name="denominazionePersonaGiuridica" nillable="true" type="xsd:string"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="partitaIva" nillable="true" type="xsd:string"/>
+     <element name="sintesiOperatore" nillable="true" type="impl:SintesiOperatore"/>
+     <element name="sintesiSedeLegale" nillable="true" type="impl:SintesiSede"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSintesiPersonaGiuridica">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SintesiPersonaGiuridica"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultMessage">
+    <sequence>
+     <element name="codCategMsg" nillable="true" type="xsd:string"/>
+     <element name="codTipoMsg" nillable="true" type="xsd:string"/>
+     <element name="codice" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="idMessaggio" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoPG">
+    <sequence>
+     <element name="elencoPG" nillable="true" type="impl:ArrayOfSintesiPersonaGiuridica"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <complexType name="SystemException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault1" type="impl:SystemException"/>
+   <complexType name="UnrecoverableException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault2" type="impl:UnrecoverableException"/>
+   <complexType name="UserException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault3" type="impl:InvalidParameterException"/>
+   <complexType name="TooManyOccurencesException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault4" type="impl:TooManyOccurencesException"/>
+   <complexType name="MateriaNotYetSupportedException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault5" type="impl:MateriaNotYetSupportedException"/>
+   <element name="getElencoPG_GCO">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element maxOccurs="unbounded" minOccurs="0" name="in1" type="impl:AkOperatore"/>
+      <element maxOccurs="unbounded" minOccurs="0" name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoPG_GCOResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoPG_GCOReturn" type="impl:ResultElencoPG"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioOperatore">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="impl:AkOperatore"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioOperatoreResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioOperatoreReturn" type="impl:ResultDettaglioPersonaGiuridica"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Cessazione">
+    <sequence>
+     <element name="codiceCausale" nillable="true" type="xsd:string"/>
+     <element name="dataCessazione" nillable="true" type="xsd:dateTime"/>
+     <element name="descrizioneCausale" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="RamoAzienda">
+    <sequence>
+     <element name="codice" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="Quartiere">
+    <sequence>
+     <element name="codice" type="xsd:int"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="istatComune" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SedeOperatore">
+    <sequence>
+     <element name="cessazione" nillable="true" type="impl:Cessazione"/>
+     <element name="cittaEstera" nillable="true" type="xsd:string"/>
+     <element name="datiGenerali" nillable="true" type="impl:SintesiSede"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="indirizzoAlternativo" nillable="true" type="xsd:string"/>
+     <element name="numeroVerde" nillable="true" type="xsd:string"/>
+     <element name="orarioApertura" nillable="true" type="xsd:string"/>
+     <element name="quartiere" nillable="true" type="impl:Quartiere"/>
+     <element name="sitoWeb" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DatiOperatore">
+    <sequence>
+     <element name="annoCCIAA" nillable="true" type="xsd:string"/>
+     <element name="cessazione" nillable="true" type="impl:Cessazione"/>
+     <element name="codiceSisa" nillable="true" type="xsd:string"/>
+     <element name="matricolaINPS" nillable="true" type="xsd:string"/>
+     <element name="numeroRegistroDitte" nillable="true" type="xsd:string"/>
+     <element name="provinciaCCIAA" nillable="true" type="xsd:string"/>
+     <element name="ramoAzienda" nillable="true" type="impl:RamoAzienda"/>
+     <element name="sedeLegale" nillable="true" type="impl:SedeOperatore"/>
+    </sequence>
+   </complexType>
+   <complexType name="FormaGiuridica">
+    <sequence>
+     <element name="codice" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="DettaglioPersonaGiuridica">
+    <sequence>
+     <element name="attivitaEconomica" nillable="true" type="impl:AttivitaEconomica"/>
+     <element name="datiOperatore" nillable="true" type="impl:DatiOperatore"/>
+     <element name="formaGiuridica" nillable="true" type="impl:FormaGiuridica"/>
+     <element name="sintesiPG" nillable="true" type="impl:SintesiPersonaGiuridica"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioPersonaGiuridica">
+    <sequence>
+     <element name="dettaglioPersonaGiuridica" nillable="true" type="impl:DettaglioPersonaGiuridica"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getDettaglioPersonaGiuridica">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioPersonaGiuridicaResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioPersonaGiuridicaReturn" type="impl:ResultDettaglioPersonaGiuridica"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipoElemento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipoElementoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoTipoElementoReturn" type="impl:ResultElencoTipoElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SelItemDto">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="tag" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSelItemDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SelItemDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoTipoElementoDto">
+    <sequence>
+     <element name="elencoTipoElemento" nillable="true" type="impl:ArrayOfSelItemDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <complexType name="AnagrafePgException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault6" type="impl:AnagrafePgException"/>
+   <complexType name="MateriaNotSupportedByOperationException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault7" type="impl:MateriaNotSupportedByOperationException"/>
+   <element name="getApplicationMessage">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getApplicationMessageResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getApplicationMessageReturn" type="impl:ResultMessage"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiAk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:int"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+      <element minOccurs="0" name="in6" type="xsd:int"/>
+      <element minOccurs="0" name="in7" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiAkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoElementiAkReturn" type="impl:ResultElencoElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ElementoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrTipoElemento" nillable="true" type="xsd:string"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfElementoDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ElementoDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoElementoDto">
+    <sequence>
+     <element name="elencoElementi" nillable="true" type="impl:ArrayOfElementoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoElementiPk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:int"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+      <element minOccurs="0" name="in6" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiPkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoElementiPkReturn" type="impl:ResultElencoElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioElementiAk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioElementiAkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioElementiAkReturn" type="impl:ResultDettaglioElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DettaglioElementoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codFiscaleUtenteInserimento" nillable="true" type="xsd:string"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="codiceSedeUbicazione" nillable="true" type="xsd:int"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrElemento" nillable="true" type="xsd:string"/>
+     <element name="descrTipoElemento" nillable="true" type="xsd:string"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="elencoUtilizzoSede" nillable="true" type="xsd:string"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazione" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceProvincia" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneDenominazioneComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneIndirizzo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneLuogo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneSiglaProvincia" nillable="true" type="xsd:string"/>
+     <element name="utilizzatoTutteSedi" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioElementoDto">
+    <sequence>
+     <element name="dettaglioElemento" nillable="true" type="impl:DettaglioElementoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getDettaglioElementiPk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioElementiPkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioElementiPkReturn" type="impl:ResultDettaglioElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoCodiciSede">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoCodiciSedeResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoCodiciSedeReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminaElemento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="eliminaElementoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="eliminaElementoReturn" type="impl:ResultEliminaElemento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ResultEliminaElemento">
+    <sequence>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="inserisciElemento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="impl:InserisciElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="InserisciElementoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codFiscaleUtenteInserimento" nillable="true" type="xsd:string"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceSedeUbicazione" nillable="true" type="xsd:int"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="elencoUtilizzoSede" nillable="true" type="xsd:string"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazioneCodiceComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceProvincia" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneIndirizzo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneLuogo" nillable="true" type="xsd:string"/>
+     <element name="utilizzatoTutteSedi" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="inserisciElementoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="inserisciElementoReturn" type="impl:ResultInserisciElemento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ResultInserisciElemento">
+    <sequence>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="aggiornaElemento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="impl:AggiornaElementoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AggiornaElementoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codFiscaleUtenteModifica" nillable="true" type="xsd:string"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceSedeUbicazione" nillable="true" type="xsd:int"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="elencoUtilizzoSede" nillable="true" type="xsd:string"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazioneCodiceComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceProvincia" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneIndirizzo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneLuogo" nillable="true" type="xsd:string"/>
+     <element name="utilizzatoTutteSedi" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="aggiornaElementoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="aggiornaElementoReturn" type="impl:ResultAggiornaElemento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ResultAggiornaElemento">
+    <sequence>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoClassificazione">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoClassificazioneResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoClassificazioneReturn" type="impl:ResultClassifElementoArrayDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ClassifElementoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfClassifElementoDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ClassifElementoDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultClassifElementoArrayDto">
+    <sequence>
+     <element name="classifElementoArray" nillable="true" type="impl:ArrayOfClassifElementoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getDatiAteco2007">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDatiAteco2007Response">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDatiAteco2007Return" type="impl:ResultAteco2007"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Ateco2007">
+    <sequence>
+     <element name="codAteco" nillable="true" type="xsd:string"/>
+     <element name="codAtecoNormalizzato" nillable="true" type="xsd:string"/>
+     <element name="codCategoria" nillable="true" type="xsd:string"/>
+     <element name="codClasse" nillable="true" type="xsd:string"/>
+     <element name="codDivisione" nillable="true" type="xsd:string"/>
+     <element name="codGruppo" nillable="true" type="xsd:string"/>
+     <element name="codLivello" type="xsd:int"/>
+     <element name="codSezione" nillable="true" type="xsd:string"/>
+     <element name="codSottoCategoria" nillable="true" type="xsd:string"/>
+     <element name="descrAteco" nillable="true" type="xsd:string"/>
+     <element name="descrCategoria" nillable="true" type="xsd:string"/>
+     <element name="descrClasse" nillable="true" type="xsd:string"/>
+     <element name="descrDivisione" nillable="true" type="xsd:string"/>
+     <element name="descrGruppo" nillable="true" type="xsd:string"/>
+     <element name="descrSezione" nillable="true" type="xsd:string"/>
+     <element name="descrSottoCategoria" nillable="true" type="xsd:string"/>
+     <element name="idAteco" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfAteco2007">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:Ateco2007"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultAteco2007">
+    <sequence>
+     <element name="ateco2007Array" nillable="true" type="impl:ArrayOfAteco2007"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoDettaglioElementiAk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element maxOccurs="unbounded" minOccurs="0" name="in3" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoDettaglioElementiAkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoDettaglioElementiAkReturn" type="impl:ResultDettaglioElementiDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOfDettaglioElementoDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:DettaglioElementoDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioElementiDto">
+    <sequence>
+     <element name="dettaglioElementi" nillable="true" type="impl:ArrayOfDettaglioElementoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoElementiEstesoAk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:int"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+      <element minOccurs="0" name="in6" type="xsd:int"/>
+      <element minOccurs="0" name="in7" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiEstesoAkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoElementiEstesoAkReturn" type="impl:ResultElencoElementoEstesoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ElementoEstesoDto">
+    <sequence>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codSubCodiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrTipoElemento" nillable="true" type="xsd:string"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="elencoUtilizzoSede" nillable="true" type="xsd:string"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazione" nillable="true" type="xsd:string"/>
+     <element name="utilizzoTutteSedi" nillable="true" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfElementoEstesoDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ElementoEstesoDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoElementoEstesoDto">
+    <sequence>
+     <element name="elencoElementi" nillable="true" type="impl:ArrayOfElementoEstesoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoElementiEstesoPk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:int"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+      <element minOccurs="0" name="in6" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiEstesoPkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoElementiEstesoPkReturn" type="impl:ResultElencoElementoEstesoDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="gestioneFirmatario">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="impl:GestioneFirmatarioInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="FirmatarioDto">
+    <sequence>
+     <element name="cittaResidenza" nillable="true" type="xsd:string"/>
+     <element name="codFiscFirmatario" nillable="true" type="xsd:string"/>
+     <element name="codFunzioneOrganizzativa" nillable="true" type="xsd:string"/>
+     <element name="codTipoGestioneFirma" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:long"/>
+     <element name="cognome" nillable="true" type="xsd:string"/>
+     <element name="dataNascita" nillable="true" type="xsd:dateTime"/>
+     <element name="descFunzioneOrganizzativa" nillable="true" type="xsd:string"/>
+     <element name="descTipoFirma" nillable="true" type="xsd:string"/>
+     <element name="gruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:long"/>
+     <element name="indirizzoResidenza" nillable="true" type="xsd:string"/>
+     <element name="luogoNascita" nillable="true" type="xsd:string"/>
+     <element name="nome" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="GestioneFirmatarioInput">
+    <sequence>
+     <element name="soggFirmatario" nillable="true" type="impl:FirmatarioDto"/>
+     <element name="tipoGestione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="gestioneFirmatarioResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="gestioneFirmatarioReturn" type="impl:GestioneFirmatarioOutput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="GestioneFirmatarioOutput">
+    <sequence>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+     <element name="soggFirmatario" nillable="true" type="impl:FirmatarioDto"/>
+    </sequence>
+   </complexType>
+   <element name="getFunzioneOrganizzativa">
+    <complexType/>
+   </element>
+   <element name="getFunzioneOrganizzativaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getFunzioneOrganizzativaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTipoGestioneFirma">
+    <complexType/>
+   </element>
+   <element name="getTipoGestioneFirmaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getTipoGestioneFirmaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiPkV2">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:int"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+      <element minOccurs="0" name="in6" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoElementiPkV2Response">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoElementiPkV2Return" type="impl:ResultElencoElementoDtoV2"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ElementoDtoV2">
+    <sequence>
+     <element name="annoInserimento" nillable="true" type="xsd:string"/>
+     <element name="annoModifica" nillable="true" type="xsd:string"/>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codSubCodiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="dataInserimento" nillable="true" type="xsd:dateTime"/>
+     <element name="dataModifica" nillable="true" type="xsd:dateTime"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrTipoElemento" nillable="true" type="xsd:string"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfElementoDtoV2">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ElementoDtoV2"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoElementoDtoV2">
+    <sequence>
+     <element name="elencoElementi" nillable="true" type="impl:ArrayOfElementoDtoV2"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getDettaglioElementiPkV2">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioElementiPkV2Response">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioElementiPkV2Return" type="impl:ResultDettaglioElementoDtoV2"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DettaglioElementoDtoV2">
+    <sequence>
+     <element name="annoInserimento" nillable="true" type="xsd:string"/>
+     <element name="annoModifica" nillable="true" type="xsd:string"/>
+     <element name="codClassificazioneElemento" nillable="true" type="xsd:int"/>
+     <element name="codFiscaleUtenteInserimento" nillable="true" type="xsd:string"/>
+     <element name="codTipoElemento" nillable="true" type="xsd:int"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="codiceSedeUbicazione" nillable="true" type="xsd:int"/>
+     <element name="dataInserimento" nillable="true" type="xsd:dateTime"/>
+     <element name="dataModifica" nillable="true" type="xsd:dateTime"/>
+     <element name="denominazioneElemento" nillable="true" type="xsd:string"/>
+     <element name="descrElemento" nillable="true" type="xsd:string"/>
+     <element name="descrTipoElemento" nillable="true" type="xsd:string"/>
+     <element name="descrizioneClassifElemento" nillable="true" type="xsd:string"/>
+     <element name="disponibilita" nillable="true" type="xsd:int"/>
+     <element name="elencoUtilizzoSede" nillable="true" type="xsd:string"/>
+     <element name="idElemento" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="superficie" nillable="true" type="xsd:int"/>
+     <element name="ubicazione" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneCodiceProvincia" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneDenominazioneComune" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneIndirizzo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneLuogo" nillable="true" type="xsd:string"/>
+     <element name="ubicazioneSiglaProvincia" nillable="true" type="xsd:string"/>
+     <element name="utilizzatoTutteSedi" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioElementoDtoV2">
+    <sequence>
+     <element name="dettaglioElemento" nillable="true" type="impl:DettaglioElementoDtoV2"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoIncarichiPk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:int"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:string"/>
+      <element minOccurs="0" name="in6" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoIncarichiPkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoIncarichiPkReturn" type="impl:ResultGetElencoIncarichi"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="IncaricoDto">
+    <sequence>
+     <element name="codComuneNasc" nillable="true" type="xsd:string"/>
+     <element name="codFiscale" nillable="true" type="xsd:string"/>
+     <element name="codFiscaleInserimento" nillable="true" type="xsd:string"/>
+     <element name="codFiscaleModifica" nillable="true" type="xsd:string"/>
+     <element name="codFiscaleValidazione" nillable="true" type="xsd:string"/>
+     <element name="codTipoTitolareEffettivo" nillable="true" type="xsd:string"/>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+     <element name="cognome" nillable="true" type="xsd:string"/>
+     <element name="comuneNascita" nillable="true" type="xsd:string"/>
+     <element name="dataFineIncarico" nillable="true" type="xsd:dateTime"/>
+     <element name="dataInizioIncarico" nillable="true" type="xsd:dateTime"/>
+     <element name="dataInserimento" nillable="true" type="xsd:dateTime"/>
+     <element name="dataModifica" nillable="true" type="xsd:dateTime"/>
+     <element name="dataNascita" nillable="true" type="xsd:dateTime"/>
+     <element name="dataValidazione" nillable="true" type="xsd:dateTime"/>
+     <element name="denominazioneOperatore" nillable="true" type="xsd:string"/>
+     <element name="descrProvNascita" nillable="true" type="xsd:string"/>
+     <element name="descrizioneIncarico" nillable="true" type="xsd:string"/>
+     <element name="descrizioneIncaricoPlurale" nillable="true" type="xsd:string"/>
+     <element name="genere" nillable="true" type="xsd:string"/>
+     <element name="idOperatoreTitolareEffettivo" nillable="true" type="xsd:int"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="idTitolareEffettivo" nillable="true" type="xsd:int"/>
+     <element name="istatProvNascita" nillable="true" type="xsd:string"/>
+     <element name="nome" nillable="true" type="xsd:string"/>
+     <element name="siglaProvNascita" nillable="true" type="xsd:string"/>
+     <element name="statoEsteroNasc" nillable="true" type="xsd:string"/>
+     <element name="territorioNascita" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfIncaricoDto">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:IncaricoDto"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultGetElencoIncarichi">
+    <sequence>
+     <element name="elencoIncarichi" nillable="true" type="impl:ArrayOfIncaricoDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoIncarichiAk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+      <element minOccurs="0" name="in3" type="xsd:int"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:string"/>
+      <element minOccurs="0" name="in6" type="xsd:string"/>
+      <element minOccurs="0" name="in7" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoIncarichiAkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoIncarichiAkReturn" type="impl:ResultGetElencoIncarichi"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="gestioneReferenteDDR">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="impl:GestioneReferenteDDRInput"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ReferenteDto">
+    <sequence>
+     <element name="codiceOperatore" nillable="true" type="xsd:long"/>
+     <element name="cognome" nillable="true" type="xsd:string"/>
+     <element name="gruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:long"/>
+     <element name="indirizzoMail" nillable="true" type="xsd:string"/>
+     <element name="nome" nillable="true" type="xsd:string"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="GestioneReferenteDDRInput">
+    <sequence>
+     <element name="referente" nillable="true" type="impl:ReferenteDto"/>
+     <element name="tipoGestione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="gestioneReferenteDDRResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="gestioneReferenteDDRReturn" type="impl:ResultGestioneReferenteDDR"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ResultGestioneReferenteDDR">
+    <sequence>
+     <element name="referente" nillable="true" type="impl:ReferenteDto"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getTipoGestioneFirmaRequest">
+
+      <wsdl:part element="impl:getTipoGestioneFirma" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioPersonaGiuridicaResponse">
+
+      <wsdl:part element="impl:getDettaglioPersonaGiuridicaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoCodiciSedeResponse">
+
+      <wsdl:part element="impl:getElencoCodiciSedeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesRequest">
+
+      <wsdl:part element="impl:testResources" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiPkV2Response">
+
+      <wsdl:part element="impl:getDettaglioElementiPkV2Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiPkRequest">
+
+      <wsdl:part element="impl:getDettaglioElementiPk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipoElementoRequest">
+
+      <wsdl:part element="impl:getElencoTipoElemento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiEstesoAkRequest">
+
+      <wsdl:part element="impl:getElencoElementiEstesoAk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminaElementoRequest">
+
+      <wsdl:part element="impl:eliminaElemento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UnrecoverableException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiPkResponse">
+
+      <wsdl:part element="impl:getDettaglioElementiPkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoDettaglioElementiAkResponse">
+
+      <wsdl:part element="impl:getElencoDettaglioElementiAkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioOperatoreRequest">
+
+      <wsdl:part element="impl:getDettaglioOperatore" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiPkV2Request">
+
+      <wsdl:part element="impl:getDettaglioElementiPkV2" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gestioneReferenteDDRResponse">
+
+      <wsdl:part element="impl:gestioneReferenteDDRResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiEstesoPkRequest">
+
+      <wsdl:part element="impl:getElencoElementiEstesoPk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="TooManyOccurencesException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoPG_GCORequest">
+
+      <wsdl:part element="impl:getElencoPG_GCO" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="MateriaNotSupportedByOperationException">
+
+      <wsdl:part element="impl:fault7" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gestioneFirmatarioResponse">
+
+      <wsdl:part element="impl:gestioneFirmatarioResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoIncarichiPkRequest">
+
+      <wsdl:part element="impl:getElencoIncarichiPk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipoElementoResponse">
+
+      <wsdl:part element="impl:getElencoTipoElementoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiAkResponse">
+
+      <wsdl:part element="impl:getDettaglioElementiAkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiEstesoAkResponse">
+
+      <wsdl:part element="impl:getElencoElementiEstesoAkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiAkRequest">
+
+      <wsdl:part element="impl:getElencoElementiAk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="SystemException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gestioneReferenteDDRRequest">
+
+      <wsdl:part element="impl:gestioneReferenteDDR" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiPkRequest">
+
+      <wsdl:part element="impl:getElencoElementiPk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiEstesoPkResponse">
+
+      <wsdl:part element="impl:getElencoElementiEstesoPkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoPG_GCOResponse">
+
+      <wsdl:part element="impl:getElencoPG_GCOResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTipoGestioneFirmaResponse">
+
+      <wsdl:part element="impl:getTipoGestioneFirmaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoIncarichiAkResponse">
+
+      <wsdl:part element="impl:getElencoIncarichiAkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="eliminaElementoResponse">
+
+      <wsdl:part element="impl:eliminaElementoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioElementiAkRequest">
+
+      <wsdl:part element="impl:getDettaglioElementiAk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getApplicationMessageRequest">
+
+      <wsdl:part element="impl:getApplicationMessage" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiPkV2Request">
+
+      <wsdl:part element="impl:getElencoElementiPkV2" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="AnagrafePgException">
+
+      <wsdl:part element="impl:fault6" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aggiornaElementoRequest">
+
+      <wsdl:part element="impl:aggiornaElemento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getApplicationMessageResponse">
+
+      <wsdl:part element="impl:getApplicationMessageResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CSIException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesResponse">
+
+      <wsdl:part element="impl:testResourcesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoIncarichiAkRequest">
+
+      <wsdl:part element="impl:getElencoIncarichiAk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioOperatoreResponse">
+
+      <wsdl:part element="impl:getDettaglioOperatoreResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiAkResponse">
+
+      <wsdl:part element="impl:getElencoElementiAkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoPGResponse">
+
+      <wsdl:part element="impl:getElencoPGResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoCodiciSedeRequest">
+
+      <wsdl:part element="impl:getElencoCodiciSede" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFunzioneOrganizzativaResponse">
+
+      <wsdl:part element="impl:getFunzioneOrganizzativaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="aggiornaElementoResponse">
+
+      <wsdl:part element="impl:aggiornaElementoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoIncarichiPkResponse">
+
+      <wsdl:part element="impl:getElencoIncarichiPkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="gestioneFirmatarioRequest">
+
+      <wsdl:part element="impl:gestioneFirmatario" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoClassificazioneRequest">
+
+      <wsdl:part element="impl:getElencoClassificazione" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="inserisciElementoRequest">
+
+      <wsdl:part element="impl:inserisciElemento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDatiAteco2007Response">
+
+      <wsdl:part element="impl:getDatiAteco2007Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFunzioneOrganizzativaRequest">
+
+      <wsdl:part element="impl:getFunzioneOrganizzativa" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="MateriaNotYetSupportedException">
+
+      <wsdl:part element="impl:fault5" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoDettaglioElementiAkRequest">
+
+      <wsdl:part element="impl:getElencoDettaglioElementiAk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="inserisciElementoResponse">
+
+      <wsdl:part element="impl:inserisciElementoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiPkResponse">
+
+      <wsdl:part element="impl:getElencoElementiPkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioPersonaGiuridicaRequest">
+
+      <wsdl:part element="impl:getDettaglioPersonaGiuridica" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDatiAteco2007Request">
+
+      <wsdl:part element="impl:getDatiAteco2007" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoElementiPkV2Response">
+
+      <wsdl:part element="impl:getElencoElementiPkV2Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoClassificazioneResponse">
+
+      <wsdl:part element="impl:getElencoClassificazioneResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoPGRequest">
+
+      <wsdl:part element="impl:getElencoPG" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="flaianagpgAnagrafepg">
+
+      <wsdl:operation name="testResources">
+
+         <wsdl:input message="impl:testResourcesRequest" name="testResourcesRequest"/>
+
+         <wsdl:output message="impl:testResourcesResponse" name="testResourcesResponse"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoPG">
+
+         <wsdl:input message="impl:getElencoPGRequest" name="getElencoPGRequest"/>
+
+         <wsdl:output message="impl:getElencoPGResponse" name="getElencoPGResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotYetSupportedException" name="MateriaNotYetSupportedException"/>
+
+         <wsdl:fault message="impl:TooManyOccurencesException" name="TooManyOccurencesException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoPG_GCO">
+
+         <wsdl:input message="impl:getElencoPG_GCORequest" name="getElencoPG_GCORequest"/>
+
+         <wsdl:output message="impl:getElencoPG_GCOResponse" name="getElencoPG_GCOResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotYetSupportedException" name="MateriaNotYetSupportedException"/>
+
+         <wsdl:fault message="impl:TooManyOccurencesException" name="TooManyOccurencesException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioOperatore">
+
+         <wsdl:input message="impl:getDettaglioOperatoreRequest" name="getDettaglioOperatoreRequest"/>
+
+         <wsdl:output message="impl:getDettaglioOperatoreResponse" name="getDettaglioOperatoreResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotYetSupportedException" name="MateriaNotYetSupportedException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioPersonaGiuridica">
+
+         <wsdl:input message="impl:getDettaglioPersonaGiuridicaRequest" name="getDettaglioPersonaGiuridicaRequest"/>
+
+         <wsdl:output message="impl:getDettaglioPersonaGiuridicaResponse" name="getDettaglioPersonaGiuridicaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+         <wsdl:fault message="impl:TooManyOccurencesException" name="TooManyOccurencesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipoElemento">
+
+         <wsdl:input message="impl:getElencoTipoElementoRequest" name="getElencoTipoElementoRequest"/>
+
+         <wsdl:output message="impl:getElencoTipoElementoResponse" name="getElencoTipoElementoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getApplicationMessage">
+
+         <wsdl:input message="impl:getApplicationMessageRequest" name="getApplicationMessageRequest"/>
+
+         <wsdl:output message="impl:getApplicationMessageResponse" name="getApplicationMessageResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiAk">
+
+         <wsdl:input message="impl:getElencoElementiAkRequest" name="getElencoElementiAkRequest"/>
+
+         <wsdl:output message="impl:getElencoElementiAkResponse" name="getElencoElementiAkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiPk">
+
+         <wsdl:input message="impl:getElencoElementiPkRequest" name="getElencoElementiPkRequest"/>
+
+         <wsdl:output message="impl:getElencoElementiPkResponse" name="getElencoElementiPkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiAk">
+
+         <wsdl:input message="impl:getDettaglioElementiAkRequest" name="getDettaglioElementiAkRequest"/>
+
+         <wsdl:output message="impl:getDettaglioElementiAkResponse" name="getDettaglioElementiAkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiPk">
+
+         <wsdl:input message="impl:getDettaglioElementiPkRequest" name="getDettaglioElementiPkRequest"/>
+
+         <wsdl:output message="impl:getDettaglioElementiPkResponse" name="getDettaglioElementiPkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoCodiciSede">
+
+         <wsdl:input message="impl:getElencoCodiciSedeRequest" name="getElencoCodiciSedeRequest"/>
+
+         <wsdl:output message="impl:getElencoCodiciSedeResponse" name="getElencoCodiciSedeResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminaElemento">
+
+         <wsdl:input message="impl:eliminaElementoRequest" name="eliminaElementoRequest"/>
+
+         <wsdl:output message="impl:eliminaElementoResponse" name="eliminaElementoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="inserisciElemento">
+
+         <wsdl:input message="impl:inserisciElementoRequest" name="inserisciElementoRequest"/>
+
+         <wsdl:output message="impl:inserisciElementoResponse" name="inserisciElementoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aggiornaElemento">
+
+         <wsdl:input message="impl:aggiornaElementoRequest" name="aggiornaElementoRequest"/>
+
+         <wsdl:output message="impl:aggiornaElementoResponse" name="aggiornaElementoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoClassificazione">
+
+         <wsdl:input message="impl:getElencoClassificazioneRequest" name="getElencoClassificazioneRequest"/>
+
+         <wsdl:output message="impl:getElencoClassificazioneResponse" name="getElencoClassificazioneResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDatiAteco2007">
+
+         <wsdl:input message="impl:getDatiAteco2007Request" name="getDatiAteco2007Request"/>
+
+         <wsdl:output message="impl:getDatiAteco2007Response" name="getDatiAteco2007Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoDettaglioElementiAk">
+
+         <wsdl:input message="impl:getElencoDettaglioElementiAkRequest" name="getElencoDettaglioElementiAkRequest"/>
+
+         <wsdl:output message="impl:getElencoDettaglioElementiAkResponse" name="getElencoDettaglioElementiAkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:MateriaNotYetSupportedException" name="MateriaNotYetSupportedException"/>
+
+         <wsdl:fault message="impl:TooManyOccurencesException" name="TooManyOccurencesException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiEstesoAk">
+
+         <wsdl:input message="impl:getElencoElementiEstesoAkRequest" name="getElencoElementiEstesoAkRequest"/>
+
+         <wsdl:output message="impl:getElencoElementiEstesoAkResponse" name="getElencoElementiEstesoAkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiEstesoPk">
+
+         <wsdl:input message="impl:getElencoElementiEstesoPkRequest" name="getElencoElementiEstesoPkRequest"/>
+
+         <wsdl:output message="impl:getElencoElementiEstesoPkResponse" name="getElencoElementiEstesoPkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gestioneFirmatario">
+
+         <wsdl:input message="impl:gestioneFirmatarioRequest" name="gestioneFirmatarioRequest"/>
+
+         <wsdl:output message="impl:gestioneFirmatarioResponse" name="gestioneFirmatarioResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFunzioneOrganizzativa">
+
+         <wsdl:input message="impl:getFunzioneOrganizzativaRequest" name="getFunzioneOrganizzativaRequest"/>
+
+         <wsdl:output message="impl:getFunzioneOrganizzativaResponse" name="getFunzioneOrganizzativaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTipoGestioneFirma">
+
+         <wsdl:input message="impl:getTipoGestioneFirmaRequest" name="getTipoGestioneFirmaRequest"/>
+
+         <wsdl:output message="impl:getTipoGestioneFirmaResponse" name="getTipoGestioneFirmaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiPkV2">
+
+         <wsdl:input message="impl:getElencoElementiPkV2Request" name="getElencoElementiPkV2Request"/>
+
+         <wsdl:output message="impl:getElencoElementiPkV2Response" name="getElencoElementiPkV2Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiPkV2">
+
+         <wsdl:input message="impl:getDettaglioElementiPkV2Request" name="getDettaglioElementiPkV2Request"/>
+
+         <wsdl:output message="impl:getDettaglioElementiPkV2Response" name="getDettaglioElementiPkV2Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:MateriaNotSupportedByOperationException" name="MateriaNotSupportedByOperationException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoIncarichiPk">
+
+         <wsdl:input message="impl:getElencoIncarichiPkRequest" name="getElencoIncarichiPkRequest"/>
+
+         <wsdl:output message="impl:getElencoIncarichiPkResponse" name="getElencoIncarichiPkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoIncarichiAk">
+
+         <wsdl:input message="impl:getElencoIncarichiAkRequest" name="getElencoIncarichiAkRequest"/>
+
+         <wsdl:output message="impl:getElencoIncarichiAkResponse" name="getElencoIncarichiAkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gestioneReferenteDDR">
+
+         <wsdl:input message="impl:gestioneReferenteDDRRequest" name="gestioneReferenteDDRRequest"/>
+
+         <wsdl:output message="impl:gestioneReferenteDDRResponse" name="gestioneReferenteDDRResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:AnagrafePgException" name="AnagrafePgException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="flaianagpgAnagrafepgSoapBinding" type="impl:flaianagpgAnagrafepg">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="testResources">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testResourcesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResourcesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoPG">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoPGRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoPGResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotYetSupportedException">
+
+            <wsdlsoap:fault name="MateriaNotYetSupportedException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="TooManyOccurencesException">
+
+            <wsdlsoap:fault name="TooManyOccurencesException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoPG_GCO">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoPG_GCORequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoPG_GCOResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotYetSupportedException">
+
+            <wsdlsoap:fault name="MateriaNotYetSupportedException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="TooManyOccurencesException">
+
+            <wsdlsoap:fault name="TooManyOccurencesException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioOperatore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioOperatoreRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioOperatoreResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotYetSupportedException">
+
+            <wsdlsoap:fault name="MateriaNotYetSupportedException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioPersonaGiuridica">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioPersonaGiuridicaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioPersonaGiuridicaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="TooManyOccurencesException">
+
+            <wsdlsoap:fault name="TooManyOccurencesException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipoElemento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoTipoElementoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoTipoElementoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getApplicationMessage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getApplicationMessageRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getApplicationMessageResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiAk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoElementiAkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoElementiAkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiPk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoElementiPkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoElementiPkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiAk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioElementiAkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioElementiAkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiPk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioElementiPkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioElementiPkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoCodiciSede">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoCodiciSedeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoCodiciSedeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="eliminaElemento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="eliminaElementoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="eliminaElementoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="inserisciElemento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="inserisciElementoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="inserisciElementoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="aggiornaElemento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="aggiornaElementoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="aggiornaElementoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoClassificazione">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoClassificazioneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoClassificazioneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDatiAteco2007">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDatiAteco2007Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDatiAteco2007Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoDettaglioElementiAk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoDettaglioElementiAkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoDettaglioElementiAkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotYetSupportedException">
+
+            <wsdlsoap:fault name="MateriaNotYetSupportedException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="TooManyOccurencesException">
+
+            <wsdlsoap:fault name="TooManyOccurencesException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiEstesoAk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoElementiEstesoAkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoElementiEstesoAkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiEstesoPk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoElementiEstesoPkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoElementiEstesoPkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gestioneFirmatario">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gestioneFirmatarioRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gestioneFirmatarioResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFunzioneOrganizzativa">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFunzioneOrganizzativaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFunzioneOrganizzativaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTipoGestioneFirma">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTipoGestioneFirmaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTipoGestioneFirmaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoElementiPkV2">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoElementiPkV2Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoElementiPkV2Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioElementiPkV2">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioElementiPkV2Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioElementiPkV2Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="MateriaNotSupportedByOperationException">
+
+            <wsdlsoap:fault name="MateriaNotSupportedByOperationException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoIncarichiPk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoIncarichiPkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoIncarichiPkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoIncarichiAk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoIncarichiAkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoIncarichiAkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="gestioneReferenteDDR">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="gestioneReferenteDDRRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="gestioneReferenteDDRResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="AnagrafePgException">
+
+            <wsdlsoap:fault name="AnagrafePgException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="flaianagpgAnagrafepgService">
+
+      <wsdl:port binding="impl:flaianagpgAnagrafepgSoapBinding" name="flaianagpgAnagrafepg">
+
+         <wsdlsoap:address location="http://tst-applogic.reteunitaria.piemonte.it/flaianagpgApplAnagrafepgWsfad/services/flaianagpgAnagrafepg"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,84 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+  <mat-card-header>
+    <h5 mat-card-title>Servizi</h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="ps-5 pe-5 mt-3">
+    <ng-container *ngIf="!serviziList.length; else listaServizi">
+      Nessun servizio selezionato
+    <hr>
+    </ng-container>
+    <ng-template #listaServizi>
+      <div class="row border-bottom border-1 mb-3">
+        <div class="col-2"> <Strong>Id</Strong></div>
+        <div class="col-8"> <Strong>Titolo</Strong></div>
+        <div class="col-2"> <Strong>Azioni</Strong></div>
+      </div>
+      <div class="row" *ngFor="let servizio of serviziList">
+        <div class="col-2"> {{servizio.idServizio}} </div>
+        <div class="col-8"> {{servizio.titoloServizio}} </div>
+        <div class="col-2">
+          <button *ngIf="servizio.statoServizio!.idStatoServizio != 40 && servizio.soggettoAttuatore?.codOperatore===this.codOperatore && servizio.soggettoAttuatore?.gruppoOperatore===this.gruppoOperatore"
+              (click)="apriServizioPerModifica(servizio)"
+              aria-label="modifica servizio"
+              class="btn btn--plain-text--primary"
+              mat-icon-button>
+            <mat-icon>{{penIcon}}</mat-icon>
+          </button>
+          <button *ngIf="servizio.statoServizio!.idStatoServizio == 40 || servizio.soggettoAttuatore?.codOperatore!==this.codOperatore || servizio.soggettoAttuatore?.gruppoOperatore!==this.gruppoOperatore"
+              (click)="apriServizioPerVisualizzare(servizio)"
+              aria-label="visualizza dati servizio"
+              class="btn btn--plain-text--primary"
+              mat-icon-button>
+            <mat-icon>{{eyeIcon}}</mat-icon>
+          </button>
+          <button *ngIf="servizio.statoServizio!.idStatoServizio == 10 && servizio.soggettoAttuatore?.codOperatore===this.codOperatore && servizio.soggettoAttuatore?.gruppoOperatore===this.gruppoOperatore"
+              (click)="onEliminaServizio(servizio)"
+              aria-label="elimina servizio"
+              class="btn btn--plain-text--danger"
+              mat-icon-button>
+            <mat-icon>{{trashIcon}}</mat-icon>
+          </button>
+        </div>
+        <hr>
+      </div>
+    </ng-template>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+  <mat-card-actions
+    *ngIf="isModificabile && stato!=40"
+      [align]="'start'">
+      <button
+          mat-button
+          class="btn-link--primary"
+          aria-label="aggiungi servizio"
+        (click)="aggiungiServizio()">
+        AGGIUNGI SERVIZIO
+    </button>
+  </mat-card-actions>
+</mat-card>

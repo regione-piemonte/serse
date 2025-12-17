@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.SportelloMonitoraggioDAO">
+    <resultMap type="it.csi.serse.serseweb.integration.mybatis.generated.dto.SerseDSportMonitoraggioDTO" id="sportelloMonitoraggio">
+        <id column="id_reg_comport_pso_sport" jdbcType="BIGINT" property="idRegComportPsoSport" />
+        <result column="flg_livello_istruzione" jdbcType="VARCHAR" property="flgLivelloIstruzione" />
+        <result column="flg_condizione_occupazionale" jdbcType="VARCHAR" property="flgCondizioneOccupazionale" />
+        <result column="flg_disabilita" jdbcType="VARCHAR" property="flgDisabilita" />
+        <result column="flg_svantaggio_abitativo" jdbcType="VARCHAR" property="flgSvantaggioAbitativo" />
+        <result column="cod_livello_istruzione_default" jdbcType="VARCHAR" property="codLivelloIstruzioneDefault" />
+        <result column="cod_condizione_occupazionale_default" jdbcType="VARCHAR" property="codCondizioneOccupazionaleDefault" />
+        <result column="flg_disabilita_default" jdbcType="VARCHAR" property="flgDisabilitaDefault" />
+        <result column="flg_svantaggio_abitativo_default" jdbcType="VARCHAR" property="flgSvantaggioAbitativoDefault" />
+    </resultMap>
+    <select id="getSportelloMonitoraggio" parameterType="map" resultMap="sportelloMonitoraggio">
+        SELECT *
+        FROM SERSE_D_SPORT_MONITORAGGIO sdpm JOIN
+        SERSE_D_REG_COMPORT_PSO_SPORT sdrcps ON sdpm.id_reg_comport_pso_sport = sdrcps.id_reg_comport_pso_sport
+        WHERE sdrcps.num_progr_sportello = #{idSportello}
+    </select>
+</mapper>

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.InterventiDAO">
+<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.InterventoDTO" id="interventoMap">
+	<id column="id_intervento" jdbcType="INTEGER" property="idIntervento"/>
+	<result column="titolo_intervento" javaType="string" property="titolo"/>
+	<result column="descr_sintetica_intervento" javaType="string" property="descrizione" />
+	<result column="id_pso" javaType="long" 	property="idPso"/>
+	<result column="id_modello_di_intervento" javaType="long" property="idModelloIntervento" />
+	<result column="id_destinatario" javaType="long" property="idDestinatario"/>
+	<result column="gruppo_beneficiario" javaType="string" property="gruppoBeneficiario" />
+	<result column="codice_beneficiario" javaType="long" property="codiceBeneficiario" />
+	<result column="num_servizi" javaType="int" property="numServizi"/>
+	
+	<result column="cod_user_inserim" javaType="string" property="codUserInserimento" />
+	<result column="d_inserim" javaType="date" 	property="dataInserimento"/>
+	<result column="cod_user_aggiorn" javaType="string" property="codUserAggiornamento" />
+	<result column="d_aggiorn" javaType="date" 	property="dataAggiornamento"/>
+	
+	<association property="referente" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ReferenteDTO">
+		<result column="referente_nome" javaType="string" property="referenteNome"/>
+		<result column="referente_cognome" javaType="string" property="referenteCognome"/>
+		<result column="referente_email" javaType="string" property="referenteEmail"/>
+		<result column="referente_telefono" javaType="string" property="referenteTelefono"/>
+	</association>
+	<association property="statoIntervento" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.StatoInterventoDTO">
+		<id property="idStatoIntervento" column="id_stato_intervento" javaType="long"/>
+		<result property="descrStatoIntervento" column="descr_stato_intervento" javaType="string"/>
+	</association>
+	<association property="tipoIntervento" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoInterventoDTO">
+		<id column="cod_tipo_intervento" javaType="string" 					 property="codTipoIntervento"/>
+		<result column="descr_tipo_intervento" javaType="string" 			 property="descrizione"/>
+		<result column="flg_progettazione_individuale" javaType="string" property="flgProgettazioneIndividuale"/>
+	</association>
+	<association property="soggettoAttuatore" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+		<id column="id_soggetto_attuatore" javaType="long"   property="idSoggettoAttuatore"/>
+		<result column="gruppo_operatore" javaType="string" property="gruppoOperatore"/>
+		<result column="model_id" javaType="int" 			property="modelId"/>
+		<result column="cod_operatore" javaType="int" 		property="codOperatore"/>
+		<result column="flg_capofila" javaType="string" 		property="flgCapofila"/>
+		<result column="num_progr_sportello" javaType="int" property="numProgrSportello"/>
+		<result column="cod_user_inserim" javaType="string" property="codUserInserimento" />
+		<result column="d_inserim" javaType="date" 			property="dataInserimento"/>
+		<result column="cod_user_aggiorn" javaType="string" property="codUserAggiornamento" />
+		<result column="d_aggiorn" javaType="date" 			property="dataAggiornamento"/>
+	</association>
+	<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.DestinatarioDTO" property="destinatario">
+		<id column="dest_id_destinatario" javaType="int" property="idDestinatario" />
+		<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+		<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+		<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+		<result column="data_nascita" javaType="date" property="dataNascita"/>
+		<result column="cod_istat_comune_nascita" javaType="string" property="codIstatComuneNascita"/>
+		<result column="cod_stato_estero_nascita" javaType="string" property="codStatoEsteroNasccita"/>
+		<result column="cod_istat_comune_residenza" javaType="string" property="codIstatComuneResidenza"/>
+		<result column="cod_stato_estero_residenza" javaType="string" property="codStatoEsteroResidenza"/>
+		<result column="descr_citta_estera_residenza" javaType="string" property="descrCittaEsteraResidenza"/>
+		<result column="cod_istat_comune_domicilio" javaType="string" property="codIstatComuneDomicilio"/>
+		<result column="indirizzo_residenza" javaType="string" property="indResidenza"/>
+		<result column="indirizzo_domicilio" javaType="string" property="indDomicilio"/>
+		<result column="recapito_mail" javaType="string" property="recapitoMail"/>
+		<result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+		<result column="cod_cittadinanza" javaType="string" property="codCittadinanza"/>
+		<result column="cod_user_ins_destinatario" javaType="string" property="codUserInserimento"/>
+		<result column="d_ins_destinatario" javaType="date" property="dataInserimento"/>
+		<result column="cod_user_agg_destinatario" javaType="string" property="codUserAggiornamento"/>
+		<result column="d_agg_destinatario" javaType="date" property="dataAggiornamento"/>
+	</association>
+</resultMap>
+<resultMap type="it.csi.serse.serseweb.vo.ExcelInterventiBean" id="interventoExcelMap">
+	<id column="id_intervento" jdbcType="INTEGER" property="idIntervento"/>
+	<result column="titolo_intervento" javaType="string" property="titoloIntervento"/>
+	<result column="descr_tipo_intervento" javaType="string" property="tipologiaIntervento"/>
+	<result column="finalita_intervento" javaType="string" 	property="finalitaIntervento"/>
+	<result column="id_modello_di_intervento" javaType="long" property="idModello" />
+	<result column="descr_stato_intervento" javaType="string" property="statoIntervento"/>
+	<result column="cognome_nome_referente" javaType="string" property="cognomeNomeReferente" />
+	<result column="cognome_nome_destinatario" javaType="string" property="cognomeNomeDestinatario" />
+	<result column="cf_destinatario" javaType="string" property="cfDestinatario" />
+	<result column="tipologie_servizi_previsti" javaType="string" property="tipologieServiziPrevisti" />
+	<result column="tot_servizi_inclusi" javaType="int" property="totServiziInclusi"/>
+	<result column="tot_servizi_chiusi" javaType="int" property="totServiziChiusi"/>
+	
+	<result column="sogg_beneficiario" javaType="string" property="soggBeneficiario"/>
+	<result column="sogg_attuatore" javaType="string" property="soggAttuatore"/>
+	<result column="model_id" javaType="long" property="modelId"/>
+	<result column="enti_coinvolti" javaType="string" property="entiCoinvolti"/>
+	<result column="cod_user_inserim" javaType="string" property="cfUtenteInserimento" />
+	<result column="cod_user_aggiorn" javaType="string" property="cfUtenteAggiornamento" />
+</resultMap>
+<select id="getTipologieInterventoForPso" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoInterventoDTO">
+	select sdti.cod_tipo_intervento as codTipoIntervento,
+		sdti.descr_tipo_intervento as descrizione,
+		sdti.flg_progettazione_individuale as flgProgettazioneIndividuale
+	from serse_d_tipo_intervento sdti join
+		serse_r_pso_tipo_intervento srpti on
+		sdti.cod_tipo_intervento = srpti.cod_tipo_intervento 
+	where srpti.id_pso =#{idPso}
+
+</select>
+<select id="verificaCampiIntervento" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.TestInterventoModificaDTO">
+	select sti.id_destinatario as idDestinatario,
+			sti.id_modello_di_intervento as idModelloIntervento ,
+			steci.id_ente_coinvolto_intervento as idEnteCoinvoltoIntervento,
+			sts.id_servizio as idServizio
+	from serse_t_intervento sti left join serse_t_ente_coinvolto_intervento steci on
+			steci.id_intervento = sti.id_intervento left join serse_t_servizio sts on
+			sts.id_intervento= sti.id_intervento
+	where
+		sti.id_intervento=#{idIntervento}
+</select>
+<select id="getInterventoById" parameterType="map" resultMap="interventoMap">
+	SELECT *
+	FROM serse_t_intervento sti join serse_d_stato_intervento sdsi on sti.id_stato_intervento = sdsi.id_stato_intervento
+	join serse_d_tipo_intervento sdti on sdti.cod_tipo_intervento = sti.cod_tipo_intervento
+	join serse_t_soggetto_attuatore stsa on stsa.id_soggetto_attuatore =sti.id_soggetto_attuatore
+	WHERE id_intervento =#{idIntervento}
+</select>
+
+
+<select id="getInterventi" parameterType="map" resultMap="interventoMap">
+	SELECT  *
+	<include refid="getInterventiCommon" />
+	ORDER BY
+	<if test="sort.property == null">
+		<!-- ordinamento di default -->
+		sti.id_intervento DESC
+	</if>
+	<if test="sort.property != null">
+		<choose>
+			<when test="sort.property == 'id'">
+				sti.id_intervento
+			</when>
+			<when test="sort.property == 'titolo'">
+				sti.titolo_intervento
+			</when>
+			<when test="sort.property == 'tipoIntervento'">
+				sdti.descr_tipo_intervento
+			</when>
+			<when test="sort.property == 'destinatario'">
+				std.cognome_destinatario, std.nome_destinatario
+			</when>
+			<when test="sort.property == 'soggAttuatore'">
+				stsa.gruppo_operatore, stsa.cod_operatore
+			</when>
+			<when test="sort.property == 'soggBeneficiario'">
+				beneficiario.gruppo_beneficiario, beneficiario.codice_beneficiario
+			</when>
+			<when test="sort.property == 'istanzaCandidatura'">
+				stsa.model_id
+			</when>
+			<otherwise>
+				sti.id_intervento
+			</otherwise>
+		</choose>
+		<if test="!sort.asc">DESC</if>
+	</if>
+	<if test="limit != null">LIMIT #{limit}</if>
+	<if test="offset != null">OFFSET #{offset}</if>
+</select>
+
+<select id="countInterventi">
+	SELECT COUNT(*)
+	<include refid="getInterventiCommon" />
+</select>
+
+<sql id="getInterventiCommon">
+	FROM SERSE_T_INTERVENTO sti
+	JOIN SERSE_T_SOGGETTO_ATTUATORE stsa ON sti.id_soggetto_attuatore =stsa.id_soggetto_attuatore
+	JOIN
+	(SELECT distinct stsa.model_id
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE 
+			stsa.num_progr_sportello=#{filter.numProgrSportello} and
+			stsa.gruppo_operatore=#{filter.gruppoOperatore} and
+			stsa.cod_operatore =#{filter.codOperatore}
+		)as tmp on tmp.model_id=stsa.model_id
+	join serse_d_tipo_intervento sdti on sdti.cod_tipo_intervento = sti.cod_tipo_intervento 
+	join serse_r_pso_tipo_intervento srpti on srpti.cod_tipo_intervento= sdti.cod_tipo_intervento 
+	join serse_d_stato_intervento sdsi on sdsi.id_stato_intervento = sti.id_stato_intervento
+	left join (
+			select
+				id_destinatario as dest_id_destinatario,
+				cf_destinatario,
+				nome_destinatario,
+				cognome_destinatario,
+				d_nascita,
+				cod_istat_comune_nascita,
+				cod_stato_estero_nascita,
+				descr_citta_estera_nascita,
+				cod_istat_comune_residenza,
+				cod_stato_estero_residenza,
+				descr_citta_estera_residenza,
+				indirizzo_residenza,
+				cap_residenza,
+				cod_istat_comune_domicilio,
+				indirizzo_domicilio,
+				cap_domicilio,
+				recapito_email,
+				recapito_telefonico,
+				cod_cittadinanza,
+				cod_user_inserim as cod_user_ins_destinatario,
+				d_inserim as d_ins_destinatario,
+				cod_user_aggiorn as cod_user_agg_destinatario,
+				d_aggiorn as d_agg_destinatario
+			from serse_t_destinatario) std on sti.id_destinatario=std.dest_id_destinatario
+	join (
+		select gruppo_operatore as gruppo_beneficiario, cod_operatore as codice_beneficiario, model_id
+		from SERSE_T_SOGGETTO_ATTUATORE
+		where flg_capofila='S'
+	) as beneficiario on beneficiario.model_id = stsa.model_id 
+	join (
+		select sti2.id_intervento, count(sts.id_intervento) as num_servizi
+		from SERSE_T_INTERVENTO sti2
+		left join serse_t_servizio sts on sts.id_intervento = sti2.id_intervento
+		group by sti2.id_intervento
+	) as servizi on servizi.id_intervento = sti.id_intervento
+	
+	<if test="filter.denominazioneEnteCoinvolto!= null and filter.denominazioneEnteCoinvolto!=''">
+		join serse_t_ente_coinvolto_intervento steci on steci.id_intervento  = sti.id_intervento left join
+		serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello
+	</if>
+	
+	where 
+		1=1
+		<if test="filter.idStatoIntervento != null">
+			AND sti.id_stato_intervento=#{filter.idStatoIntervento}
+		</if>
+		<if test="filter.codiceTipoIntervento!= null ">
+			AND sti.cod_tipo_intervento=#{filter.codiceTipoIntervento}
+		</if>
+		<if test="filter.modelId != null">
+			AND stsa.model_id= #{filter.modelId}
+		</if>
+		<if test="filter.idServizio!= null">
+			AND EXISTS (
+				select 1 from serse_t_servizio sts
+				join serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale = sts.id_servizio_regionale
+				where sts.id_intervento = sti.id_intervento and sdsr.id_servizio_regionale = #{filter.idServizio}
+			)
+		</if>
+		<if test="filter.idIntervento != null">
+			AND sti.id_intervento= #{filter.idIntervento}
+		</if>
+		<if test="filter.codiceFiscaleDestinatario != null and filter.codiceFiscaleDestinatario!= '' ">
+			AND std.cf_destinatario=#{filter.codiceFiscaleDestinatario}
+		</if>
+		<if test="filter.denominazioneEnteCoinvolto != null and filter.denominazioneEnteCoinvolto != ''">
+			AND (lower(steci.denominazione) like lower('%'||#{filter.denominazioneEnteCoinvolto}||'%')
+					or lower(stecm.denominazione) like lower('%'||#{filter.denominazioneEnteCoinvolto}||'%'))
+		</if>
+		<if test="filter.gruppoOpBeneficiario != null and filter.gruppoOpBeneficiario != ''">
+			AND beneficiario.gruppo_beneficiario= #{filter.gruppoOpBeneficiario}
+			AND beneficiario.codice_beneficiario= #{filter.codOpBeneficiario}
+		</if>
+		<if test="filter.isProprietario">
+			AND stsa.gruppo_operatore = #{filter.gruppoOperatore}
+			AND stsa.cod_operatore = #{filter.codOperatore}
+		</if>
+</sql>
+
+<delete id="deleteInterventoById" parameterType="map" >
+	begin;
+
+	    delete
+				from SERSE_T_INTERVENTO
+				where id_modello_di_intervento =#{idIntervento};
+		delete 
+			from serse_t_destinatario 
+			where serse_t_destinatario.id_destinatario 
+			in(select serse_t_destinatario.id_destinatario as id
+				from serse_t_destinatario join
+					serse_t_intervento on
+					serse_t_destinatario.id_destinatario=
+					serse_t_intervento.id_destinatario
+				where serse_t_intervento.id_intervento=#{idIntervento} 	
+					);
+
+		delete 
+			from SERSE_T_ENTE_COINVOLTO_INTERVENTO
+			where id_intervento=#{idIntervento};
+	commit;		
+</delete>
+
+<select id="getInterventiPerModello" parameterType="map" resultMap="interventoMap">
+	SELECT *
+	FROM SERSE_T_INTERVENTO sti
+	JOIN SERSE_T_SOGGETTO_ATTUATORE stsa ON sti.id_soggetto_attuatore = stsa.id_soggetto_attuatore
+	join serse_d_tipo_intervento sdti on sdti.cod_tipo_intervento = sti.cod_tipo_intervento
+	join serse_d_stato_intervento sdsi on sdsi.id_stato_intervento = sti.id_stato_intervento
+	WHERE sti.id_modello_di_intervento = #{idModelloDiIntervento}
+</select>
+
+<select id="getInterventiExcel" parameterType="map" resultMap="interventoExcelMap">
+	SELECT
+		sti.id_intervento,
+		stsa.gruppo_operatore || stsa.cod_operatore as sogg_attuatore, -- senza descrizione
+		gruppo_beneficiario || codice_beneficiario as sogg_beneficiario, -- senza descrizione
+		stsa.model_id,
+		sti.titolo_intervento,
+		descr_tipo_intervento, -- tipo o tipologia sembra uguale
+		case when flg_progettazione_individuale = 'S' then 'Individuale' else 'Di gruppo' end finalita_intervento,
+		sti.id_modello_di_intervento,
+		sdsi.descr_stato_intervento,
+		case when sti.referente_cognome is not null then sti.referente_cognome || ' ' || sti.referente_nome else null end as cognome_nome_referente,
+		cf_destinatario,
+		cognome_nome_destinatario,
+		tot_servizi_inclusi,
+		tot_servizi_chiusi,
+		(
+			select string_agg('-'||coalesce(steci.denominazione, stecm.denominazione),chr(13)||chr(10)) enti_coinvolti
+			from serse_t_ente_coinvolto_intervento steci 
+			left join serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello 
+			where steci.id_intervento = sti.id_intervento
+		) as enti_coinvolti,
+		(
+			select string_agg(tmp.denominazione, chr(13)||chr(10)) enti_coinvolti
+			from (
+				select distinct sdsr.codice_servizio_regionale||'-'||sdsr.descr_servizio_regionale as denominazione
+				from serse_t_servizio sts 
+				join serse_d_servizio_regionale sdsr ON sdsr.id_servizio_regionale = sts.id_servizio_regionale
+				where sts.id_intervento = sti.id_intervento
+			) tmp
+		) as tipologie_servizi_previsti,
+		sti.cod_user_inserim,
+		sti.cod_user_aggiorn
+	FROM SERSE_T_INTERVENTO sti
+	JOIN SERSE_T_SOGGETTO_ATTUATORE stsa ON sti.id_soggetto_attuatore =stsa.id_soggetto_attuatore
+	JOIN
+	(SELECT distinct stsa.model_id
+		FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE 
+			stsa.num_progr_sportello=#{filter.numProgrSportello} and
+			stsa.gruppo_operatore=#{filter.gruppoOperatore} and
+			stsa.cod_operatore =#{filter.codOperatore}
+		)as tmp on tmp.model_id=stsa.model_id
+	join serse_d_tipo_intervento sdti on sdti.cod_tipo_intervento = sti.cod_tipo_intervento 
+	join serse_r_pso_tipo_intervento srpti on srpti.cod_tipo_intervento= sdti.cod_tipo_intervento 
+	join serse_d_stato_intervento sdsi on sdsi.id_stato_intervento = sti.id_stato_intervento
+	left join (
+			select
+				id_destinatario as dest_id_destinatario,
+				cf_destinatario,
+				cognome_destinatario || ' ' || nome_destinatario as cognome_nome_destinatario
+			from serse_t_destinatario) std on sti.id_destinatario=std.dest_id_destinatario
+	join (
+		select gruppo_operatore as gruppo_beneficiario, cod_operatore as codice_beneficiario, model_id
+		from SERSE_T_SOGGETTO_ATTUATORE
+		where flg_capofila='S'
+	) as beneficiario on beneficiario.model_id = stsa.model_id
+	join (
+		select sti2.id_intervento,
+			count(sts.id_servizio) as tot_servizi_inclusi,
+			count(case when sts.id_stato_servizio = 40 then 1 end) as tot_servizi_chiusi
+		from SERSE_T_INTERVENTO sti2
+		left join serse_t_servizio sts on sts.id_intervento = sti2.id_intervento
+		group by sti2.id_intervento
+	) as servizi on servizi.id_intervento = sti.id_intervento
+
+	<if test="filter.idServizio!= null">
+		join serse_t_servizio sts on sts.id_intervento = sti.id_intervento
+		join serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale= sts.id_servizio_regionale
+		--join serse_r_destinatario_servizio srds on sts.id_servizio = srds.id_servizio
+	</if>
+	
+	<if test="filter.denominazioneEnteCoinvolto!= null and filter.denominazioneEnteCoinvolto != ''">
+		join serse_t_ente_coinvolto_intervento steci on steci.id_intervento  = sti.id_intervento left join
+		serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello
+	</if>
+	
+	where 
+		1=1
+		<if test=" filter.idStatoIntervento != null">
+			AND sti.id_stato_intervento = #{filter.idStatoIntervento}
+		</if>
+		<if test="filter.codiceTipoIntervento != null ">
+			AND sti.cod_tipo_intervento = #{filter.codiceTipoIntervento}
+		</if>
+		<if test="filter.modelId != null">
+			AND stsa.model_id = #{filter.modelId}
+		</if>
+		<if test="filter.idServizio != null">
+			AND sdsr.id_servizio_regionale = #{filter.idServizio}
+		</if>
+		<if test="filter.idIntervento != null">
+			AND sti.id_intervento = #{filter.idIntervento}
+		</if>
+		<if test="filter.codiceFiscaleDestinatario != null and filter.codiceFiscaleDestinatario != '' ">
+			AND std.cf_destinatario = #{filter.codiceFiscaleDestinatario}
+		</if>
+		<if test="filter.denominazioneEnteCoinvolto != null and filter.denominazioneEnteCoinvolto != ''">
+			AND (lower(steci.denominazione) like lower('%'||#{filter.denominazioneEnteCoinvolto}||'%')
+					or lower(stecm.denominazione) like lower('%'||#{filter.denominazioneEnteCoinvolto}||'%'))
+		</if>
+		<if test="filter.gruppoOpBeneficiario != null and filter.gruppoOpBeneficiario != ''">
+			AND beneficiario.gruppo_beneficiario = #{filter.gruppoOpBeneficiario}
+			AND beneficiario.codice_beneficiario = #{filter.codOpBeneficiario}
+		</if>
+		<if test="filter.isProprietario">
+			AND stsa.gruppo_operatore = #{filter.gruppoOperatore}
+			AND stsa.cod_operatore = #{filter.codOperatore}
+		</if>
+	ORDER BY
+		sti.id_intervento DESC
+</select>
+</mapper>

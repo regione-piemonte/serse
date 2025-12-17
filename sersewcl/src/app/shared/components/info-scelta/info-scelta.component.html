@@ -1,0 +1,70 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<div class="info-scelta shadow">
+  <mat-card class="card-body--info">
+    <!-- Tipologia PSO -->
+    <mat-card-content >
+      <dl>
+        <dt>
+          Tipologia PSO:
+        </dt>
+        <dd>
+          {{tipologiaPso.descrizione}}
+        </dd>
+      </dl>
+
+    <!-- Amministrazione ecc..-->
+      <dl>
+        <!-- Regione Piemonte - Ciclo unico -->
+        <dt>
+          Amm. Resp. e Ciclo finanziario:
+        </dt>
+        <dd>
+          {{amministrazioneResponsabileCicloFinanziario.ammResponsabili?.descrizione}} {{amministrazioneResponsabileCicloFinanziario.cicliFinanziari?.value}}
+        </dd>
+      </dl>
+
+    <!-- Sportello -->
+      <dl>
+        <dt>
+          Sportello:
+        </dt>
+        <!-- 01/07/2023 - 15/07/2023 Presentazione Istanze di Candidatura -->
+        <dd>
+          {{sportello.dataInizio! |customDate }} -
+          {{sportello.dataFine! |customDate}} -
+          {{sportello.descrizioneSportello}}
+        </dd>
+      </dl>
+    </mat-card-content>
+
+    <!-- pulsante cambia -->
+    <mat-card-actions [align]="'end'" class="pe-4 pb-2">
+        <button class="btn btn-link--primary"
+                aria-label="cambia sportello"
+                (click)="apriModaleConferma()">CAMBIA SPORTELLO</button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

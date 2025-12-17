@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.CentriPerImpiegoDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.CentroPerImpiegoDTO" id="centriPerImpiegoMap" >
+		<id column="id_cpi" javaType="long" property="idCpi"/>
+		<result column="codice_cpi" javaType="string" property="codiceCpi"/>
+		<result column="cpi" javaType="string" property="cpi"/>
+		<result column="gruppo_operatore" javaType="string" property="gruppoOperatore"/>
+		<result column="cod_operatore" javaType="integer" property="codOperatore"/>
+		<result column="sede"  javaType="string" property="sede"/>
+		<result column="indirizzo"  javaType="string" property="indirizzo"/>
+		<result column="cap"  javaType="string" property="cap"/>
+		<result column="telefono"  javaType="string" property="telefono"/>
+		<result column="telefono2"  javaType="string" property="telefono2"/>
+		<result column="telefono3"  javaType="string" property="telefono3"/>
+		<result column="numero_verde"  javaType="string" property="numeroVerde"/>
+		<result column="email"  javaType="string" property="email"/>
+		<result column="indirizzo_web"  javaType="string" property="indirizzoWeb"/>
+		<association property="comune" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ComuneDTO">
+		    	<id column="cod_istat_comune" javaType="string" property="codiceIstatComune" />
+		    	<result column="descom" javaType="string" property="descrizioneComune"/>
+		    	<result column="cap" javaType="int" property="cap"/>
+		    	<result column="codfisc" javaType="string" property="codiceFiscaleComune"/>
+		    	<association property="provincia" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ProvinciaDTO">
+		    		<id column="cod_provincia" javaType="string" property="codiceProvincia"/>
+		    		<result column="regione" javaType="string" property="codiceRegione" />
+		    		<result column="desprov" javaType="string" property="descrizioneProvincia"/>
+		    		<result column="sigprov" javaType="string" property="siglaProvincia"/>
+		    	</association>
+		    </association>
+	</resultMap>
+	<select id="getCentriPerImpiego" parameterType="map" resultMap="centriPerImpiegoMap">
+		SELECT *
+		FROM serse_d_cpi sdc join ext_tt_comune etc on
+		sdc.cod_istat_comune = etc.comune join
+		ext_tt_provincia etp on etp.prov  = sdc.cod_provincia
+		WHERE
+		 1=1
+		 <if test="codIstatComune != null">
+		 	AND cod_istat_comune=#{codIstatComune}
+		 </if>
+		 <if test="codProvincia != null">
+		 	AND cod_provincia=#{codProvincia}
+		 </if>
+	</select>
+
+</mapper>

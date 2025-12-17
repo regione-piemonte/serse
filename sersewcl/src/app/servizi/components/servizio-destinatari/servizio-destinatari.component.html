@@ -1,0 +1,263 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+  <mat-card-header>
+    <h5 mat-card-title>Dati Peculiari Servizio</h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="ps-5 pe-5 mt-3">
+      <ng-container *ngIf="
+                        !servizioSelected.valoreDatoPeculiare1 &&
+                        !servizioSelected.valoreDatoPeculiare2 &&
+                        !servizioSelected.codTitoloStudioIgrue &&
+                        !servizioSelected.codCondizioneOccupazionaleIgrue &&
+                        !servizioSelected.flgDisabilita &&
+                        !servizioSelected.flgSvantaggioAbitativo
+                      ; else datiPeculiariPresenti">
+        Nessun dato peculiare inserito
+      </ng-container>
+      <ng-template #datiPeculiariPresenti>
+        <div class="row mt-2 mb-2">
+          <div class="col-6">
+            <strong *ngIf="datiPeculiariServizio!.regComportPsoSport!.labelDatoPeculiare1 && (servizioSelected.valoreDatoPeculiare1 || classeDestinatarioServizio?.descrClasseDestinatario)">{{datiPeculiariServizio!.regComportPsoSport!.labelDatoPeculiare1}}: {{classeDestinatarioServizio?.descrClasseDestinatario ? classeDestinatarioServizio?.descrClasseDestinatario : classeDestinatarioServizio?.valoreDatoPeculiare1}} </strong>
+          </div>
+          <div class="col-6">
+            <strong *ngIf="servizioSelected.valoreDatoPeculiare2 && datiPeculiariServizio!.regComportPsoSport!.labelDatoPeculiare2">{{datiPeculiariServizio!.regComportPsoSport!.labelDatoPeculiare2}}: {{servizioSelected.valoreDatoPeculiare2}} </strong>
+          </div>
+          <div class="col-6">
+            <strong *ngIf="servizioSelected.codTitoloStudioIgrue">Titolo di studio:  </strong>{{titoloDiStudio}}
+          </div>
+          <div class="col-6">
+            <strong *ngIf="servizioSelected.codCondizioneOccupazionaleIgrue">Condizione occupazionale:  </strong>{{condizioneOccupazionale}}
+          </div>
+          <div class="col-6">
+            <strong *ngIf="servizioSelected.flgSvantaggioAbitativo">Svantaggio Abitativo: {{servizioSelected.flgSvantaggioAbitativo=="N"? "NO" : "SI"}} </strong>
+          </div>
+          <div class="col-6">
+            <strong *ngIf="servizioSelected.flgDisabilita">Disabilità {{servizioSelected.flgDisabilita=="N"? "NO" : "SI"}} </strong>
+          </div>
+        </div>
+      </ng-template>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+
+  <mat-card-actions *ngIf="isModificabile">
+    <button mat-button
+      class="btn btn--plain-text--primary"
+      aria-label="modifica dati particolari servizio"
+      (click)="modificaDatiPeculiariServizio()">
+      MODIFICA
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+
+<mat-card>
+  <mat-card-header>
+    <h5 mat-card-title>Destinatari servizio</h5>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+
+  <mat-card-content class="ps-5 pe-5 mt-3">
+
+    <ng-container *ngIf="rowData.length==0; else elencoDestinatari">Nessun destinatario selezionato</ng-container>
+    <ng-template #elencoDestinatari>
+      <app-table
+            [rowData]="rowData"
+            [tableSettings]="tableSettings"
+            [columnList]="columnList"
+            [keepPagination]="true">
+      </app-table>
+    </ng-template>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+
+  <mat-card-actions [align]="'start'">
+    <button mat-button
+        *ngIf="canAdd"
+        class="btn btn--plain-text--primary"
+        aria-label="aggiungi destinatario"
+        (click)="onAggiungiDestinatario()">
+      AGGIUNGI DESTINATARIO
+    </button>
+
+    <label *ngIf="canAdd && !isIndividuale"
+            for="upload"
+            class="btn btn--plain-text--primary">
+      AGGIUNGI DESTINATARI DA FILE</label>
+    <input
+          type="file"
+          id="upload"
+          aria-label="aggiungi destinatari da file"
+          hidden
+          (change)="addfile($event)"
+          accept=".csv,.xlsm, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+
+    <button mat-button
+        [disabled]="!canRecalc"
+        class="btn btn--plain-text--primary"
+        aria-label="ricalcola numerazione"
+        (click)="onRicalcolaNumerazione()">
+      RICALCOLA NUMERAZIONE
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+
+
+<!-- Dialog  -->
+<ng-template #listaDest>
+  <h2 mat-dialog-title>Lista destinatari</h2>
+  <mat-divider></mat-divider>
+
+  <section mat-dialog-content>
+  <div class="container-fluid">
+  <div class="row ps-5 pe-5 mt-3 mb-3">
+    <div class="col-2"><strong> Cognome         </strong></div>
+    <div class="col-2"><strong> Nome            </strong></div>
+    <div class="col-3"><strong> Codice Fiscale  </strong></div>
+    <div class="col-3"><strong> Data di nascita </strong></div>
+    <div class="col-2" *ngIf="toLoad"><strong> Forzatura </strong></div>
+    <!-- <div class="col"> {{destinatario.dNascita}} </div> -->
+    <hr>
+  </div>
+  </div>
+  </section>
+
+  <section mat-dialog-content style="max-height: 50vh;">
+    <div class="container-fluid"  >
+      <div *ngFor="let destinatarioW of destinatariToUpload"
+            class="row mb-3  ps-5 pe-5">
+        <div class="col-2">{{destinatarioW.destinatario.cognomeDestinatario}} </div>
+        <div class="col-2"> {{destinatarioW.destinatario.nomeDestinatario}} </div>
+        <div class="col-3"> {{destinatarioW.destinatario.codiceFiscaleDestinatario}} </div>
+        <div class="col-3"> {{destinatarioW.destinatario.dNascita! | customDate}} </div>
+        <div class="col-2" *ngIf="toLoad">
+          <mat-checkbox *ngIf="destinatarioW.isOk==false" color="primary" [(ngModel)]="destinatarioW.chexkBox"></mat-checkbox>
+          <mat-icon *ngIf="destinatarioW.isOk==false" [matTooltip]="'il codice fiscale non sembra combaciare con i dati anagrafici'">warning</mat-icon>
+        </div>
+        <div class="col-2" *ngIf="!toLoad" class="text--error">
+          {{destinatarioW.description}}
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions
+      [align]="'end'"
+      class="d-flex"
+      [ngClass] ="{'justify-content-between mt-3': toLoad}">
+    <ng-container *ngIf="toLoad; else chiudiModale">
+      <div class="p-2">
+        <button mat-dialog-close
+                mat-button
+                class="btn btn--outline-primary">
+              ANNULLA
+        </button>
+      </div>
+      <div class="p-2">
+        <button mat-raised-button
+                class="btn btn--primary"
+                [disabled]="!ciSonoDestinatariCaricabili"
+                (click)="onConfermaAssocia()">CONFERMA</button>
+      </div>
+    </ng-container>
+
+    <ng-template #chiudiModale>
+      <div class="p-2">
+        <button mat-dialog-close
+                mat-button
+                class="btn btn--outline-primary">
+              CHIUDI
+        </button>
+      </div>
+    </ng-template>
+
+
+
+  </div>
+</ng-template>
+
+<ng-template #erroriDati>
+  <h2 mat-dialog-title>Lista Errori caricamento</h2>
+  <mat-divider></mat-divider>
+  <section mat-dialog-content *ngIf="listaErroriCaricamentoFile.length >= destinatariToUpload.length/2">
+    <mat-error>
+      Se hai dubbi su come importare i dati da un excel che risulta non funzionante all'excel configurato per il caricamento segui la relativa voce della guida,
+      se il problema persiste contatta l'assistenza
+    </mat-error>
+  </section>
+  <mat-divider></mat-divider>
+  <section mat-dialog-content>
+    <div class="container-fluid">
+    <div class="row ps-5 pe-5 mt-3 mb-3">
+      <div class="col-3"><strong> Codice Fiscale  </strong></div>
+      <div class="col-6"><strong> Elenco Dati Mancanti </strong></div>
+      <div class="col-3"><strong> Elenco Errori </strong></div>
+    </div>
+    </div>
+  </section>
+
+  <section mat-dialog-content style="max-height: 50vh;">
+    <div class="container-fluid"  >
+      <div *ngFor="let erroreCaricamento of listaErroriCaricamentoFile"
+            class="row mb-3  ps-5 pe-5">
+
+          <div class="col-3"><strong> {{erroreCaricamento.codFisc}} </strong></div>
+          <div class="col-6">
+            {{erroreCaricamento.nome? erroreCaricamento.nome + ";  ": "" }}
+            {{erroreCaricamento.cognome? erroreCaricamento.cognome + ";  ": "" }}
+            {{erroreCaricamento.dataNascita? erroreCaricamento.dataNascita + ";  ": "" }}
+            {{erroreCaricamento.codCittadinanza? erroreCaricamento.codCittadinanza + ";  ": "" }}
+            {{erroreCaricamento.luogoNascita? erroreCaricamento.luogoNascita + ";  ": "" }}
+            {{erroreCaricamento.luogoRsidenza? erroreCaricamento.luogoRsidenza + ";  ": "" }}
+          </div>
+          <div class="col-3">
+            {{erroreCaricamento.recapitoMail? erroreCaricamento.recapitoMail + ";  ": "" }}
+            {{erroreCaricamento.recapitoTelefonico? erroreCaricamento.recapitoTelefonico + ";  ": "" }}
+          </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </section>
+  <div mat-dialog-actions
+      [align]="'end'"
+      class="d-flex"
+      >
+      <div class="p-2">
+        <button mat-dialog-close
+                mat-button
+                class="btn btn--outline-primary">
+              CHIUDI
+        </button>
+      </div>
+    </div>
+</ng-template>

@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.GestioneServiziDAO">
+<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioModelloDTO" id="servizioModelloMap">
+	<id column="id_servizio_modello" javaType="long" property="idServizioModello"/>
+	<result column="id_modello_di_intervento" javaType="long" property="idModelloDiIntervento"/>
+	<result column="titolo_servizio_esterno" javaType="string" property="titoloServizioEsterno"/>
+	<result column="descrizione_servizio_esterno" javaType="string" property="descrizioneServizioEsterno"/>
+	<result column="cod_finalita_servizio_esterno" javaType="string" property="codFinalitaServizioEsterno"/>
+	<result column="descr_finalita_servizio" javaType="string" property="descrFinalitaServizioEsterno" />
+	<result column="riferimento_attore_esterno" javaType="string" property="attoreEsterno" />
+	<result column="durata_in_ore" javaType="bigdecimal" property="durataInOre"/>
+	<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+	<result column="d_inserim" javaType="date" 	property="dInserim"/>
+	<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+	<result column="d_aggiorn" javaType="date" 	property="dAggiorn"/>
+	<result column="descr_stato_modello_di_intervento" javaType="string" property="descrStatoModelloDiIntervento"/>
+	<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioRegionaleDTO" property="servizioRegionale">
+		<id column="id_servizio_regionale" javaType="long" property="idServizioRegionale" />
+		<result column="cod_finalita_servizio" javaType="string" property="codFinalitaServizio" />
+		<result column="descr_finalita_servizio" javaType="string" property="descrFinalitaServizio" />
+		<result column="codice_servizio_regionale" javaType="string" property="codiceServizioRegionale"/>
+		<result column="descr_servizio_regionale" javaType="string" property="descrServizioRegionale"/>
+		<result column="id_pso" javaType="long" property="idPso"/>
+		<result column="durata_in_ore_regionale" javaType="bigdecimal" property="durataInOre"/>
+		<result column="ore_consentite_min" javaType="int" property="oreConsentiteMin"/>
+		<result column="ore_consentite_max" javaType="int" property="oreConsentiteMax"/>
+	</association>
+	<association property="referente" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ReferenteDTO">
+		<result column="referente_nome" javaType="string" property="referenteNome"/>
+		<result column="referente_cognome" javaType="string" property="referenteCognome"/>
+		<result column="referente_email" javaType="string" property="referenteEmail"/>
+		<result column="referente_telefono" javaType="string" property="referenteTelefono"/>
+	</association>
+</resultMap>
+
+<resultMap id="servizioMap" type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioDTO">
+	<id column="id_servizio" javaType="long" property="idServizio" />
+	<result column="titolo_servizio" javaType="string" property="titoloServizio" />
+	<result column="id_intervento" javaType="long" property="idIntervento" />
+	<result column="id_pso" javaType="long" property="idPso" />
+	<result column="num_max_destinatari" javaType="int" property="numMaxDestinatari" />
+	<result column="referente_nome" javaType="string" property="referenteNome" />
+	<result column="referente_cognome" javaType="string" property="referenteCognome" />
+	<result column="referente_email" javaType="string" property="referenteEmail" />
+	<result column="referente_telefono" javaType="string" property="referenteTelefono" />
+	<result column="durata_ore" javaType="bigdecimal" property="durataOre"/>
+	<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+	<result column="d_inserim" javaType="date" 	property="dInserim"/>
+	<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+	<result column="d_aggiorn" javaType="date" 	property="dAggiorn"/>
+	<result column="d_chiusura_servizio" javaType="date" 	property="dataChiusura"/>
+	<result column="valore_dato_peculiare_1" javaType="string" property="valoreDatoPeculiare1" />
+	<result column="valore_dato_peculiare_2" javaType="string" property="valoreDatoPeculiare2" />
+	<result column="valore_campo_aggiuntivo_1" javaType="string" property="valoreCampoAggiuntivo1" />
+	<result column="cod_livello_istruzione" javaType="string" property="codTitoloStudioIgrue" />
+	<result column="cod_condizione_occupazionale" javaType="string" property="codCondizioneOccupazionaleIgrue" />
+	<result column="flg_disabilita" javaType="string" property="flgDisabilita" />
+	<result column="flg_svantaggio_abitativo" javaType="string" property="flgSvantaggioAbitativo" />
+	<result column="progressivo_sede" javaType="int" property="progressivoSede" />
+	<result column="gruppo_beneficiario" javaType="string" property="gruppoBeneficiario" />
+	<result column="codice_beneficiario" javaType="long" property="codiceBeneficiario" />
+	<association property="soggettoAttuatore" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.SoggettoAttuatoreDTO">
+		<id column="id_soggetto_attuatore" javaType="long"   property="idSoggettoAttuatore"/>
+		<result column="gruppo_operatore" javaType="string" property="gruppoOperatore"/>
+		<result column="model_id" javaType="int" 			property="modelId"/>
+		<result column="cod_operatore" javaType="int" 		property="codOperatore"/>
+		<result column="flg_capofila" javaType="string" 		property="flgCapofila"/>
+		<result column="num_progr_sportello" javaType="int" property="numProgrSportello"/>
+		<result column="cod_user_inserim" javaType="string" property="codUserInserimento" />
+		<result column="d_inserim" javaType="date" 			property="dataInserimento"/>
+		<result column="cod_user_aggiorn" javaType="string" property="codUserAggiornamento" />
+		<result column="d_aggiorn" javaType="date" 			property="dataAggiornamento"/>
+	</association>
+	<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioRegionaleDTO" property="servizioRegionale">
+		<id column="id_servizio_regionale" javaType="long" property="idServizioRegionale" />
+		<result column="cod_finalita_servizio" javaType="string" property="codFinalitaServizio" />
+		<result column="descr_finalita_servizio" javaType="string" property="descrFinalitaServizio" />
+		<result column="codice_servizio_regionale" javaType="string" property="codiceServizioRegionale"/>
+		<result column="descr_servizio_regionale" javaType="string" property="descrServizioRegionale"/>
+		<result column="id_pso" javaType="long" property="idPso"/>
+		<result column="durata_in_ore" javaType="bigdecimal" property="durataInOre"/>
+		<result column="ore_consentite_min" javaType="int" property="oreConsentiteMin"/>
+		<result column="ore_consentite_max" javaType="int" property="oreConsentiteMax"/>
+	</association>
+	<association property="statoServizio" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.StatoServizioDTO">
+		<id property="idStatoServizio" javaType="long" column="id_stato_servizio"/>
+		<result property="descrStatoServizio" javaType="string" column="descr_stato_servizio"/>
+	</association>
+	<association property="areaTerritoriale" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.AreaTerritorialeDTO">
+		<id property="codAreaTerritoriale" javaType="string" column="cod_area_territoriale"/>
+		<result property="desrAreaTerritoriale" javaType="string" column="descr_area_territoriale"/>
+	</association>
+	<association property="classificazione" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ClassificazioneDTO">
+		<id property="idClassificazione" javaType="long" column="id_classificazione"/>
+		<result property="idClassificazzioneGam" javaType="long" column="id_classificazione_gam"/>
+		<result property="idTipoSuddivDotfin" javaType="long" column="id_tipo_suddiv_dotfin"/>
+		<result property="livello1" javaType="string" column="livello_1"/>
+		<result property="livello2" javaType="string" column="livello_2"/>
+		<result property="livello3" javaType="string" column="livello_3"/>
+		<result property="livello4" javaType="string" column="livello_4"/>
+		<result property="desrFinalita" javaType="string" column="descr_finalita"/>
+	</association>
+	<association javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.DestinatarioDTO" property="destinatarioServizioIndividuale">
+		<id column="dest_id_destinatario" javaType="int" property="idDestinatario" />
+		<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+		<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+		<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+		<result column="data_nascita" javaType="date" property="dataNascita"/>
+		<result column="cod_istat_comune_nascita" javaType="string" property="codIstatComuneNascita"/>
+		<result column="cod_stato_estero_nascita" javaType="string" property="codStatoEsteroNasccita"/>
+		<result column="cod_istat_comune_residenza" javaType="string" property="codIstatComuneResidenza"/>
+		<result column="cod_stato_estero_residenza" javaType="string" property="codStatoEsteroResidenza"/>
+		<result column="descr_citta_estera_residenza" javaType="string" property="descrCittaEsteraResidenza"/>
+		<result column="cod_istat_comune_domicilio" javaType="string" property="codIstatComuneDomicilio"/>
+		<result column="indirizzo_residenza" javaType="string" property="indResidenza"/>
+		<result column="indirizzo_domicilio" javaType="string" property="indDomicilio"/>
+		<result column="recapito_mail" javaType="string" property="recapitoMail"/>
+		<result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+		<result column="cod_cittadinanza" javaType="string" property="codCittadinanza"/>
+		<result column="cod_user_ins_destinatario" javaType="string" property="codUserInserimento"/>
+		<result column="d_ins_destinatario" javaType="date" property="dataInserimento"/>
+		<result column="cod_user_agg_destinatario" javaType="string" property="codUserAggiornamento"/>
+		<result column="d_agg_destinatario" javaType="date" property="dataAggiornamento"/>
+	</association>
+</resultMap>
+
+<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioVoceSpesaDTO"
+					 id="servizioVoceSpesa">
+	<result column="id_servizio" javaType="long" property="idServizio"/>
+	<result column="id_pso" javaType="long" property="idPso"/>
+	<result column="cod_natura_spesa" javaType="string" property="codNaturaSpesa" />
+	<result column="parametro_economico" javaType="bigdecimal" property="parametroEconomico"/>
+	<result column="parametro_fisico" javaType="bigdecimal" property="parametroFisico"/>
+	<result column="parametro_temporale" javaType="bigdecimal" property="parametroTemporale"/>
+	<result column="importo_voce_spesa" javaType="bigdecimal" property="importoVoceSpesa" />
+	<result column="cod_user_inserim" javaType="string" property="codUserInserim" />
+	<result column="d_inserim" javaType="date" 			property="dInserim"/>
+	<result column="cod_user_aggiorn" javaType="string" property="codUserAggiorn" />
+	<result column="d_aggiorn" javaType="date" 			property="dAggiorn"/>
+	<association property="voceSpesa" javaType="it.csi.serse.serseweb.integration.mybatis.dto.custom.VoceSpesaDTO">
+		<result property="codVoceSpesa" javaType="string" column="cod_voce_spesa"/>
+		<result property="descrVoceSpesa" javaType="string" column="descr_voce_spesa"/>
+		<result property="codNaturaSpesa" javaType="string" column="cod_natura_spesa"/>
+	</association>
+</resultMap>
+
+<resultMap type="it.csi.serse.serseweb.vo.ExcelServiziBean" id="servizioExcelMap">
+	<id column="id_servizio" javaType="long" property="idServizio"/>
+	<result column="progressivo_sede" javaType="int" property="sede"/>
+	<result column="titolo_servizio" javaType="string" property="titoloServizio"/>
+	<result column="descr_servizio_regionale" javaType="string" property="tipologiaServizio"/>
+	<result column="descr_finalita_servizio" javaType="string" property="finalitaServizio"/>
+	<result column="id_intervento" javaType="long" property="idIntervento"/>
+	<result column="descr_stato_servizio" javaType="string" property="statoServizio"/>
+	<result column="durata_ore" javaType="bigdecimal" property="durataOre"/>
+	<result column="num_max_destinatari" javaType="int" property="numMaxDestinatari"/>
+	<result column="num_destinatari" javaType="int" property="numDestinatari"/>
+	<result column="cognome_nome_destinatario" javaType="string" property="cognomeNomeDestinatario"/>
+	<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+	<result column="tot_incontri_definiti" javaType="int" property="totIncontriDefiniti"/>
+	<result column="tot_incontri_chiusi" javaType="int" property="totIncontriChiusi"/>
+	<result column="valore_campo_aggiuntivo_1" javaType="string" property="valoreCampoAggiuntivo1"/>
+	
+	<result column="sogg_beneficiario" javaType="string" property="soggBeneficiario"/>
+	<result column="sogg_attuatore" javaType="string" property="soggAttuatore"/>
+	<result column="model_id" javaType="long" property="modelId"/>
+	<result column="enti_coinvolti" javaType="string" property="entiCoinvolti"/>
+	<result column="cod_user_inserim" javaType="string" property="cfUtenteInserimento" />
+	<result column="cod_user_aggiorn" javaType="string" property="cfUtenteAggiornamento" />
+</resultMap>
+
+<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.DettaglioClasseDestinatarioServizioDTO" id="dettaglioClasseDestinatarioServizio">
+	<id column="id_pso_classe_destinatario" javaType="long" property="idPsoClasseDestinatario" />
+	<result column="descr_classe_destinatario" javaType="string" property="descrClasseDestinatario" />
+	<result column="valore_dato_peculiare_1" javaType="string" property="valoreDatoPeculiare1" />
+</resultMap>
+
+<select id="getServiziVoceSpesa" parameterType="map" resultMap="servizioVoceSpesa">
+	SELECT distinct *
+	FROM serse.serse_r_servizio_voce_spesa srsvs
+	JOIN serse.serse_r_pso_voce_spesa srpvs ON srsvs.id_pso = srpvs.id_pso and srsvs.cod_voce_spesa =srpvs.cod_voce_spesa
+	JOIN serse.serse_d_voce_spesa sdvs ON sdvs.cod_voce_spesa = srpvs.cod_voce_spesa
+
+	where srsvs.id_servizio=#{idServizio}
+</select>
+<!-- Algoritmo – Tipologie di Servizi del Modello
+	Mettere in relazione le tabelle SERSE_T_SERVIZIO_MODELLO, SERSE_T_MODELLO_DI_INTERVENTO, SERSE_D_SERVIZIO_REGIONALE, 
+	SERSE_D_FINALITA_SERVIZIO con queste condizioni:
+	SERSE_T_SERVIZIO_MODELLO.id_modello_di_intervento = SERSE_T_MODELLO_DI_INTERVENTO.id_modello_di_intervento
+	SERSE_D_SERVIZIO_REGIONALE.id_servizio_regionale = SERSE_D_SERVIZIO_REGIONALE.id_servizio_regionale
+	SERSE_T_SERVIZIO_MODELLO.cod_finalita_servizio_esterno = SERSE_D_FINALITA_SERVIZIO.cod_finalita_servizio (outer join)
+	SERSE_D_SERVIZIO_REGIONALE.cod_finalita_servizio = SERSE_D_FINALITA_SERVIZIO.cod_finalita_servizio (outer join)
+	
+	Per i record individuati, recuperare l’id_servizio_modello (da non visualizzare) e poi:
+	se id_servizio_regionale è valorizzato:
+	id_servizio_regionale (da non visualizzare)
+	codice_servizio_regionale
+	descr_servizio_regionale
+	cod_finalita_servizio 
+	
+	
+	se id_servizio_regionale non è valorizzato
+	titolo_servizio_esterno
+ -->
+<select id="getTipologieServiziForModelloIntervento" parameterType="map" resultMap="servizioModelloMap">
+	SELECT sdfs.descr_finalita_servizio ,
+			stsm.cod_finalita_servizio_esterno,
+			stsm.id_servizio_regionale,
+			stsm.titolo_servizio_esterno,
+			stsm.descrizione_servizio_esterno,
+			sdsr.codice_servizio_regionale,
+			sdsr.descr_servizio_regionale,
+			sdsr.ore_consentite_min,
+			sdsr.ore_consentite_max,
+			stsm.durata_in_ore,
+			stsm.riferimento_attore_esterno,
+			stsm.id_servizio_modello,
+			sdsr.durata_in_ore as durata_in_ore_regionale,
+			sdsr.cod_finalita_servizio
+FROM serse.serse_t_servizio_modello stsm full join
+	serse_t_modello_di_intervento stmdi on stmdi.id_modello_di_intervento =stsm.id_modello_di_intervento full join 
+	serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale = stsm.id_servizio_regionale full join 
+	serse_d_finalita_servizio sdfs  on (stsm.cod_finalita_servizio_esterno = sdfs.cod_finalita_servizio or sdsr.cod_finalita_servizio=sdfs.cod_finalita_servizio )
+
+	where stmdi.id_modello_di_intervento=${idModellointervento}
+	ORDER BY sdsr.codice_servizio_regionale,stsm.descrizione_servizio_esterno
+</select>
+
+<select id="getServiziRegionaliForPso" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioRegionaleDTO">
+	SELECT *
+	FROM serse_d_servizio_regionale sdsr join
+	     serse_d_finalita_servizio sdfs on sdsr.cod_finalita_servizio=sdfs.cod_finalita_servizio
+	WHERE sdsr.id_pso= #{idPso}
+</select>
+
+<select id="getServiziEsternoForIdModelloIntervento" parameterType="map" resultMap="servizioModelloMap">
+	SELECT id_servizio_modello, 
+		id_modello_di_intervento, 
+		id_servizio_regionale, 
+		titolo_servizio_esterno, 
+		descrizione_servizio_esterno, 
+		cod_finalita_servizio_esterno, 
+		durata_in_ore, 
+		referente_nome, 
+		referente_cognome, 
+		referente_email, 
+		referente_telefono, 
+		cod_user_inserim, 
+		d_inserim, 
+		cod_user_aggiorn, 
+		d_aggiorn
+	FROM serse.serse_t_servizio_modello
+	WHERE id_modello_di_intervento=#{idModelloIntervento} and id_servizio_regionale is null
+</select>
+
+<select id="getServizioById" parameterType="map" resultMap="servizioMap">
+	SELECT *
+
+
+	FROM serse_t_servizio sts join
+	serse_t_soggetto_attuatore stsa on sts.id_soggetto_attuatore =stsa.id_soggetto_attuatore
+
+	left join serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale = sts.id_servizio_regionale
+	left join serse_d_finalita_servizio sdfs on sdfs.cod_finalita_servizio =sdsr.cod_finalita_servizio
+	left join serse_d_stato_servizio sdss on sdss.id_stato_servizio =sts.id_stato_servizio
+	left join ext_gmop_d_area_territoriale egdat on egdat.cod_area_territoriale = sts.cod_area_territoriale_finanziamento
+
+	WHERE sts.id_servizio=#{idServizio}
+
+</select>
+
+<select id="getServizi" parameterType="map" resultMap="servizioMap">
+	SELECT *
+	<include refid="getServiziCommon" />
+	ORDER BY
+	<if test="sort.property == null">
+		<!-- ordinamento di default -->
+		sts.id_servizio DESC
+	</if>
+	<if test="sort.property != null">
+		<choose>
+			<when test="sort.property == 'id'">
+				sts.id_servizio
+			</when>
+			<when test="sort.property == 'titolo'">
+				sts.titolo_servizio
+			</when>
+			<when test="sort.property == 'finalita'">
+				sdfs.descr_finalita_servizio
+			</when>
+			<when test="sort.property == 'destinatario'">
+				std.cognome_destinatario, std.nome_destinatario
+			</when>
+			<when test="sort.property == 'soggAttuatore'">
+				stsa.gruppo_operatore, stsa.cod_operatore
+			</when>
+			<when test="sort.property == 'progressivoSede'">
+				sts.progressivo_sede
+			</when>
+			<when test="sort.property == 'soggBeneficiario'">
+				beneficiario.gruppo_beneficiario, beneficiario.codice_beneficiario
+			</when>
+			<when test="sort.property == 'istanzaCandidatura'">
+				stsa.model_id
+			</when>
+			<otherwise>
+				sts.id_servizio
+			</otherwise>
+		</choose>
+		<if test="!sort.asc">DESC</if>
+	</if>
+	<if test="limit != null">LIMIT #{limit}</if>
+	<if test="offset != null">OFFSET #{offset}</if>
+</select>
+
+<select id="countServizi">
+	SELECT COUNT(*)
+	<include refid="getServiziCommon" />
+</select>
+
+<sql id="getServiziCommon">
+		FROM serse_t_servizio sts join
+		serse_t_soggetto_attuatore stsa on sts.id_soggetto_attuatore =stsa.id_soggetto_attuatore
+		JOIN
+		(SELECT distinct stsa.model_id
+			FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE
+			stsa.num_progr_sportello=#{filter.numProgrSportello} and
+			stsa.gruppo_operatore=#{filter.gruppoOperatore} and
+			stsa.cod_operatore =#{filter.codOperatore}
+		)as tmp on tmp.model_id=stsa.model_id
+		join (
+			select gruppo_operatore as gruppo_beneficiario, cod_operatore as codice_beneficiario, model_id
+			from SERSE_T_SOGGETTO_ATTUATORE
+			where flg_capofila='S'
+		) as beneficiario on beneficiario.model_id = stsa.model_id 
+		join serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale = sts.id_servizio_regionale
+		join serse_d_finalita_servizio sdfs on sdfs.cod_finalita_servizio =sdsr.cod_finalita_servizio
+		join serse_d_stato_servizio sdss on sdss.id_stato_servizio =sts.id_stato_servizio
+		left join serse_r_destinatario_servizio srds on sdsr.cod_finalita_servizio='I' and srds.id_servizio = sts.id_servizio
+		left join (
+			select
+				id_destinatario as dest_id_destinatario,
+				cf_destinatario,
+				nome_destinatario,
+				cognome_destinatario,
+				d_nascita,
+				cod_istat_comune_nascita,
+				cod_stato_estero_nascita,
+				descr_citta_estera_nascita,
+				cod_istat_comune_residenza,
+				cod_stato_estero_residenza,
+				descr_citta_estera_residenza,
+				indirizzo_residenza,
+				cap_residenza,
+				cod_istat_comune_domicilio,
+				indirizzo_domicilio,
+				cap_domicilio,
+				recapito_email,
+				recapito_telefonico,
+				cod_cittadinanza,
+				cod_user_inserim as cod_user_ins_destinatario,
+				d_inserim as d_ins_destinatario,
+				cod_user_aggiorn as cod_user_agg_destinatario,
+				d_aggiorn as d_agg_destinatario
+			from serse_t_destinatario) std on std.dest_id_destinatario = srds.id_destinatario
+
+		<if test="filter.denominazioneEnte != null and filter.denominazioneEnte!=''">
+			join serse_t_ente_coinvolto_servizio stecs on stecs.id_servizio =sts.id_servizio
+			left join serse_t_ente_coinvolto_intervento steci on stecs .id_ente_coinvolto_intervento =steci.id_ente_coinvolto_intervento
+			left join serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello
+		</if>
+		WHERE
+			1=1
+			<if test="filter.idStatoServizio != null">
+				AND sts.id_stato_servizio=#{filter.idStatoServizio}
+			</if>
+			<if test="filter.modelId != null">
+				AND stsa.model_id= #{filter.modelId}
+			</if>
+
+			<if test="filter.idServizioRegionale!= null">
+				AND sdsr.id_servizio_regionale=#{filter.idServizioRegionale}
+			</if>
+
+			<if test="filter.idServizio != null">
+				AND sts.id_servizio= #{filter.idServizio}
+			</if>
+
+			<if test="filter.codFiscaleDestinatario!=null and filter.codFiscaleDestinatario!= '' ">
+				AND exists (
+					select 1 from serse_t_destinatario std
+					join serse_r_destinatario_servizio srds on srds.id_destinatario =std.id_destinatario
+					where sts.id_servizio=srds.id_servizio and std.cf_destinatario=#{filter.codFiscaleDestinatario}
+				)
+			</if>
+			<if test="filter.idFinalitaServizio!= null">
+				AND sdfs.cod_finalita_servizio=#{filter.idFinalitaServizio}
+			</if>
+			<if test="filter.progressivoSede != null">
+				AND sts.progressivo_sede=#{filter.progressivoSede}
+			</if>
+			<if test="filter.denominazioneEnte!=null and filter.denominazioneEnte!=''">
+				AND ( lower(steci.denominazione) like lower('%'||#{filter.denominazioneEnte}||'%')
+						or lower(stecs.denominazione) like lower('%'||#{filter.denominazioneEnte}||'%') )
+			</if>
+			<if test="filter.gruppoOpBeneficiario != null and filter.gruppoOpBeneficiario != ''">
+				AND beneficiario.gruppo_beneficiario= #{filter.gruppoOpBeneficiario}
+				AND beneficiario.codice_beneficiario= #{filter.codOpBeneficiario}
+			</if>
+			<if test="filter.situazioneIncontro == 1">
+				AND EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio and id_stato_incontro &lt; 40)
+			</if>
+			<if test="filter.situazioneIncontro == 2">
+				AND EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio)
+				AND NOT EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio and id_stato_incontro &lt; 40)
+			</if>
+			<if test="filter.isProprietario">
+				AND stsa.gruppo_operatore = #{filter.gruppoOperatore}
+				AND stsa.cod_operatore = #{filter.codOperatore}
+			</if>
+</sql>
+
+<select id="getDestinatarioForServizioIndividuale" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.DestinatarioDTO">
+	select std.*
+	from serse_t_servizio sts join serse_r_destinatario_servizio srds on sts.id_servizio = srds.id_servizio
+	join serse_t_destinatario std on std.id_destinatario = srds.id_destinatario
+	where sts.id_servizio=#{idServizio}
+</select>
+
+<select id="getTipologieServiziForIntervento" parameterType="map" resultType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioRegionaleDTO">
+	SELECT Distinct
+		   sdsr.id_servizio_regionale as idServizioRegionale,
+		   sdsr.codice_servizio_regionale as codiceServizioRegionale,
+		   sdsr.descr_servizio_regionale as descrServizioregionale,
+		   sdfs.descr_finalita_servizio as descrFinalitaServizio
+	FROM serse_t_intervento sti 
+		JOIN serse_t_servizio sts ON
+		sti.id_intervento = sts.id_intervento 
+		JOIN serse_d_servizio_regionale sdsr ON 
+		sdsr.id_servizio_regionale =sts.id_servizio_regionale 
+		JOIN serse_d_finalita_servizio sdfs ON
+		sdsr.cod_finalita_servizio = sdfs.cod_finalita_servizio
+		
+	WHERE sti.id_intervento=#{idIntervento}
+</select>
+
+<select id="getServizioEsternoById" parameterType="map" resultMap="servizioModelloMap">
+	SELECT *
+	FROM serse.serse_t_servizio_modello
+	where serse_t_servizio_modello.id_servizio_modello=#{idServizioModello}
+</select>
+<select id="getServiziDestinatari" parameterType="map" resultMap="servizioMap">
+	SELECT *
+	FROM serse_t_servizio sts JOIN serse_r_destinatario_servizio srds ON sts.id_servizio = srds.id_servizio
+		 JOIN serse_t_destinatario std ON std.id_destinatario = srds.id_destinatario
+	WHERE srds.id_destinatario = #{idDestinatario}
+</select>
+
+
+<delete id="deleteServizioModelloById" parameterType="map">
+	DELETE FROM serse_t_servizio_modello
+	WHERE id_servizio_modello=#{idServizioModello} and id_servizio_regionale is null
+</delete>
+<delete id="deleteServiziModelloRegionale" parameterType="map">
+	DELETE FROM serse_t_servizio_modello
+	WHERE id_servizio_modello=#{idServizioModello} and id_modello_di_intervento=#{idModelloIntervento} and id_servizio_regionale= #{idServizioRegionale}
+</delete>
+<insert id="insertServiziModelloRegionale" parameterType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioModelloDTO">
+	INSERT INTO serse_t_servizio_modello
+		(id_servizio_modello, 
+		 id_modello_di_intervento, 
+		 id_servizio_regionale, 
+		 titolo_servizio_esterno, 
+		 descrizione_servizio_esterno, 
+		 cod_finalita_servizio_esterno,
+		 durata_in_ore,
+		 riferimento_attore_esterno,
+		 referente_nome, 
+		 referente_cognome, 
+		 referente_email, 
+		 referente_telefono, 
+		 cod_user_inserim, 
+		 d_inserim, 
+		 cod_user_aggiorn, 
+		 d_aggiorn)
+		VALUES(#{servizioModelloRegionale.idServizioModello},
+				#{servizioModelloRegionale.idModelloDiIntervento} ,
+				#{servizioModelloRegionale.servizioRegionale.idServizioRegionale}, 
+				null, 
+				null, 
+				null, 
+				#{servizioModelloRegionale.durataInOre},
+				null,
+				#{servizioModelloRegionale.referente.referenteNome},
+				#{servizioModelloRegionale.referente.referenteCognome}, 
+				#{servizioModelloRegionale.referente.referenteEmail},
+				#{servizioModelloRegionale.referente.referenteTelefono},
+				#{servizioModelloRegionale.codUserInserim}, 
+				#{servizioModelloRegionale.dInserim},
+				#{servizioModelloRegionale.codUserAggiorn},
+				#{servizioModelloRegionale.dAggiorn})
+</insert>
+<update id="updateServiziModelloRegionale" parameterType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioModelloDTO">
+	UPDATE serse_t_servizio_modello
+	SET  durata_in_ore=#{servizioModelloRegionale.durataInOre}, 
+		 cod_user_aggiorn=#{servizioModelloRegionale.codUserAggiorn}, 
+		 d_aggiorn=#{servizioModelloRegionale.dAggiorn}
+	WHERE id_servizio_modello=#{servizioModelloRegionale.idServizioModello};
+</update>
+<insert id="insertServiziModelloEsterno" parameterType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioModelloDTO">
+INSERT INTO serse_t_servizio_modello
+		(id_servizio_modello, 
+		 id_modello_di_intervento, 
+		 id_servizio_regionale, 
+		 titolo_servizio_esterno, 
+		 descrizione_servizio_esterno, 
+		 cod_finalita_servizio_esterno, 
+		 durata_in_ore,
+		 riferimento_attore_esterno,
+		 referente_nome, 
+		 referente_cognome, 
+		 referente_email, 
+		 referente_telefono, 
+		 cod_user_inserim, 
+		 d_inserim, 
+		 cod_user_aggiorn, 
+		 d_aggiorn)
+		VALUES(#{servizioModelloEsterno.idServizioModello} ,
+				#{servizioModelloEsterno.idModelloDiIntervento} ,
+				null, 
+				#{servizioModelloEsterno.titoloServizioEsterno}, 
+				#{servizioModelloEsterno.descrizioneServizioEsterno}, 
+				#{servizioModelloEsterno.codFinalitaServizioEsterno}, 
+				#{servizioModelloEsterno.durataInOre},
+				#{servizioModelloEsterno.attoreEsterno},
+				#{servizioModelloEsterno.referente.referenteNome}, 
+				#{servizioModelloEsterno.referente.referenteCognome}, 
+				#{servizioModelloEsterno.referente.referenteEmail}, 
+				#{servizioModelloEsterno.referente.referenteTelefono}, 
+				#{servizioModelloEsterno.codUserInserim},
+				#{servizioModelloEsterno.dInserim},
+				#{servizioModelloEsterno.codUserAggiorn},
+				#{servizioModelloEsterno.dAggiorn})
+</insert>
+<update id="updateServiziModelloEsterno" parameterType="it.csi.serse.serseweb.integration.mybatis.dto.custom.ServizioModelloDTO">
+	UPDATE serse_t_servizio_modello
+	SET  titolo_servizio_esterno= #{servizioModelloEsterno.titoloServizioEsterno},
+		 descrizione_servizio_esterno= #{servizioModelloEsterno.descrizioneServizioEsterno},
+		 cod_finalita_servizio_esterno= #{servizioModelloEsterno.codFinalitaServizioEsterno},
+		 riferimento_attore_esterno= #{servizioModelloEsterno.attoreEsterno},
+		 referente_nome= #{servizioModelloEsterno.referente.referenteNome},
+		 referente_cognome= #{servizioModelloEsterno.referente.referenteCognome},
+		 referente_email= #{servizioModelloEsterno.referente.referenteEmail},
+		 referente_telefono= #{servizioModelloEsterno.referente.referenteTelefono},
+		 durata_in_ore= #{servizioModelloEsterno.durataInOre},
+		 cod_user_aggiorn= #{servizioModelloEsterno.codUserAggiorn},
+		 d_aggiorn= #{servizioModelloEsterno.dAggiorn}
+	WHERE id_servizio_modello= #{servizioModelloEsterno.idServizioModello};
+</update>
+
+<select id="getServiziExcel" parameterType="map" resultMap="servizioExcelMap">
+	SELECT
+		sts.id_servizio,
+		stsa.gruppo_operatore || stsa.cod_operatore as sogg_attuatore, -- senza descrizione
+		gruppo_beneficiario || codice_beneficiario as sogg_beneficiario, -- senza descrizione
+		sts.progressivo_sede,
+		stsa.model_id,
+		sts.titolo_servizio,
+		descr_servizio_regionale,
+		descr_finalita_servizio,
+		sts.id_intervento,
+		sdss.descr_stato_servizio,
+		sts.durata_ore,
+		sts.num_max_destinatari,
+		num_destinatari,
+		cognome_nome_destinatario,
+		cf_destinatario,
+		tot_incontri_definiti,
+		tot_incontri_chiusi,
+		sts.valore_campo_aggiuntivo_1 as valore_campo_aggiuntivo_1,
+		(
+			select string_agg('-'||tmp.denominazione, chr(13)||chr(10)) enti_coinvolti
+			from (
+				select distinct coalesce(stecs.denominazione, steci.denominazione, stecm.denominazione) as denominazione
+				from serse_t_ente_coinvolto_servizio stecs
+				left join serse_t_ente_coinvolto_intervento steci on steci.id_ente_coinvolto_intervento = stecs.id_ente_coinvolto_intervento 
+				left join serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello 
+				where stecs.id_servizio = sts.id_servizio
+			) tmp
+		) as enti_coinvolti,
+		sts.cod_user_inserim,
+		sts.cod_user_aggiorn
+	FROM serse_t_servizio sts
+	JOIN serse_t_soggetto_attuatore stsa on sts.id_soggetto_attuatore =stsa.id_soggetto_attuatore
+	JOIN
+		(SELECT distinct stsa.model_id
+			FROM SERSE_T_SOGGETTO_ATTUATORE stsa
+		WHERE
+			stsa.num_progr_sportello=#{filter.numProgrSportello} and
+			stsa.gruppo_operatore=#{filter.gruppoOperatore} and
+			stsa.cod_operatore =#{filter.codOperatore}
+		)as tmp on tmp.model_id=stsa.model_id
+	join (
+			select gruppo_operatore as gruppo_beneficiario, cod_operatore as codice_beneficiario, model_id
+			from SERSE_T_SOGGETTO_ATTUATORE
+			where flg_capofila='S'
+		) as beneficiario on beneficiario.model_id = stsa.model_id 
+	join serse_d_servizio_regionale sdsr on sdsr.id_servizio_regionale = sts.id_servizio_regionale
+	join serse_d_finalita_servizio sdfs on sdfs.cod_finalita_servizio =sdsr.cod_finalita_servizio
+	join serse_d_stato_servizio sdss on sdss.id_stato_servizio =sts.id_stato_servizio
+	left join serse_r_destinatario_servizio srds on sdsr.cod_finalita_servizio='I' and srds.id_servizio = sts.id_servizio
+	left join (
+		select
+			id_destinatario as dest_id_destinatario,
+			cf_destinatario,
+			cognome_destinatario || ' ' || nome_destinatario as cognome_nome_destinatario
+		from serse_t_destinatario
+	) std on std.dest_id_destinatario = srds.id_destinatario
+	left join (
+		select sts2.id_servizio,
+			count(sti.id_incontro) as tot_incontri_definiti,
+			count(case when sti.id_stato_incontro = 40 then 1 end) AS tot_incontri_chiusi
+		from serse_t_servizio sts2
+		left join serse_t_incontro sti on sti.id_servizio = sts2.id_servizio
+		group by sts2.id_servizio
+	) as incontri on incontri.id_servizio = sts.id_servizio 
+	left join (
+		select sts2.id_servizio, count(distinct std.id_destinatario) as num_destinatari
+		from serse_t_servizio sts2
+		join serse_r_destinatario_servizio destser ON destser.id_servizio = sts2.id_servizio
+		join serse_t_destinatario std on std.id_destinatario = destser.id_destinatario
+		group by sts2.id_servizio
+	) destinatari on destinatari.id_servizio = sts.id_servizio
+
+		<if test="filter.denominazioneEnte != null and filter.denominazioneEnte !=''">
+			join serse_t_ente_coinvolto_servizio stecs on stecs.id_servizio =sts.id_servizio
+			left join serse_t_ente_coinvolto_intervento steci on stecs .id_ente_coinvolto_intervento =steci.id_ente_coinvolto_intervento
+			left join serse_t_ente_coinvolto_modello stecm on stecm.id_ente_coinvolto_modello = steci.id_ente_coinvolto_modello
+		</if>
+		WHERE
+			1=1
+			<if test="filter.idStatoServizio != null">
+				AND sts.id_stato_servizio=#{filter.idStatoServizio}
+			</if>
+			<if test="filter.modelId != null">
+				AND stsa.model_id= #{filter.modelId}
+			</if>
+
+			<if test="filter.idServizioRegionale != null">
+				AND sdsr.id_servizio_regionale=#{filter.idServizioRegionale}
+			</if>
+
+			<if test="filter.idServizio != null">
+				AND sts.id_servizio= #{filter.idServizio}
+			</if>
+
+			<if test="filter.codFiscaleDestinatario != null and filter.codFiscaleDestinatario != '' ">
+				AND exists (
+					select 1 from serse_t_destinatario std
+					join serse_r_destinatario_servizio srds on srds.id_destinatario =std.id_destinatario
+					where sts.id_servizio=srds.id_servizio and std.cf_destinatario=#{filter.codFiscaleDestinatario}
+				)
+			</if>
+			<if test="filter.idFinalitaServizio != null">
+				AND sdfs.cod_finalita_servizio=#{filter.idFinalitaServizio}
+			</if>
+			<if test="filter.progressivoSede != null">
+				AND sts.progressivo_sede=#{filter.progressivoSede}
+			</if>
+			<if test="filter.denominazioneEnte != null and filter.denominazioneEnte != ''">
+				AND ( lower(steci.denominazione) like lower('%'||#{filter.denominazioneEnte}||'%')
+						or lower(stecs.denominazione) like lower('%'||#{filter.denominazioneEnte}||'%') )
+			</if>
+			<if test="filter.gruppoOpBeneficiario != null and filter.gruppoOpBeneficiario != ''">
+				AND beneficiario.gruppo_beneficiario= #{filter.gruppoOpBeneficiario}
+				AND beneficiario.codice_beneficiario= #{filter.codOpBeneficiario}
+			</if>
+			<if test="filter.situazioneIncontro == 1">
+				AND EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio and id_stato_incontro &lt; 40)
+			</if>
+			<if test="filter.situazioneIncontro == 2">
+				AND EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio)
+				AND NOT EXISTS(select 1 from serse_t_incontro where id_servizio = sts.id_servizio and id_stato_incontro &lt; 40)
+			</if>
+			<if test="filter.isProprietario">
+				AND stsa.gruppo_operatore = #{filter.gruppoOperatore}
+				AND stsa.cod_operatore = #{filter.codOperatore}
+			</if>
+	ORDER BY
+		sts.id_servizio DESC
+</select>
+
+<select id="getClasseServizioByIdServzioAndIdPso" parameterType="map" resultMap="dettaglioClasseDestinatarioServizio">
+		SELECT 
+				srpcd.id_pso_classe_destinatario
+				,sdcd.descr_classe_destinatario 
+				,sts.valore_dato_peculiare_1 
+		FROM serse_t_servizio sts 
+		LEFT JOIN serse_r_pso_classe_destinatario srpcd 	ON sts.id_pso_classe_destinatario 	= srpcd.id_pso_classe_destinatario 
+		LEFT JOIN serse_d_classe_destinatario sdcd 			ON srpcd.id_classe_destinatario 	= sdcd.id_classe_destinatario
+		WHERE 	sts.id_servizio = #{idServizio} 
+		AND 	sts.id_pso      = #{idPso}
+</select>
+
+</mapper>

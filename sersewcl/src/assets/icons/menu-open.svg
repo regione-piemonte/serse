@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="45" viewBox="0 0 45 45">
+  <defs>
+    <filter id="Tracciato_60246" x="0" y="0" width="45" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-opacity="0.282"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Raggruppa_21290" data-name="Raggruppa 21290" transform="translate(-97.5 -75.5)">
+    <g transform="matrix(1, 0, 0, 1, 97.5, 75.5)" filter="url(#Tracciato_60246)">
+      <path id="Tracciato_60246-2" data-name="Tracciato 60246" d="M12,2A10,10,0,1,0,22,12,9.991,9.991,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.011,8.011,0,0,1,12,20Z" transform="translate(7.5 7.5)" fill="#0063a5" stroke="rgba(0,0,0,0)" stroke-width="1"/>
+    </g>
+    <path id="Tracciato_60250" data-name="Tracciato 60250" d="M0,0V7.414L5.467,3.427Z" transform="matrix(-0.719, 0.695, -0.695, -0.719, 119.338, 97.692)" fill="#0063a5"/>
+    <path id="Tracciato_60251" data-name="Tracciato 60251" d="M0,7.414V0L5.467,3.987Z" transform="matrix(0.719, -0.695, 0.695, 0.719, 114.599, 91.935)" fill="#0063a5"/>
+  </g>
+</svg>

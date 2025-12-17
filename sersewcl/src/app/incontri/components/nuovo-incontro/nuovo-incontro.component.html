@@ -1,0 +1,239 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Handle  Back to search -->
+<app-back-to-bar
+  [backUrl]="'/dashboard/servizio/form'"
+
+  [statoFor]="'incontro'"
+  [stato]="statoIncontro ? statoIncontro:''"
+  [statoClass]="''">
+</app-back-to-bar>
+
+<!-- Handle pso selected -->
+
+<mat-tab-group class="icon_after mt-3"
+              [selectedIndex]="selectedTab"
+              appTabClickInterceptor
+              (tabClick)="onTabClick($event)">
+  <mat-tab label="Dati identificativi">
+    <app-dati-identificativi
+      [title]="'incontro'"
+      [nIdentificativi]="{
+                          modello: identificativoModello,
+                          intervento: identificativoIntervento,
+                          servizio: identificativoServizio,
+                          incontro: identificativoIncontro
+                          }">
+    </app-dati-identificativi>
+
+    <mat-card class="mb-3 pe-5">
+      <mat-card-header>
+        <mat-card-title>
+          <h5 class="mb-5">Dati generali</h5>
+        </mat-card-title>
+
+      </mat-card-header>
+
+       <mat-card-content>
+      <!-- Form -->
+      <form [formGroup]="form">
+        <div class="container-fluid">
+          <mat-card-content>
+
+            <div class="">
+              <div class="row col-6">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Titolo incontro</mat-label>
+                  <input matInput formControlName="titoloIncontro" maxlength="250">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Giorno dell'incontro</mat-label>
+                  <input matInput  [matDatepicker]="picker"
+                    formControlName="dataIncontro" >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['dataIncontro']|castFromControl"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class=" col-6">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Durata in ore *</mat-label>
+                  <input matInput formControlName="durata">
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['durata']|castFromControl"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-3">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Ora inizio*</mat-label>
+                  <input matInput
+                    id="oraInizio"
+                    formControlName="oraInizio"
+
+                    type="text"
+                    >
+                    <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="'formati esempio: 00:30, 03:00 , 3:00'">info</mat-icon>
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['oraInizio']|castFromControl"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class=" col-3">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Ora fine*</mat-label>
+                  <input matInput  formControlName="oraFine"
+                  type="text">
+                  <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="'formati esempio: 00:30, 03:00 , 3:00'">info</mat-icon>
+                  <mat-error>
+                    <app-control-messages [control]="form.controls['oraFine']|castFromControl"></app-control-messages>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row">
+              <mat-form-field appearance="legacy">
+                <mat-label>Note</mat-label>
+                <textarea matInput formControlName="note" maxlength="4000"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </div>
+      </form>
+
+
+      <!-- Informazione ultima richiesta -->
+      <app-info-gam
+        [datiToken]="datiToken"
+        [visibilityAggiorna]="visibilityAggiorna"
+        (onAggiornaProposta)="onAggiorna()">
+      </app-info-gam>
+
+
+      <mat-divider></mat-divider>
+      <div class="mt-5"></div>
+      <!-- Riferimenti -->
+      <app-dati-riferimento [riferimentoA]="riferimentoA"
+                            [formGrup]="riferimentoForm">
+      </app-dati-riferimento>
+
+
+      <!-- info Salvataggio -->
+      <app-info-salvataggio *ngIf="isSaved"
+            [soggettoAttuatoreCompetente]="soggettoAttuatoreCompetente"
+            [codiceFiscaleIns]="codiceFiscaleIns"
+            [codiceFiscaleAgg]="codiceFiscaleAgg"
+            [dataIns]="dataIns"
+            [dataAgg]="dataAgg">
+      </app-info-salvataggio>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Button -->
+    <div class="d-flex mt-3">
+      <div *ngIf="!visibilityAggiorna" class="p-2">
+        <button *ngIf="canClose"
+                mat-button
+                class="btn btn--plain-text--danger"
+                aria-label="chiudi incontro"
+                (click)="onChiudi()"
+                [disabled]="!form.pristine || !riferimentoForm.pristine">
+          CHIUDI INCONTRO
+        </button>
+      </div>
+      <div class="p-2">
+        <button *ngIf="canReopen"
+                mat-button
+                class="btn btn--plain-text--danger"
+                aria-label="riapri incontro"
+                (click)="onRiapri()">
+          RIAPRI INCONTRO
+        </button>
+      </div>
+      <div class="me-auto"></div>
+      <div *ngIf="!visibilityAggiorna" class="p-2">
+        <button *ngIf="isModificabile"
+                class="btn btn--primary"
+                aria-label="salva incontro"
+                (click)="onSalva()"
+                [disabled]="!form.valid">
+          SALVA
+        </button>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="PARTECIPANTI" [disabled]="!isSaved">
+    <app-dati-identificativi
+      [title]="'incontro'"
+      [nIdentificativi]="{
+                          modello: identificativoModello,
+                          intervento: identificativoIntervento,
+                          servizio: identificativoServizio,
+                          incontro: identificativoIncontro
+                          }">
+    </app-dati-identificativi>
+
+    <app-partecipanti-incontro
+    *ngIf="isSaved"
+    [incontro]="incontro"
+    [isModificabile]="isModificabile">
+    </app-partecipanti-incontro>
+  </mat-tab>
+
+  <mat-tab label="LUOGO" [disabled]="!isSaved">
+    <app-dati-identificativi
+      [title]="'incontro'"
+      [nIdentificativi]="{
+                          modello: identificativoModello,
+                          intervento: identificativoIntervento,
+                          servizio: identificativoServizio,
+                          incontro: identificativoIncontro
+                          }">
+    </app-dati-identificativi>
+
+    <app-luogo-incontro
+    *ngIf="isSaved"
+    [incontro]="incontro"
+    [isModificabile]="isModificabile">
+
+    </app-luogo-incontro>
+  </mat-tab>
+
+
+  <mat-icon #Icona [matTooltip]="isIndividuale?'Individuale':'Di gruppo'"
+            aria-hidden="true">
+      {{isIndividuale?"person":"group"}}</mat-icon>
+</mat-tab-group>
+

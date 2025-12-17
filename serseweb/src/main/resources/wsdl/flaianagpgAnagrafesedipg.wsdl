@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://anagrafesedipg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://anagrafesedipg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:intf="http://anagrafesedipg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns:tns1="http://anagrafepg.exception.flaianagpg.flaianag.csi.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Nov 13, 2013 (09:13:21 GMT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://anagrafesedipg.interfacecsi.flaianagpg.flaianag.csi.it/" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://anagrafepg.exception.flaianagpg.flaianag.csi.it"/>
+   <element name="testResources">
+    <complexType/>
+   </element>
+   <element name="testResourcesResponse">
+    <complexType>
+     <sequence>
+      <element name="testResourcesReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CSIException">
+    <sequence>
+     <element name="nestedExcClassName" nillable="true" type="xsd:string"/>
+     <element name="nestedExcMsg" nillable="true" type="xsd:string"/>
+     <element name="stackTraceMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault" type="impl:CSIException"/>
+   <element name="getElencoSediOperatore">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="impl:AkOperatore"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AkOperatore">
+    <sequence>
+     <element name="codiceGruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoSediOperatoreResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoSediOperatoreReturn" type="impl:ResultElencoSedi"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Comune">
+    <sequence>
+     <element name="codiceComune" nillable="true" type="xsd:string"/>
+     <element name="denominazioneComune" nillable="true" type="xsd:string"/>
+     <element name="siglaProvincia" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="StatoEstero">
+    <sequence>
+     <element name="codiceStatoEstero" nillable="true" type="xsd:string"/>
+     <element name="denominazioneStatoEstero" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TipoStrada">
+    <sequence>
+     <element name="codiceTipoStrada" nillable="true" type="xsd:string"/>
+     <element name="descrizioneTipoStrada" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SintesiSede">
+    <sequence>
+     <element name="civicoSede" nillable="true" type="xsd:string"/>
+     <element name="codiceBacino" nillable="true" type="xsd:int"/>
+     <element name="codiceFiscale" nillable="true" type="xsd:string"/>
+     <element name="comune" nillable="true" type="impl:Comune"/>
+     <element name="denominazioneBacino" nillable="true" type="xsd:string"/>
+     <element name="denominazioneSede" nillable="true" type="xsd:string"/>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="idSede" nillable="true" type="xsd:int"/>
+     <element name="indirizzoSede" nillable="true" type="xsd:string"/>
+     <element name="operatore" nillable="true" type="impl:AkOperatore"/>
+     <element name="statoEstero" nillable="true" type="impl:StatoEstero"/>
+     <element name="tipoSede" nillable="true" type="xsd:string"/>
+     <element name="tipoStrada" nillable="true" type="impl:TipoStrada"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSintesiSede">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SintesiSede"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultMessage">
+    <sequence>
+     <element name="codCategMsg" nillable="true" type="xsd:string"/>
+     <element name="codTipoMsg" nillable="true" type="xsd:string"/>
+     <element name="codice" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="idMessaggio" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoSedi">
+    <sequence>
+     <element name="elencoSedi" nillable="true" type="impl:ArrayOfSintesiSede"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <complexType name="SystemException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault1" type="impl:SystemException"/>
+   <complexType name="UnrecoverableException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault2" type="impl:UnrecoverableException"/>
+   <complexType name="UserException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault3" type="impl:InvalidParameterException"/>
+   <element name="getElencoSediPersonaGiuridica">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element maxOccurs="unbounded" minOccurs="0" name="in4" type="xsd:string"/>
+      <element minOccurs="0" name="in5" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSediPersonaGiuridicaResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoSediPersonaGiuridicaReturn" type="impl:ResultElencoSedi"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioSedeOperatore">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="impl:AkOperatore"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioSedeOperatoreResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioSedeOperatoreReturn" type="impl:ResultDettaglioSede"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AttivitaEconomica">
+    <sequence>
+     <element name="codice" type="xsd:int"/>
+     <element name="codiceAteco" nillable="true" type="xsd:string"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Cessazione">
+    <sequence>
+     <element name="codiceCausale" nillable="true" type="xsd:string"/>
+     <element name="dataCessazione" nillable="true" type="xsd:dateTime"/>
+     <element name="descrizioneCausale" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Quartiere">
+    <sequence>
+     <element name="codice" type="xsd:int"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="istatComune" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DettaglioSedeOperatore">
+    <sequence>
+     <element name="cessazione" nillable="true" type="impl:Cessazione"/>
+     <element name="cittaEstera" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="indirizzoAlternativo" nillable="true" type="xsd:string"/>
+     <element name="numeroVerde" nillable="true" type="xsd:string"/>
+     <element name="orarioApertura" nillable="true" type="xsd:string"/>
+     <element name="quartiere" nillable="true" type="impl:Quartiere"/>
+     <element name="sitoWeb" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="DettaglioSede">
+    <sequence>
+     <element name="attivitaEconomica" nillable="true" type="impl:AttivitaEconomica"/>
+     <element name="cap" nillable="true" type="xsd:string"/>
+     <element name="datiGenerali" nillable="true" type="impl:SintesiSede"/>
+     <element name="dettaglioSedeOperatore" nillable="true" type="impl:DettaglioSedeOperatore"/>
+     <element name="fax" nillable="true" type="xsd:string"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+     <element name="tipoStrada" nillable="true" type="impl:TipoStrada"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioSede">
+    <sequence>
+     <element name="dettaglioSede" nillable="true" type="impl:DettaglioSede"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getDettaglioSedePersonaGiuridica">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDettaglioSedePersonaGiuridicaResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioSedePersonaGiuridicaReturn" type="impl:ResultDettaglioSede"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSediOccasionaliOperatore">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="impl:AkOperatore"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSediOccasionaliOperatoreResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoSediOccasionaliOperatoreReturn" type="impl:ResultElencoSediOccasionali"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SintesiSedeOccasionale">
+    <sequence>
+     <element name="capSede" nillable="true" type="xsd:string"/>
+     <element name="cessazione" nillable="true" type="impl:Cessazione"/>
+     <element name="civicoSede" nillable="true" type="xsd:string"/>
+     <element name="codiceBacino" nillable="true" type="xsd:int"/>
+     <element name="comune" nillable="true" type="impl:Comune"/>
+     <element name="denominazioneBacino" nillable="true" type="xsd:string"/>
+     <element name="denominazioneSede" nillable="true" type="xsd:string"/>
+     <element name="fax" nillable="true" type="xsd:string"/>
+     <element name="idSedeOccasionale" nillable="true" type="xsd:int"/>
+     <element name="indirizzoSede" nillable="true" type="xsd:string"/>
+     <element name="telefono" nillable="true" type="xsd:string"/>
+     <element name="tipoStrada" nillable="true" type="impl:TipoStrada"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfSintesiSedeOccasionale">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:SintesiSedeOccasionale"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultElencoSediOccasionali">
+    <sequence>
+     <element name="elencoSediOccasionali" nillable="true" type="impl:ArrayOfSintesiSedeOccasionale"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="getElencoSediOccasionaliPersonaGiuridica">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element minOccurs="0" name="in1" type="xsd:int"/>
+      <element minOccurs="0" name="in2" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSediOccasionaliPersonaGiuridicaResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getElencoSediOccasionaliPersonaGiuridicaReturn" type="impl:ResultElencoSediOccasionali"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBacino">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getBacinoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getBacinoReturn" type="impl:ResultBacino"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Bacino">
+    <sequence>
+     <element name="codBacino" nillable="true" type="xsd:int"/>
+     <element name="denominazioneBacino" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfBacino">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:Bacino"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultBacino">
+    <sequence>
+     <element name="bacinoArray" nillable="true" type="impl:ArrayOfBacino"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+   <element name="fault4" type="tns1:InvalidParameterException"/>
+   <element name="getDettaglioAreeTerritorialiPk">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="impl:RequestGetDettaglioAreeTerritoriali"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="RequestGetDettaglioAreeTerritoriali">
+    <sequence>
+     <element name="idPersonaGiuridica" nillable="true" type="xsd:int"/>
+     <element name="idSede" nillable="true" type="xsd:int"/>
+     <element name="materia" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getDettaglioAreeTerritorialiPkResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDettaglioAreeTerritorialiPkReturn" type="impl:ResultDettaglioAreeTerritoriali"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="DettaglioAreaTerritoriale">
+    <sequence>
+     <element name="codAreaTerritoriale" type="xsd:long"/>
+     <element name="descrizioneAreaTerritoriale" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDettaglioAreaTerritoriale">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:DettaglioAreaTerritoriale"/>
+    </sequence>
+   </complexType>
+   <complexType name="ResultDettaglioAreeTerritoriali">
+    <sequence>
+     <element name="dettaglioAreeTerritoriali" nillable="true" type="impl:ArrayOfDettaglioAreaTerritoriale"/>
+     <element name="resultMessage" nillable="true" type="impl:ResultMessage"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://anagrafepg.exception.flaianagpg.flaianag.csi.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://anagrafesedipg.interfacecsi.flaianagpg.flaianag.csi.it/"/>
+   <complexType name="InvalidParameterException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getBacinoRequest">
+
+      <wsdl:part element="impl:getBacino" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOperatoreRequest">
+
+      <wsdl:part element="impl:getElencoSediOperatore" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="SystemException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UnrecoverableException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOccasionaliPersonaGiuridicaRequest">
+
+      <wsdl:part element="impl:getElencoSediOccasionaliPersonaGiuridica" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBacinoResponse">
+
+      <wsdl:part element="impl:getBacinoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOccasionaliPersonaGiuridicaResponse">
+
+      <wsdl:part element="impl:getElencoSediOccasionaliPersonaGiuridicaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOccasionaliOperatoreRequest">
+
+      <wsdl:part element="impl:getElencoSediOccasionaliOperatore" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioAreeTerritorialiPkResponse">
+
+      <wsdl:part element="impl:getDettaglioAreeTerritorialiPkResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOperatoreResponse">
+
+      <wsdl:part element="impl:getElencoSediOperatoreResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediOccasionaliOperatoreResponse">
+
+      <wsdl:part element="impl:getElencoSediOccasionaliOperatoreResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediPersonaGiuridicaResponse">
+
+      <wsdl:part element="impl:getElencoSediPersonaGiuridicaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException1">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSediPersonaGiuridicaRequest">
+
+      <wsdl:part element="impl:getElencoSediPersonaGiuridica" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesResponse">
+
+      <wsdl:part element="impl:testResourcesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioAreeTerritorialiPkRequest">
+
+      <wsdl:part element="impl:getDettaglioAreeTerritorialiPk" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioSedePersonaGiuridicaRequest">
+
+      <wsdl:part element="impl:getDettaglioSedePersonaGiuridica" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesRequest">
+
+      <wsdl:part element="impl:testResources" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CSIException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioSedeOperatoreResponse">
+
+      <wsdl:part element="impl:getDettaglioSedeOperatoreResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioSedePersonaGiuridicaResponse">
+
+      <wsdl:part element="impl:getDettaglioSedePersonaGiuridicaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDettaglioSedeOperatoreRequest">
+
+      <wsdl:part element="impl:getDettaglioSedeOperatore" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="flaianagpgAnagrafesedipg">
+
+      <wsdl:operation name="testResources">
+
+         <wsdl:input message="impl:testResourcesRequest" name="testResourcesRequest"/>
+
+         <wsdl:output message="impl:testResourcesResponse" name="testResourcesResponse"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOperatore">
+
+         <wsdl:input message="impl:getElencoSediOperatoreRequest" name="getElencoSediOperatoreRequest"/>
+
+         <wsdl:output message="impl:getElencoSediOperatoreResponse" name="getElencoSediOperatoreResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediPersonaGiuridica">
+
+         <wsdl:input message="impl:getElencoSediPersonaGiuridicaRequest" name="getElencoSediPersonaGiuridicaRequest"/>
+
+         <wsdl:output message="impl:getElencoSediPersonaGiuridicaResponse" name="getElencoSediPersonaGiuridicaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioSedeOperatore">
+
+         <wsdl:input message="impl:getDettaglioSedeOperatoreRequest" name="getDettaglioSedeOperatoreRequest"/>
+
+         <wsdl:output message="impl:getDettaglioSedeOperatoreResponse" name="getDettaglioSedeOperatoreResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioSedePersonaGiuridica">
+
+         <wsdl:input message="impl:getDettaglioSedePersonaGiuridicaRequest" name="getDettaglioSedePersonaGiuridicaRequest"/>
+
+         <wsdl:output message="impl:getDettaglioSedePersonaGiuridicaResponse" name="getDettaglioSedePersonaGiuridicaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOccasionaliOperatore">
+
+         <wsdl:input message="impl:getElencoSediOccasionaliOperatoreRequest" name="getElencoSediOccasionaliOperatoreRequest"/>
+
+         <wsdl:output message="impl:getElencoSediOccasionaliOperatoreResponse" name="getElencoSediOccasionaliOperatoreResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOccasionaliPersonaGiuridica">
+
+         <wsdl:input message="impl:getElencoSediOccasionaliPersonaGiuridicaRequest" name="getElencoSediOccasionaliPersonaGiuridicaRequest"/>
+
+         <wsdl:output message="impl:getElencoSediOccasionaliPersonaGiuridicaResponse" name="getElencoSediOccasionaliPersonaGiuridicaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBacino">
+
+         <wsdl:input message="impl:getBacinoRequest" name="getBacinoRequest"/>
+
+         <wsdl:output message="impl:getBacinoResponse" name="getBacinoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterException1" name="InvalidParameterException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioAreeTerritorialiPk">
+
+         <wsdl:input message="impl:getDettaglioAreeTerritorialiPkRequest" name="getDettaglioAreeTerritorialiPkRequest"/>
+
+         <wsdl:output message="impl:getDettaglioAreeTerritorialiPkResponse" name="getDettaglioAreeTerritorialiPkResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="flaianagpgAnagrafesedipgSoapBinding" type="impl:flaianagpgAnagrafesedipg">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="testResources">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testResourcesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResourcesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOperatore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoSediOperatoreRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoSediOperatoreResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediPersonaGiuridica">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoSediPersonaGiuridicaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoSediPersonaGiuridicaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioSedeOperatore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioSedeOperatoreRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioSedeOperatoreResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioSedePersonaGiuridica">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioSedePersonaGiuridicaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioSedePersonaGiuridicaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOccasionaliOperatore">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoSediOccasionaliOperatoreRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoSediOccasionaliOperatoreResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSediOccasionaliPersonaGiuridica">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoSediOccasionaliPersonaGiuridicaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoSediOccasionaliPersonaGiuridicaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getBacino">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBacinoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBacinoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterException">
+
+            <wsdlsoap:fault name="InvalidParameterException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDettaglioAreeTerritorialiPk">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDettaglioAreeTerritorialiPkRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDettaglioAreeTerritorialiPkResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="flaianagpgAnagrafesedipgService">
+
+      <wsdl:port binding="impl:flaianagpgAnagrafesedipgSoapBinding" name="flaianagpgAnagrafesedipg">
+
+         <wsdlsoap:address location="http://tst-applogic.reteunitaria.piemonte.it/flaianagpgApplAnagrafesedipgWsfad/services/flaianagpgAnagrafesedipg"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

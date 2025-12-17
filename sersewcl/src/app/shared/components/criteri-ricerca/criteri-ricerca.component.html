@@ -1,0 +1,225 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Expansion panel per la ricerca -->
+<mat-expansion-panel class="mt-3" [expanded]="panelOpenState" (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon svgIcon={{iconaLente}}></mat-icon>
+      <strong class="ms-2">Criteri di ricerca</strong>
+      <mat-icon>{{!panelOpenState ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <ng-template matExpansionPanelContent>
+    <div>
+      <!-- Radio button Miei/Altro -->
+      <div class="row mb-2">
+        <mat-radio-group aria-label="Select an option" (change)="onChangeOprion()" [formControl]="radioControl">
+          <mat-radio-button class="m-2" value="1">I miei {{mainDisplay?.plurale}}</mat-radio-button>
+          <mat-radio-button class="m-2" value="2">Tutti</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="row">
+        <!-- tipo -->
+        <ng-container *ngIf="filterFor === 'servizio';
+                    then service; else notService">
+        </ng-container>
+        <ng-template #notService>
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="w-100" appearance="legacy">
+              <mat-label>Selezionare un tipo di {{mainDisplay?.singolare}}</mat-label>
+              <mat-select [formControl]="tipologieControl">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let tipo of tipologie;
+                            index as i;" [value]="i">
+                  {{tipo}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-template>
+        <!-- stato -->
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare uno stato</mat-label>
+            <mat-select [formControl]="statoControl">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let stato of stati;
+                            index as i;" [value]="i">
+                {{stato}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- soggetto beneficiario -->
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare un soggetto beneficiario</mat-label>
+            <mat-select [formControl]="beneficiarioControl"
+                        (selectionChange)="onBeneficiarioChange()">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let beneficiario of soggettiBeneficiariBackup;
+                            index as i;" [value]="beneficiario.codiceFiscale">
+                {{beneficiario.gruppoOperatore}}{{beneficiario.codOperatore}} -
+                {{beneficiario.denominazione}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- istanza candidatura-->
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare un'istanza di candidatura</mat-label>
+            <mat-select [formControl]="candidaturaControl"
+                          (selectionChange)="onCandidaturaChange()">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let candidatura of candidatureBackup;
+                            index as i;" [value]="candidatura.modelId">
+                {{candidatura.modelId}} - {{candidatura.descrAreaTerritoriale}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- tipologia/Finalità di servizio -->
+
+
+
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare una tipologia di servizio</mat-label>
+            <mat-select [formControl]="tipoServizioControl">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let tipologiaServizio of tipologieServizio;
+                            index as i;" [value]="i">
+                {{tipologiaServizio}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <ng-template #service>
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="w-100" appearance="legacy">
+              <mat-label>Selezionare una finalità del servizio</mat-label>
+              <mat-select [formControl]="finalitaControl">
+                <mat-option>--</mat-option>
+                <mat-option value="I"> Servizio individuale </mat-option>
+                <mat-option value="G"> Servizio di gruppo </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-template>
+        <div class="col-md-6 col-sm-12"></div>
+
+        <!-- Soggetto Attuatore -->
+        <div *ngIf="filterFor === 'servizio'" class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare un Soggetto Attuatore</mat-label>
+            <mat-select [disabled]="candidaturaControl.value == undefined" (selectionChange)="onSoggettoAttuatoreChange()" [formControl]="soggettoAttuatore">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let soggettoAttuatore of soggettiAttuatoriBackup;
+                            index as i;" [value]="soggettoAttuatore.idSoggettoAttuatore">
+                {{soggettoAttuatore.gruppoOperatore}}{{soggettoAttuatore.codOperatore}} -
+                {{soggettoAttuatore.denominazioneGiuridica}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Soggetto Attuatore Sede -->
+        <div *ngIf="filterFor === 'servizio'" class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Selezionare una sede del Soggetto Attuatore</mat-label>
+            <mat-select [disabled]="soggettoAttuatore.value == undefined" [formControl]="soggettoAttuatoreSede">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let soggettoAttuatoreSede of soggettoAttuatoreSediList;
+                            index as i;" [value]="soggettoAttuatoreSede.idSede">
+                {{soggettoAttuatoreSede.idSede}} - {{soggettoAttuatoreSede.indirizzoSede}} - {{soggettoAttuatoreSede.comune?.descrizioneComune}} ({{soggettoAttuatoreSede.comune?.provincia?.siglaProvincia}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Ente coinvolto -->
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Ente coinvolto</mat-label>
+            <input matInput [formControl]="enteControl">
+            <mat-error>
+              <app-control-messages [control]="enteControl"></app-control-messages>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <!-- Destinatario -->
+        <div *ngIf="filterFor !== 'modello'" class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Destinatario</mat-label>
+            <input matInput
+                  type="text"
+                  style="text-transform:uppercase"
+                  [formControl]="destinatarioControl"
+                  placeHolder="codice fiscale destinatario"
+                  [textMask]="{mask:codiceFiscaleMask, guide:false}">
+          </mat-form-field>
+        </div>
+
+
+        <!-- identificativo -->
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Identificativo {{mainDisplay?.singolare}}</mat-label>
+            <input matInput type="text"
+                  [formControl]="identificativoControl"
+                  placeholder="99999"
+                  [textMask]="{mask:identificativoMask, guide:false}">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mb-2 mt-2" *ngIf="filterFor === 'servizio'">
+          <mat-radio-group aria-label="Select an option" [formControl]="incontriControl">
+            <mat-label>Situazione incontri del servizio:</mat-label>
+            <mat-radio-button class="m-2" value="0">Tutti</mat-radio-button>
+            <mat-radio-button class="m-2" value="1">Almeno un incontro non concluso</mat-radio-button>
+            <mat-radio-button class="m-2" value="2">Tutti gli incontri chiusi</mat-radio-button>
+          </mat-radio-group>
+      </div>
+
+    </div>
+
+    <mat-action-row class="action-row--morebtn" >
+      <button class="btn btn--outline-primary" aria-label="pulisci filtri" (click)="clear()">Pulisci i filtri</button>
+      <button class="btn btn--primary" aria-label="effettua la ricerca" (click)="onCerca()">CERCA</button>
+    </mat-action-row>
+
+  </ng-template>
+</mat-expansion-panel>

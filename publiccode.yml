@@ -1,0 +1,48 @@
+publiccodeYmlVersion: 0.5.0
+name: SERSE
+applicationSuite: Regione Piemonte Formazione Professionale
+url: https://github.com/regione-piemonte/serse
+landingURL: https://github.com/regione-piemonte/gemip.git
+softwareVersion: 2.1.0
+releaseDate: 2025-11-30
+platforms:
+  - web
+categories:
+  - business-process-management
+  - workflow-management
+  - customer-service-and-support
+organisation:
+  uri: urn:x-italian-pa:r_piemon
+developmentStatus: stable
+softwareType: standalone/web
+description:
+  it:
+    shortDescription: SERSE - Sistema di Erogazione Servizi
+    longDescription: >-
+      Serse è un nuovo sistema dedicato all’erogazione dei servizi individuali
+      e di gruppo. Le funzioni comprese nel sistema saranno ad uso dei
+      “soggetti attuatori”, ossia dei soggetti deputati all’erogazione dei servizi
+      oggetto di finanziamento, nell’ambito delle candidature in cui sono
+      coinvolti in qualità di Beneficiari o di eventuali Componenti del
+      Raggruppamento Temporaneo. 
+    features:
+      - Gestione Servizi
+      - Gestione Interventi
+      - Gestione Modelli di Intervento
+legal:
+  license: EUPL-1.2
+maintenance:
+  type: internal
+  contacts:
+    - name: Anna Nicchi
+      email: anna.nicchi@csi.it
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it-IT
+IT:
+  countryExtensionVersion: "1.0"
+  piattaforme:
+    anpr: false
+    pagopa: false
+    io: false

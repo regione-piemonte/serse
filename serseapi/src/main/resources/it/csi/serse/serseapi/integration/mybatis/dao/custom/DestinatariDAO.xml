@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseapi.integration.mybatis.dao.custom.DestinatariDAO">
+    
+	<resultMap type="it.csi.serse.serseapi.integration.mybatis.dto.custom.DestinatarioDTO" id="destinatario">
+		<id column="id_destinatario" javaType="long" property="idDestinatario"/>
+		<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+		<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+		<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+		<result column="d_nascita" javaType="date" property="dataNascita"/>
+
+		<result column="cod_istat_comune_nascita" javaType="string" property="codIstatComuneNascita"/>
+		<result column="descom_nascita" javaType="string" property="descomNascita"/>
+		<result column="sigprov_nascita" javaType="string" property="sigprovNascita"/>
+		<result column="cod_stato_estero_nascita" javaType="int" property="codStatoEsteroNascita"/>
+		<result column="descrizione_stato_estero_nascita" javaType="string" property="descrizioneStatoEsteroNascita"/>
+		<result column="descr_citta_estera_nascita" javaType="string" property="descrCittaEsteraNascita"/>
+
+		<result column="cod_istat_comune_residenza" javaType="string" property="codIstatComuneResidenza"/>
+		<result column="descom_residenza" javaType="string" property="descomResidenza"/>
+		<result column="sigprov_residenza" javaType="string" property="sigprovResidenza"/>
+		<result column="cod_stato_estero_residenza" javaType="int" property="codStatoEsteroResidenza"/>
+		<result column="descr_citta_estera_residenza" javaType="string" property="descrCittaEsteraResidenza"/>
+		<result column="descrizione_stato_estero_residenza" javaType="string" property="descrizioneStatoEsteroResidenza"/>
+		<result column="indirizzo_residenza" javaType="string" property="indirizzoResidenza"/>
+		<result column="cap_residenza" javaType="int" property="capResidenza"/>
+
+		<result column="cod_istat_comune_domicilio" javaType="string" property="codIstatComuneDomicilio"/>
+		<result column="descom_domicilio" javaType="string" property="descomDomicilio"/>
+		<result column="sigprov_domicilio" javaType="string" property="sigprovDomicilio"/>
+		<result column="indirizzo_domicilio" javaType="string" property="indirizzoDomicilio"/>
+		<result column="cap_domicilio" javaType="int" property="capDomicilio"/>
+
+		<result column="recapito_email" javaType="string" property="recapitoEmail"/>
+		<result column="recapito_telefonico" javaType="string" property="recapitoTelefonico"/>
+		<result column="cod_cittadinanza" javaType="string" property="codCittadinanza"/>
+		<result column="descr_cittadinanza" javaType="string" property="descrCittadinanza"/>
+	</resultMap>
+    
+	<resultMap type="it.csi.serse.serseapi.integration.mybatis.dto.custom.ServiziDestinatarioDTO" id="servizio">
+		<id column="id_destinatario" javaType="long" property="idDestinatario"/>
+		<result column="cf_destinatario" javaType="string" property="cfDestinatario"/>
+		<result column="cognome_destinatario" javaType="string" property="cognomeDestinatario"/>
+		<result column="nome_destinatario" javaType="string" property="nomeDestinatario"/>
+		<result column="d_nascita" javaType="date" property="dataNascita"/>
+
+		<result column="id_servizio" javaType="long" property="idServizio"/>
+		<result column="titolo_servizio" javaType="string" property="titoloServizio"/>
+		<result column="id_servizio_regionale" javaType="int" property="idServizioRegionale"/>
+		<result column="descr_servizio_regionale" javaType="string" property="descrServizioRegionale"/>
+		<result column="cod_finalita_servizio" javaType="string" property="codFinalitaServizio"/>
+		<result column="descr_finalita_servizio" javaType="string" property="descrFinalitaServizio"/>
+		<result column="gruppo_operatore" javaType="string" property="gruppoOperatore"/>
+		<result column="cod_operatore" javaType="int" property="codOperatore"/>
+		<result column="descr_stato_servizio" javaType="string" property="descrStatoServizio"/>
+		<result column="gruppo_beneficiario" javaType="string" property="gruppoBeneficiario"/>
+		<result column="cod_beneficiario" javaType="int" property="codBeneficiario"/>
+	</resultMap>
+
+	<select id="getAnagraficheDestinatario" parameterType="map" resultMap="destinatario">
+select distinct id_destinatario,cf_destinatario,cognome_destinatario, nome_destinatario,d_nascita, cod_istat_comune_nascita, 
+	cod_stato_estero_nascita, descr_citta_estera_nascita, cod_istat_comune_residenza, cod_stato_estero_residenza, 
+	descr_citta_estera_residenza, indirizzo_residenza, cap_residenza, cod_istat_comune_domicilio, indirizzo_domicilio, 
+	cap_domicilio, recapito_email, recapito_telefonico, cod_cittadinanza,
+	com_nascita.descom as descom_nascita,
+	prov_nascita.sigprov as sigprov_nascita,
+	stato_nascita.descrizione_stato as descrizione_stato_estero_nascita,
+	com_residenza.descom as descom_residenza,
+	prov_residenza.sigprov as sigprov_residenza,
+	stato_residenza.descrizione_stato as descrizione_stato_estero_residenza,
+	com_domicilio.descom as descom_domicilio,
+	prov_domicilio.sigprov as sigprov_domicilio,
+	citt.descr_cittadinanza 
+from serse_t_destinatario d
+left join ext_tt_comune com_nascita on com_nascita.comune = d.cod_istat_comune_nascita
+left join ext_tt_provincia prov_nascita on prov_nascita.prov = com_nascita.prov
+left join ext_stati_esteri stato_nascita on stato_nascita.cod_stato = d.cod_stato_estero_nascita
+left join ext_tt_comune com_residenza on com_residenza.comune = d.cod_istat_comune_residenza
+left join ext_tt_provincia prov_residenza on prov_residenza.prov = com_residenza.prov
+left join ext_stati_esteri stato_residenza on stato_residenza.cod_stato = d.cod_stato_estero_residenza
+left join ext_tt_comune com_domicilio on com_domicilio.comune = d.cod_istat_comune_domicilio
+left join ext_tt_provincia prov_domicilio on prov_domicilio.prov = com_domicilio.prov
+left join ext_tab_cittadinanza citt on citt.cod_istat_cittadinanza = d.cod_cittadinanza 
+where cf_destinatario = #{cf}
+	</select>
+
+	<select id="getServiziDestinatario" parameterType="map" resultMap="servizio">
+select
+	dest.cf_destinatario,
+	dest.nome_destinatario,
+	dest.cognome_destinatario,
+	dest.d_nascita,
+	s.id_servizio,
+	s.titolo_servizio,
+	s.id_servizio_regionale,
+	servReg.descr_servizio_regionale,
+	servReg.cod_finalita_servizio,
+	finSer.descr_finalita_servizio,
+	soggAtt.gruppo_operatore,
+	soggAtt.cod_operatore,
+	statoSer.descr_stato_servizio,
+	beneficiario.gruppo_beneficiario,
+	beneficiario.cod_beneficiario
+from serse_t_destinatario dest
+join serse_r_destinatario_servizio destSer on destSer.id_destinatario = dest.id_destinatario
+join serse_t_servizio s on s.id_servizio = destSer.id_servizio
+left join serse_d_stato_servizio statoSer on statoSer.id_stato_servizio = s.id_stato_servizio 
+left join serse_d_servizio_regionale servReg on servReg.id_servizio_regionale = s.id_servizio_regionale
+left join serse_d_finalita_servizio finSer on finSer.cod_finalita_servizio = servReg.cod_finalita_servizio 
+left join serse_t_soggetto_attuatore soggAtt on soggAtt.id_soggetto_attuatore = s.id_soggetto_attuatore
+left join (
+	select gruppo_operatore as gruppo_beneficiario, cod_operatore as cod_beneficiario, model_id
+	from SERSE_T_SOGGETTO_ATTUATORE
+	where flg_capofila='S'
+) as beneficiario on beneficiario.model_id = soggAtt.model_id
+where dest.cf_destinatario = #{cf}
+	</select>
+</mapper>

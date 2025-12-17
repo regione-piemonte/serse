@@ -1,0 +1,49 @@
+/*
+QUESTO FILE VIENE USATO SOLO DA SONARQUBE
+DOVREBBE ESSERE UNA COPIA DI tsconfig.json MA SENZA LA RIGA
+"noImplicitOverride": true
+*/
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "paths": {
+      "@environment/*":["src/environments/*"],
+      "@shared/*":["src/app/shared/*"],
+      "@home/*":["src/app/home/*"],
+      "@core/*":["src/app/core/*"],
+      "@modelli/*":["src/app/modelli-di-intervento/*"],
+      "@interventi/*":["src/app/interventi/*"],
+      "@servizi/*":["src/app/servizi/*"],
+      "@strumenti/*":["src/app/strumenti/*"],
+      "@incontri/*":["src/app/incontri/*"],
+      "@aiuto/*":["src/app/aiuto/*"],
+      "constants/*":["src/app/constants/*"],
+      "interceptors/*": ["src/app/interceptors/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

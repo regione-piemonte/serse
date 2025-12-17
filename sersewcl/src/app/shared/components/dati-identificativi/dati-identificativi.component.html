@@ -1,0 +1,46 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<div class="info-dati-identificativi mb-3">
+  <mat-card class="card-body--info">
+    <mat-card-header>
+        <mat-card-title><h2>Identificativi {{title}}</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="ps-3">
+      <dl>
+
+        <ng-container *ngIf="title=='incontro' || nIdentificativi.incontro"><dt>Identificativo Incontro:</dt>
+        <dd>{{nIdentificativi.incontro ? nIdentificativi.incontro: "N.D." }}</dd></ng-container>
+
+        <ng-container *ngIf="title=='servizio' || nIdentificativi.servizio"><dt>Identificativo Servizio:</dt>
+        <dd>{{nIdentificativi.servizio ? nIdentificativi.servizio: "N.D." }}</dd></ng-container>
+
+        <ng-container *ngIf="title=='intervento' || nIdentificativi.intervento"><dt>Identificativo Intervento:</dt>
+        <dd>{{nIdentificativi.intervento ? nIdentificativi.intervento: "N.D." }}</dd></ng-container>
+
+        <ng-container *ngIf="title=='modello' || nIdentificativi.modello"><dt>Identificativo Modello:</dt>
+        <dd>{{nIdentificativi.modello ? nIdentificativi.modello: "N.D." }}</dd></ng-container>
+      </dl>
+    </mat-card-content>
+  </mat-card>
+</div>

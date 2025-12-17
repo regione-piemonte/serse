@@ -1,0 +1,142 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Barra superiore -->
+<app-toolbar class="main-navigation"
+             [userInfo]="userInfo"
+             [ruolo]="descrizioneRuolo"
+             [operatore]="descrizioneOperatore"
+
+             (openHelpEvent)="openHelp()">
+</app-toolbar>
+<app-loading-indicator [color]="'primary'"
+                        [mode]="'indeterminate'"
+                        [value]="50"
+                        [backdropEnabled]="true">
+</app-loading-indicator>
+
+<div class="bot-container" >
+  <div [hidden]="!chatHidden">
+      <button
+              aria-label="apri chat aiuto"
+              class="bot-botton"
+              (mouseenter)="isHovered = true"
+              (mouseleave)="isHovered = false"
+              [ngClass]="{'bot-botton-hover': isHovered}"
+              (click)="openChatHelp()"
+              >
+        <span class="tooltip">Hai bisogno di aiuto ?</span>
+        <mat-icon class="icon-bot-botton">
+            person_pin
+        </mat-icon>
+      </button>
+  </div>
+
+  <mat-card class="chat-card"
+          [hidden]="chatHidden">
+      <mat-card-header class="chat-header">
+          <mat-card-title><h3> Assistenza</h3></mat-card-title>
+          <mat-card-subtitle>
+            <button class="btn btn--outline-primary " mat-button (click)="cleanChatHelp()">PULISCI</button>
+            <button class="btn--danger" mat-button (click)="closeChatHelp()">CHIUDI</button>
+          </mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+
+
+      <mat-card-content>
+        <div #chatArea
+              class="chat-area">
+          <ng-container *ngFor="let message of messages; index as i">
+            <div class="chat-bubble-container"
+                  [ngClass]="{'sender':message.sender==true}">
+              <div class="chat-bubble font-125"
+                    [innerHTML]="message.message"
+                    aria-label="espandi immagine"
+                    [ngClass]="{'chat-bubble-new':i == messageLastPosition }">
+                    (click)="openImage($event)">
+              </div>
+            </div>
+            <div class="chat-bubble-container" *ngIf="message.buttons.length">
+              <button *ngFor="let btn of message.buttons"
+                      [class]="btn.classCss"
+                      (click)="btn.action!()">
+                      {{btn.text}}
+              </button>
+            </div>
+          </ng-container>
+
+        </div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions [align]="'start'">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label class="font-125">Domanda ?</mat-label>
+          <input [formControl]="domandaForm" class="font-125" (keyup.enter)="onDomanda()" matInput>
+          <mat-icon class="c-pointer" (click)="onDomanda()" matSuffix>send</mat-icon>
+        </mat-form-field>
+      </mat-card-actions>
+
+  </mat-card>
+</div>
+
+<div class="doc-container" [hidden]="aiutoHidden"
+      cdkDrag
+      cdkDragResizable >
+
+  <app-aiuto class="aiuto-app-ref"></app-aiuto>
+
+
+  <div class="move-bar" cdkDragHandle>
+    <h3>Assistenza</h3>
+  </div>
+  <div class="close-btn">
+    <button class="btn btn--danger" (click)="aiutoHidden=true">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="zoom-container">
+    <button (click)="zoomIn()"><mat-icon>zoom_in</mat-icon>
+    </button>
+    <button (click)="zoomOut()"><mat-icon>zoom_out</mat-icon>
+    </button>
+  </div>
+
+</div>
+
+<div  *ngIf="visible"
+      class="image-overlay"
+      [ngClass]="{'open': isOpen}"
+      (click)="closeImageOverlay()">
+  <div class="image-container">
+    <img [src]="imageUrl"
+        alt="Immagine a schermo intero" />
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
+

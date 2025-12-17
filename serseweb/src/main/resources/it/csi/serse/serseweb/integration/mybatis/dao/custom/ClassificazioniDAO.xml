@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.ClassificazioniDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.ClassificazioneDTO" id="classificazioni">
+		<id column="id_classificazione" javaType="long" property="idClassificazione"/>
+		<result column="id_classificazione_gam" javaType="long" property="idClassificazzioneGam"/>
+		<result column="livello_1" javaType="string" property="livello1"/>
+		<result column="livello_2" javaType="string" property="livello2"/>
+		<result column="livello_3" javaType="string" property="livello3"/>
+		<result column="livello_4" javaType="string" property="livello4" />
+		<result column="id_tipo_suddiv_dotfin" javaType="long" property="idTipoSuddivDotfin"/>
+		<result column="descr_classificazione" javaType="string" property="descrFinalita" />
+	</resultMap>
+	
+	<select id="getClassificazioniForPsoServizioRegionale" parameterType="map" resultMap="classificazioni">
+		SELECT distinct	classif.*
+		FROM 	
+				serse.serse_d_classificazione classif
+				JOIN serse.serse_r_pso_classif_servizio_regionale psoclaserreg 
+				ON psoclaserreg.id_classificazione = classif.id_classificazione 
+		WHERE psoclaserreg.id_pso = #{idPso}
+			AND psoclaserreg.id_servizio_regionale = #{idServizioRegionale}
+	</select>
+	
+	<select id="getClassificazioniForServizio" parameterType="map" resultMap="classificazioni">
+		SELECT distinct	classif.*
+		FROM serse.serse_d_classificazione classif
+		JOIN serse.serse_r_pso_classif_servizio_regionale psoclaserreg ON psoclaserreg.id_classificazione = classif.id_classificazione 
+		JOIN serse.serse_t_servizio serv ON psoclaserreg.id_servizio_regionale = serv.id_servizio_regionale 
+			AND psoclaserreg.id_pso = serv.id_pso
+		JOIN serse.serse_r_pso_classificazione psoclas ON psoclaserreg.id_classificazione = psoclas.id_classificazione
+			AND psoclaserreg.id_pso = psoclas.id_pso
+		JOIN serse.serse_d_servizio_regionale servregio ON psoclaserreg.id_servizio_regionale = servregio.id_servizio_regionale
+		WHERE serv.id_servizio = #{idServizio}
+	</select>
+	
+</mapper>

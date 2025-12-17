@@ -1,0 +1,52 @@
+{
+  "/serseweb/bff/v1/user-info":"/user-info",
+  "/serseweb/bff/v1/test-resources/test-versione":"/test-versione",
+  "/serseweb/bff/v1/ruoli":"/ruoli",
+  "/serseweb/bff/v1/info-operatore?codRuolo=:codRuolo":"/info-operatore?codRuolo=:codRuolo",
+  "/serseweb/bff/v1/info-operatore/persona-giuridica?gruppoOperatore=:gruppoOperatore&codOperatore=:codOperatore":"/persona-giuridica?gruppoOperatore=:gruppoOperatore&codOperatore=:codOperatore",
+  "/serseweb/bff/v1/pso?tipologiaPsoId=:tipologiaPsoId&idAttoIndirizzo=:idAttoIndirizzo&codOperatore=:codOperatore":"/pso?tipologiaPsoId=:tipologiaPsoId&idAttoIndirizzo=:idAttoIndirizzo&codOperatore=:codOperatore",
+  "/serseweb/bff/v1/tipologie-pso?codOperatore=:codOperatore&gruppoOperatore=:gruppoOperatore":"/tipologie-pso?codOperatore=:codOperatore&gruppoOperatore=:gruppoOperatore",
+  "/serseweb/bff/v1/sportelli?idPso=:idPso&codOperatore=:codOperatore&gruppoOperatore=:gruppoOperatore":"/sportelli?pso.idPso=:idPso&codOperatore=:codOperatore&gruppoOperatore=:gruppoOperatore",
+  "/serseweb/bff/v1/sportelli/:numProgrSportello":"/gestione-sportelli?numProgrSportello=:numProgrSportello",
+  "/serseweb/bff/v1/soggetto-attuatore?idSoggettoAttuatore=:idSoggettoAttuatore":"/soggetto-attuatore?idSoggettoAttuatore=:idSoggettoAttuatore",
+  "/serseweb/bff/v1/soggetto-attuatore/soggetto-beneficiario?idSoggettoAttuatore=:idSoggettoAttuatore":"/soggetto-beneficiario?idSoggettoAttuatore=:idSoggettoAttuatore",
+  "/serseweb/bff/v1/tipi-modello?idPso=:idPso":"/tipi-modello?idPso=:idPso",
+  "/serseweb/bff/v1/servizi/servizi-regionali?idPso=:idPso":"/servizi-regionali?idPso=:idPso",
+  "/serseweb/bff/v1/servizi?numProgrSportello=818&codOperatore=:c&gruppoOperatore=:g&isProprietario=true&situazioneIncontro=0":"/servizi",
+  "/serseweb/bff/v1/servizi/tipologie-servizi?idModelloIntervento=:idModelloIntervento":"/servizio-modello?idModelloIntervento=:idModelloIntervento",
+
+
+  "/serseweb/bff/v1/modelli-di-intervento/seleziona-modello?idModelloIntervento=:idModelloIntervento":"/modelli-di-intervento?idModelloIntervento=:idModelloIntervento",
+  "/serseweb/bff/v1/modelli-di-intervento?codOperatore=:codOperatore&gruppoOperatore=:gruppoOperatore":"/modelli-di-intervento?idModelloIntervento=:idModelloIntervento",
+
+
+
+
+  "/serseweb/bff/v1/soggetto-attuatore/istanze-candidatura?numProgrSportello=818&codOperatore=3&gruppoOperatore=B":"/istanzeCandidatura",
+  "/serseweb/bff/v1/soggetto-attuatore/soggetti-beneficiari?numProgrSportello=818&codOperatore=3&gruppoOperatore=B":"/soggetti-beneficiari",
+
+  "/serseweb/bff/v1/modelli-di-intervento/stati":"/modelli-di-intervento-stati",
+  "/serseweb/bff/v1/interventi/stati":"/interventi-stati",
+  "/serseweb/bff/v1/interventi/tipologie-intervento?idPso=:idPso":"/tipologie-intervento",
+  "/serseweb/bff/v1/interventi?numProgrSportello=818&codOperatore=:c&gruppoOperatore=:g&isProprietario=:ispropr&codiceTipoIntervento=:ti": "/interventi",
+  "/serseweb/bff/v1/interventi?numProgrSportello=818&codOperatore=:c&gruppoOperatore=:g&isProprietario=:ispropr": "/interventi",
+
+  "/serseweb/bff/v1/modelli-di-intervento?numProgrSportello=818&codOperatore=3&gruppoOperatore=B&isProprietario=true":"/modelli-miei",
+  "/serseweb/bff/v1/modelli-di-intervento?numProgrSportello=818&codOperatore=3&gruppoOperatore=B&isProprietario=true&codiceTipoModello=1&idStatoModelloIntervento=10&gruppoOperatoreSoggettoBeneficiario=B&codOperatoreSoggettoBeneficiario=3&modelId=83002&idServizioRegionale=1":"/modelli-uno-per-filtro",
+
+  "/serseweb/bff/v1/servizi/stati-servizi":"/stati-servizi",
+  "/serseweb/bff/v1/servizi/servizi-regionali-per-servizio?idPso=:idPso":"/servizi-regionali-per-servizio?idPso=:idPso",
+
+  "/serseweb/bff/v1/soggetto-attuatore/soggetti-attuatori?codOperatore=:c&gruppoOperatore=:g":"/soggetti-attuatori?codOperatore=:c&gruppoOperatore=:g",
+  "/serseweb/bff/v1/servizi/campo-aggiuntivo?idPso=:idPso&numProgrSportello=818":"/campo-aggiuntivo",
+  "/serseweb/bff/v1/servizi/verifica-periodo-attivazione-servizio?numProgrSportello=818":"/verifica-periodo-attivazione-servizio",
+
+  "/serseweb/bff/v1/soggetto-attuatore/aree-territoriali-di-finanziamento?gruppoOperatore=:g&codOperatore=:c&modelId=:m":"/aree-territoriali-di-finanziamento?gruppoOperatore=:g&codOperatore=:c",
+  "/serseweb/bff/v1/info-operatore/elenco-sedi-autorizzati-codgruppo?numProgrSportello=818&codOperatore=:c&gruppoOperatore=:g&modelId=:m":"/elenco-sedi-autorizzati-codgruppo?gruppoOperatore=:g&codOperatore=:c",
+
+  "/serseweb/bff/v1/servizio-gam/budget-disponibile-per-soggetto?numProgrSportello=818&codOperatore=:codOperatore&idPso=:idPso&gruppoOperatore=:gruppoOperatore":"/budget-disponibile-per-soggetto",
+  "/serseweb/bff/v1/destinatari/ricerca?cognome=:cognome&nome=:nome":"/ricerca",
+  "/serseweb/bff/v1/destinatari/ricerca?cognome=:cognome":"/ricerca",
+  "/serseweb/bff/v1/destinatari/ricerca?codiceFiscaleDestinatario=:codiceFiscaleDestinatario":"/ricerca",
+  "/serseweb/bff/v1/destinatari/ricerca?dataDiNascita=:dataDiNascita":"/ricerca"
+}

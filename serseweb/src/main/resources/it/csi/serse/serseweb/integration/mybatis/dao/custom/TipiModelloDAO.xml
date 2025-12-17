@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.TipiModelloDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.TipoModelloDTO" id="tipoModelloMap">
+		<id column="cod_tipo_modello_d" javaType="String" property="codTipoModello"/>
+		<result column="descr_tipo_modello_d" javaType="String" property="descrizione"/>
+		<result column="flg_progettazione_individuale" javaType="String" property="flgProgettazioneIndividuale"/>
+		<result column="flg_modello_standard" javaType="String" property="flgModelloStandard"/>
+	</resultMap>
+	
+	<select id="getTipiModelloForPso" parameterType="map"  resultMap="tipoModelloMap">
+	SELECT 	dtm.cod_tipo_modello as cod_tipo_modello_d ,
+			dtm.descr_tipo_modello as descr_tipo_modello_d,
+			dtm.flg_progettazione_individuale,
+			dtm.flg_modello_standard
+	FROM 
+		SERSE_D_TIPO_MODELLO dtm join 
+	    SERSE_R_PSO_TIPO_MODELLO rtm on
+	    dtm.cod_tipo_modello = rtm.cod_tipo_modello 
+    WHERE rtm.id_pso =#{idPso}
+	</select>
+</mapper>

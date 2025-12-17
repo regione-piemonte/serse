@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+   <classPathEntry
+		location="C:\Users\luca.vercelli\.m2\repository\org\postgresql\postgresql\42.5.4\postgresql-42.5.4.jar" />
+		
+  <context id="serseweb" targetRuntime="MyBatis3">
+
+	<!--
+		PLUGINS
+	 -->
+	<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+	<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+	<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+	<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+		<property name="searchString" value="Example$" />
+		<property name="replaceString" value="Selector" />
+	</plugin>
+
+	<plugin type="it.csi.serse.serseweb.integration.mybatis.generator.plugin.RenameClassesPlugin">
+		<property name="searchStringMapper" value="Mapper$" />
+		<property name="replaceStringMapper" value="DAO" />
+		<property name="searchStringDto" value="$" />
+		<property name="replaceStringDto" value="DTO" />
+		<property name="searchStringXml" value="Mapper" />
+		<property name="replaceStringXml" value="DAO" />
+	</plugin>
+	
+	<plugin type="it.csi.serse.serseweb.integration.mybatis.generator.plugin.ForceNumericToLongPlugin" />
+    
+    <jdbcConnection driverClass="org.postgresql.Driver" 
+    	connectionURL="jdbc:postgresql://127.0.0.1:5555/SERSE_DV?currentSchema=serse" 
+    	userId="serse_rw"
+		password="mypass"
+		/>
+    	<!-- inserire la password solo per generare ma non fare commit, perchè non si possono lasciare 
+    	password in chiaro -->
+
+    <javaModelGenerator
+    	targetPackage="it.csi.serse.serseweb.integration.mybatis.generated.dto"
+    	targetProject="serseweb\src\main\java"
+   	>
+      	<property name="trimStrings" value="true" />
+    	<property name="rootClass" value="it.csi.serse.serseweb.integration.mybatis.dto.custom.ParentDTO" />
+		<property name="enableSubPackages" value="false" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator
+    	targetPackage="it.csi.serse.serseweb.integration.mybatis.generated.dao"
+    	targetProject="serseweb\src\main\resources"
+   	>   	
+   		<property name="enableSubPackages" value="false" />
+   	</sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER"
+    	targetPackage="it.csi.serse.serseweb.integration.mybatis.generated.dao"
+    	targetProject="serseweb\src\main\java"
+   	>
+   		<property name="rootInterface" value="it.csi.serse.serseweb.integration.mybatis.dao.custom.ParentDAO" />
+		<property name="enableSubPackages" value="false" />
+    </javaClientGenerator>
+
+	<table tableName="serse_r_destinatario_servizio">
+
+    </table>
+	  <!--
+   		<table tableName="serse_t_servizio">
+ 	-->
+  </context>
+</generatorConfiguration>

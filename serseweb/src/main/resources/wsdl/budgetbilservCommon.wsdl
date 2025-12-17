@@ -1,0 +1,3939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://common.interfacecsi.budgetbilserv.gambudget.csi.it/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://common.interfacecsi.budgetbilserv.gambudget.csi.it/" xmlns:intf="http://common.interfacecsi.budgetbilserv.gambudget.csi.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Nov 13, 2013 (09:13:21 GMT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://common.interfacecsi.budgetbilserv.gambudget.csi.it/" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getPrimaryKey">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPrimaryKeyResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getPrimaryKeyReturn" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="CSIException">
+    <sequence>
+     <element name="nestedExcClassName" nillable="true" type="xsd:string"/>
+     <element name="nestedExcMsg" nillable="true" type="xsd:string"/>
+     <element name="stackTraceMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault" type="impl:CSIException"/>
+   <complexType name="SystemException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault1" type="impl:SystemException"/>
+   <complexType name="UnrecoverableException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault2" type="impl:UnrecoverableException"/>
+   <complexType name="UserException">
+    <complexContent>
+     <extension base="impl:CSIException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CommonException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault3" type="impl:CommonException"/>
+   <complexType name="InvalidParameterCommonException">
+    <complexContent>
+     <extension base="impl:UserException">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="fault4" type="impl:InvalidParameterCommonException"/>
+   <element name="searchGestClassiADI">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestClassiADIResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestClassiADIReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SelItemDto">
+    <sequence>
+     <element name="caratteristica" nillable="true" type="xsd:string"/>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="secondaryKey" nillable="true" type="xsd:string"/>
+     <element name="secondaryValue" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="testResources">
+    <complexType/>
+   </element>
+   <element name="testResourcesResponse">
+    <complexType>
+     <sequence>
+      <element name="testResourcesReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchComboGestClassiADI">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchComboGestClassiADIResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchComboGestClassiADIReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestProgrammazione">
+    <complexType/>
+   </element>
+   <element name="searchGestProgrammazioneResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestProgrammazioneReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAllAmmResponsabili">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAllAmmResponsabiliResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchAllAmmResponsabiliReturn" type="impl:AmmResponsabileDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AmmResponsabileDto">
+    <sequence>
+     <element name="caratteristicaAmminis" nillable="true" type="xsd:string"/>
+     <element name="codAR" nillable="true" type="xsd:int"/>
+     <element name="codFiscEnte" nillable="true" type="xsd:string"/>
+     <element name="codiceIstat" nillable="true" type="xsd:string"/>
+     <element name="codiceOperatore" nillable="true" type="xsd:long"/>
+     <element name="dataFineValidita" nillable="true" type="xsd:dateTime"/>
+     <element name="dataInizioValidita" nillable="true" type="xsd:dateTime"/>
+     <element name="descrizione" nillable="true" type="xsd:string"/>
+     <element name="gruppoOperatore" nillable="true" type="xsd:string"/>
+     <element name="siglaEnte" nillable="true" type="xsd:string"/>
+     <element name="tipoAmministrazione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="searchOriginiFonti">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchOriginiFontiResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchOriginiFontiReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAmmResp">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAmmRespResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestAmmRespReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonte">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonteResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestFonteReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchClassificazioniGAM">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchClassificazioniGAMResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchClassificazioniGAMReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAzioniGAM">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+      <element minOccurs="0" name="in3" type="xsd:string"/>
+      <element minOccurs="0" name="in4" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAzioniGAMResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchAzioniGAMReturn" type="impl:AzioniGamDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AzioniGamDto">
+    <sequence>
+     <element name="asse" nillable="true" type="xsd:string"/>
+     <element name="attivita" nillable="true" type="xsd:string"/>
+     <element name="azione" nillable="true" type="xsd:string"/>
+     <element name="codProgrammazione" nillable="true" type="xsd:long"/>
+     <element name="descAzioneGam" nillable="true" type="xsd:string"/>
+     <element name="obiettivo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="searchGestOrigini">
+    <complexType/>
+   </element>
+   <element name="searchGestOriginiResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestOriginiReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAnnoEser">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:dateTime"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAnnoEserResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestAnnoEserReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestDirezioni">
+    <complexType/>
+   </element>
+   <element name="searchGestDirezioniResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestDirezioniReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocumento">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDocumentoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="getDocumentoReturn" type="xsd:base64Binary"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoDetermina">
+    <complexType/>
+   </element>
+   <element name="searchGestTipoDeterminaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipoDeterminaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestMateria">
+    <complexType/>
+   </element>
+   <element name="searchGestMateriaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestMateriaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestCicliFin">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestCicliFinResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestCicliFinReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipiAzioni">
+    <complexType/>
+   </element>
+   <element name="searchGestTipiAzioniResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipiAzioniReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAffidamento">
+    <complexType/>
+   </element>
+   <element name="searchGestAffidamentoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestAffidamentoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAttoApprov">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:long"/>
+      <element minOccurs="0" name="in2" type="xsd:dateTime"/>
+      <element name="in3" type="xsd:long"/>
+      <element minOccurs="0" name="in4" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchAttoApprovResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchAttoApprovReturn" type="impl:AttoAmmApprovazioneDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="AttoAmmApprovazioneDto">
+    <sequence>
+     <element name="idAttoAmministrativo" nillable="true" type="xsd:long"/>
+     <element name="idDirezioneADG" nillable="true" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <element name="searchGestTipolDocumenti">
+    <complexType/>
+   </element>
+   <element name="searchGestTipolDocumentiResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipolDocumentiReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonteByFonte">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonteByFonteResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestFonteByFonteReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchTipiAttiAmm">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchTipiAttiAmmResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchTipiAttiAmmReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verificaCollegamentoImpegno">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:boolean"/>
+      <element minOccurs="0" name="in2" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="verificaCollegamentoImpegnoResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="verificaCollegamentoImpegnoReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAffidamentoV2">
+    <complexType/>
+   </element>
+   <element name="searchGestAffidamentoV2Response">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestAffidamentoV2Return" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestMotAssCig">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestMotAssCigResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestMotAssCigReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoAggiudicaz">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoAggiudicazResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipoAggiudicazReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoSportello">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoSportelloResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipoSportelloReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestModPresentIstanza">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestModPresentIstanzaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestModPresentIstanzaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipologieSpesa">
+    <complexType/>
+   </element>
+   <element name="getElencoTipologieSpesaResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoTipologieSpesaReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipiProcedimento">
+    <complexType/>
+   </element>
+   <element name="getElencoTipiProcedimentoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoTipiProcedimentoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoRegolamentiByTipoProcedimento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoRegolamentiByTipoProcedimentoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoRegolamentiByTipoProcedimentoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoObiettiviByRegolamento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoObiettiviByRegolamentoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoObiettiviByRegolamentoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSettoriByTipoProcedimentoCodRegolamento">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoSettoriByTipoProcedimentoCodRegolamentoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoSettoriByTipoProcedimentoCodRegolamentoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipiSIEG">
+    <complexType/>
+   </element>
+   <element name="getElencoTipiSIEGResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoTipiSIEGReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoTipiStrumentiAiuto">
+    <complexType/>
+   </element>
+   <element name="getElencoTipiStrumentiAiutoResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoTipiStrumentiAiutoReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getElencoCodiciATECOSecondoLivello">
+    <complexType/>
+   </element>
+   <element name="getElencoCodiciATECOSecondoLivelloResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getElencoCodiciATECOSecondoLivelloReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="infoBilancioGestAmmResp">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="infoBilancioGestAmmRespResponse">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="infoBilancioGestAmmRespReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestDirezioniOI">
+    <complexType/>
+   </element>
+   <element name="searchGestDirezioniOIResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestDirezioniOIReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonteOI">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestFonteOIResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestFonteOIReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLivelliGestProgrammazione">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getLivelliGestProgrammazioneResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="getLivelliGestProgrammazioneReturn" type="impl:LivelloClassificazionePOR"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="LivelloClassificazionePOR">
+    <sequence>
+     <element name="codProgrammazione" nillable="true" type="xsd:string"/>
+     <element name="descLivello1" nillable="true" type="xsd:string"/>
+     <element name="descLivello2" nillable="true" type="xsd:string"/>
+     <element name="descLivello3" nillable="true" type="xsd:string"/>
+     <element name="descLivello4" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="searchComboV2GestClassiADI">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:long"/>
+      <element minOccurs="0" name="in2" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchComboV2GestClassiADIResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchComboV2GestClassiADIReturn" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAffidamentoV3">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestAffidamentoV3Response">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestAffidamentoV3Return" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoAggiudicaz2127">
+    <complexType>
+     <sequence>
+      <element minOccurs="0" name="in0" type="xsd:long"/>
+      <element minOccurs="0" name="in1" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchGestTipoAggiudicaz2127Response">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="searchGestTipoAggiudicaz2127Return" type="impl:SelItemDto"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="searchGestTipolDocumentiRequest">
+
+      <wsdl:part element="impl:searchGestTipolDocumenti" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchOriginiFontiResponse">
+
+      <wsdl:part element="impl:searchOriginiFontiResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="infoBilancioGestAmmRespRequest">
+
+      <wsdl:part element="impl:infoBilancioGestAmmResp" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSettoriByTipoProcedimentoCodRegolamentoRequest">
+
+      <wsdl:part element="impl:getElencoSettoriByTipoProcedimentoCodRegolamento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoObiettiviByRegolamentoResponse">
+
+      <wsdl:part element="impl:getElencoObiettiviByRegolamentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestProgrammazioneRequest">
+
+      <wsdl:part element="impl:searchGestProgrammazione" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="UnrecoverableException">
+
+      <wsdl:part element="impl:fault2" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesRequest">
+
+      <wsdl:part element="impl:testResources" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="SystemException">
+
+      <wsdl:part element="impl:fault1" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchComboV2GestClassiADIRequest">
+
+      <wsdl:part element="impl:searchComboV2GestClassiADI" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestCicliFinResponse">
+
+      <wsdl:part element="impl:searchGestCicliFinResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipiAzioniRequest">
+
+      <wsdl:part element="impl:searchGestTipiAzioni" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestModPresentIstanzaRequest">
+
+      <wsdl:part element="impl:searchGestModPresentIstanza" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoV2Response">
+
+      <wsdl:part element="impl:searchGestAffidamentoV2Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPrimaryKeyResponse">
+
+      <wsdl:part element="impl:getPrimaryKeyResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestDirezioniOIResponse">
+
+      <wsdl:part element="impl:searchGestDirezioniOIResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoV3Response">
+
+      <wsdl:part element="impl:searchGestAffidamentoV3Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAllAmmResponsabiliResponse">
+
+      <wsdl:part element="impl:searchAllAmmResponsabiliResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoObiettiviByRegolamentoRequest">
+
+      <wsdl:part element="impl:getElencoObiettiviByRegolamento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestMotAssCigRequest">
+
+      <wsdl:part element="impl:searchGestMotAssCig" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoCodiciATECOSecondoLivelloResponse">
+
+      <wsdl:part element="impl:getElencoCodiciATECOSecondoLivelloResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLivelliGestProgrammazioneResponse">
+
+      <wsdl:part element="impl:getLivelliGestProgrammazioneResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAmmRespRequest">
+
+      <wsdl:part element="impl:searchGestAmmResp" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoV3Request">
+
+      <wsdl:part element="impl:searchGestAffidamentoV3" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoSettoriByTipoProcedimentoCodRegolamentoResponse">
+
+      <wsdl:part element="impl:getElencoSettoriByTipoProcedimentoCodRegolamentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestOriginiRequest">
+
+      <wsdl:part element="impl:searchGestOrigini" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiStrumentiAiutoResponse">
+
+      <wsdl:part element="impl:getElencoTipiStrumentiAiutoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoAggiudicazRequest">
+
+      <wsdl:part element="impl:searchGestTipoAggiudicaz" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchComboGestClassiADIResponse">
+
+      <wsdl:part element="impl:searchComboGestClassiADIResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoAggiudicaz2127Request">
+
+      <wsdl:part element="impl:searchGestTipoAggiudicaz2127" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchClassificazioniGAMResponse">
+
+      <wsdl:part element="impl:searchClassificazioniGAMResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestDirezioniOIRequest">
+
+      <wsdl:part element="impl:searchGestDirezioniOI" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="infoBilancioGestAmmRespResponse">
+
+      <wsdl:part element="impl:infoBilancioGestAmmRespResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoDeterminaResponse">
+
+      <wsdl:part element="impl:searchGestTipoDeterminaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiProcedimentoRequest">
+
+      <wsdl:part element="impl:getElencoTipiProcedimento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchTipiAttiAmmResponse">
+
+      <wsdl:part element="impl:searchTipiAttiAmmResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAzioniGAMRequest">
+
+      <wsdl:part element="impl:searchAzioniGAM" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocumentoResponse">
+
+      <wsdl:part element="impl:getDocumentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestMateriaRequest">
+
+      <wsdl:part element="impl:searchGestMateria" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipologieSpesaResponse">
+
+      <wsdl:part element="impl:getElencoTipologieSpesaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoSportelloRequest">
+
+      <wsdl:part element="impl:searchGestTipoSportello" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAnnoEserRequest">
+
+      <wsdl:part element="impl:searchGestAnnoEser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDocumentoRequest">
+
+      <wsdl:part element="impl:getDocumento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchOriginiFontiRequest">
+
+      <wsdl:part element="impl:searchOriginiFonti" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipolDocumentiResponse">
+
+      <wsdl:part element="impl:searchGestTipolDocumentiResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchTipiAttiAmmRequest">
+
+      <wsdl:part element="impl:searchTipiAttiAmm" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoV2Request">
+
+      <wsdl:part element="impl:searchGestAffidamentoV2" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchComboV2GestClassiADIResponse">
+
+      <wsdl:part element="impl:searchComboV2GestClassiADIResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoRequest">
+
+      <wsdl:part element="impl:searchGestAffidamento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoAggiudicazResponse">
+
+      <wsdl:part element="impl:searchGestTipoAggiudicazResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestDirezioniResponse">
+
+      <wsdl:part element="impl:searchGestDirezioniResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAttoApprovRequest">
+
+      <wsdl:part element="impl:searchAttoApprov" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPrimaryKeyRequest">
+
+      <wsdl:part element="impl:getPrimaryKey" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestOriginiResponse">
+
+      <wsdl:part element="impl:searchGestOriginiResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CommonException">
+
+      <wsdl:part element="impl:fault3" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteOIRequest">
+
+      <wsdl:part element="impl:searchGestFonteOI" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestMotAssCigResponse">
+
+      <wsdl:part element="impl:searchGestMotAssCigResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testResourcesResponse">
+
+      <wsdl:part element="impl:testResourcesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAzioniGAMResponse">
+
+      <wsdl:part element="impl:searchAzioniGAMResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verificaCollegamentoImpegnoResponse">
+
+      <wsdl:part element="impl:verificaCollegamentoImpegnoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestDirezioniRequest">
+
+      <wsdl:part element="impl:searchGestDirezioni" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiProcedimentoResponse">
+
+      <wsdl:part element="impl:getElencoTipiProcedimentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestClassiADIResponse">
+
+      <wsdl:part element="impl:searchGestClassiADIResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoRegolamentiByTipoProcedimentoRequest">
+
+      <wsdl:part element="impl:getElencoRegolamentiByTipoProcedimento" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteByFonteResponse">
+
+      <wsdl:part element="impl:searchGestFonteByFonteResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAmmRespResponse">
+
+      <wsdl:part element="impl:searchGestAmmRespResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiStrumentiAiutoRequest">
+
+      <wsdl:part element="impl:getElencoTipiStrumentiAiuto" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAttoApprovResponse">
+
+      <wsdl:part element="impl:searchAttoApprovResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteOIResponse">
+
+      <wsdl:part element="impl:searchGestFonteOIResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoCodiciATECOSecondoLivelloRequest">
+
+      <wsdl:part element="impl:getElencoCodiciATECOSecondoLivello" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiSIEGResponse">
+
+      <wsdl:part element="impl:getElencoTipiSIEGResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="CSIException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestMateriaResponse">
+
+      <wsdl:part element="impl:searchGestMateriaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchAllAmmResponsabiliRequest">
+
+      <wsdl:part element="impl:searchAllAmmResponsabili" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestClassiADIRequest">
+
+      <wsdl:part element="impl:searchGestClassiADI" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAffidamentoResponse">
+
+      <wsdl:part element="impl:searchGestAffidamentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestCicliFinRequest">
+
+      <wsdl:part element="impl:searchGestCicliFin" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="verificaCollegamentoImpegnoRequest">
+
+      <wsdl:part element="impl:verificaCollegamentoImpegno" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoAggiudicaz2127Response">
+
+      <wsdl:part element="impl:searchGestTipoAggiudicaz2127Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipologieSpesaRequest">
+
+      <wsdl:part element="impl:getElencoTipologieSpesa" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteResponse">
+
+      <wsdl:part element="impl:searchGestFonteResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchComboGestClassiADIRequest">
+
+      <wsdl:part element="impl:searchComboGestClassiADI" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteRequest">
+
+      <wsdl:part element="impl:searchGestFonte" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestAnnoEserResponse">
+
+      <wsdl:part element="impl:searchGestAnnoEserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchClassificazioniGAMRequest">
+
+      <wsdl:part element="impl:searchClassificazioniGAM" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestProgrammazioneResponse">
+
+      <wsdl:part element="impl:searchGestProgrammazioneResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestFonteByFonteRequest">
+
+      <wsdl:part element="impl:searchGestFonteByFonte" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipiAzioniResponse">
+
+      <wsdl:part element="impl:searchGestTipiAzioniResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestModPresentIstanzaResponse">
+
+      <wsdl:part element="impl:searchGestModPresentIstanzaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoSportelloResponse">
+
+      <wsdl:part element="impl:searchGestTipoSportelloResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchGestTipoDeterminaRequest">
+
+      <wsdl:part element="impl:searchGestTipoDetermina" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoRegolamentiByTipoProcedimentoResponse">
+
+      <wsdl:part element="impl:getElencoRegolamentiByTipoProcedimentoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getLivelliGestProgrammazioneRequest">
+
+      <wsdl:part element="impl:getLivelliGestProgrammazione" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getElencoTipiSIEGRequest">
+
+      <wsdl:part element="impl:getElencoTipiSIEG" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="InvalidParameterCommonException">
+
+      <wsdl:part element="impl:fault4" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="budgetbilservCommon">
+
+      <wsdl:operation name="getPrimaryKey">
+
+         <wsdl:input message="impl:getPrimaryKeyRequest" name="getPrimaryKeyRequest"/>
+
+         <wsdl:output message="impl:getPrimaryKeyResponse" name="getPrimaryKeyResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestClassiADI">
+
+         <wsdl:input message="impl:searchGestClassiADIRequest" name="searchGestClassiADIRequest"/>
+
+         <wsdl:output message="impl:searchGestClassiADIResponse" name="searchGestClassiADIResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testResources">
+
+         <wsdl:input message="impl:testResourcesRequest" name="testResourcesRequest"/>
+
+         <wsdl:output message="impl:testResourcesResponse" name="testResourcesResponse"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchComboGestClassiADI">
+
+         <wsdl:input message="impl:searchComboGestClassiADIRequest" name="searchComboGestClassiADIRequest"/>
+
+         <wsdl:output message="impl:searchComboGestClassiADIResponse" name="searchComboGestClassiADIResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestProgrammazione">
+
+         <wsdl:input message="impl:searchGestProgrammazioneRequest" name="searchGestProgrammazioneRequest"/>
+
+         <wsdl:output message="impl:searchGestProgrammazioneResponse" name="searchGestProgrammazioneResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAllAmmResponsabili">
+
+         <wsdl:input message="impl:searchAllAmmResponsabiliRequest" name="searchAllAmmResponsabiliRequest"/>
+
+         <wsdl:output message="impl:searchAllAmmResponsabiliResponse" name="searchAllAmmResponsabiliResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchOriginiFonti">
+
+         <wsdl:input message="impl:searchOriginiFontiRequest" name="searchOriginiFontiRequest"/>
+
+         <wsdl:output message="impl:searchOriginiFontiResponse" name="searchOriginiFontiResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAmmResp">
+
+         <wsdl:input message="impl:searchGestAmmRespRequest" name="searchGestAmmRespRequest"/>
+
+         <wsdl:output message="impl:searchGestAmmRespResponse" name="searchGestAmmRespResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonte">
+
+         <wsdl:input message="impl:searchGestFonteRequest" name="searchGestFonteRequest"/>
+
+         <wsdl:output message="impl:searchGestFonteResponse" name="searchGestFonteResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchClassificazioniGAM">
+
+         <wsdl:input message="impl:searchClassificazioniGAMRequest" name="searchClassificazioniGAMRequest"/>
+
+         <wsdl:output message="impl:searchClassificazioniGAMResponse" name="searchClassificazioniGAMResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAzioniGAM">
+
+         <wsdl:input message="impl:searchAzioniGAMRequest" name="searchAzioniGAMRequest"/>
+
+         <wsdl:output message="impl:searchAzioniGAMResponse" name="searchAzioniGAMResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestOrigini">
+
+         <wsdl:input message="impl:searchGestOriginiRequest" name="searchGestOriginiRequest"/>
+
+         <wsdl:output message="impl:searchGestOriginiResponse" name="searchGestOriginiResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAnnoEser">
+
+         <wsdl:input message="impl:searchGestAnnoEserRequest" name="searchGestAnnoEserRequest"/>
+
+         <wsdl:output message="impl:searchGestAnnoEserResponse" name="searchGestAnnoEserResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestDirezioni">
+
+         <wsdl:input message="impl:searchGestDirezioniRequest" name="searchGestDirezioniRequest"/>
+
+         <wsdl:output message="impl:searchGestDirezioniResponse" name="searchGestDirezioniResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocumento">
+
+         <wsdl:input message="impl:getDocumentoRequest" name="getDocumentoRequest"/>
+
+         <wsdl:output message="impl:getDocumentoResponse" name="getDocumentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoDetermina">
+
+         <wsdl:input message="impl:searchGestTipoDeterminaRequest" name="searchGestTipoDeterminaRequest"/>
+
+         <wsdl:output message="impl:searchGestTipoDeterminaResponse" name="searchGestTipoDeterminaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestMateria">
+
+         <wsdl:input message="impl:searchGestMateriaRequest" name="searchGestMateriaRequest"/>
+
+         <wsdl:output message="impl:searchGestMateriaResponse" name="searchGestMateriaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestCicliFin">
+
+         <wsdl:input message="impl:searchGestCicliFinRequest" name="searchGestCicliFinRequest"/>
+
+         <wsdl:output message="impl:searchGestCicliFinResponse" name="searchGestCicliFinResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipiAzioni">
+
+         <wsdl:input message="impl:searchGestTipiAzioniRequest" name="searchGestTipiAzioniRequest"/>
+
+         <wsdl:output message="impl:searchGestTipiAzioniResponse" name="searchGestTipiAzioniResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamento">
+
+         <wsdl:input message="impl:searchGestAffidamentoRequest" name="searchGestAffidamentoRequest"/>
+
+         <wsdl:output message="impl:searchGestAffidamentoResponse" name="searchGestAffidamentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAttoApprov">
+
+         <wsdl:input message="impl:searchAttoApprovRequest" name="searchAttoApprovRequest"/>
+
+         <wsdl:output message="impl:searchAttoApprovResponse" name="searchAttoApprovResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipolDocumenti">
+
+         <wsdl:input message="impl:searchGestTipolDocumentiRequest" name="searchGestTipolDocumentiRequest"/>
+
+         <wsdl:output message="impl:searchGestTipolDocumentiResponse" name="searchGestTipolDocumentiResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonteByFonte">
+
+         <wsdl:input message="impl:searchGestFonteByFonteRequest" name="searchGestFonteByFonteRequest"/>
+
+         <wsdl:output message="impl:searchGestFonteByFonteResponse" name="searchGestFonteByFonteResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchTipiAttiAmm">
+
+         <wsdl:input message="impl:searchTipiAttiAmmRequest" name="searchTipiAttiAmmRequest"/>
+
+         <wsdl:output message="impl:searchTipiAttiAmmResponse" name="searchTipiAttiAmmResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verificaCollegamentoImpegno">
+
+         <wsdl:input message="impl:verificaCollegamentoImpegnoRequest" name="verificaCollegamentoImpegnoRequest"/>
+
+         <wsdl:output message="impl:verificaCollegamentoImpegnoResponse" name="verificaCollegamentoImpegnoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamentoV2">
+
+         <wsdl:input message="impl:searchGestAffidamentoV2Request" name="searchGestAffidamentoV2Request"/>
+
+         <wsdl:output message="impl:searchGestAffidamentoV2Response" name="searchGestAffidamentoV2Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestMotAssCig">
+
+         <wsdl:input message="impl:searchGestMotAssCigRequest" name="searchGestMotAssCigRequest"/>
+
+         <wsdl:output message="impl:searchGestMotAssCigResponse" name="searchGestMotAssCigResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoAggiudicaz">
+
+         <wsdl:input message="impl:searchGestTipoAggiudicazRequest" name="searchGestTipoAggiudicazRequest"/>
+
+         <wsdl:output message="impl:searchGestTipoAggiudicazResponse" name="searchGestTipoAggiudicazResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoSportello">
+
+         <wsdl:input message="impl:searchGestTipoSportelloRequest" name="searchGestTipoSportelloRequest"/>
+
+         <wsdl:output message="impl:searchGestTipoSportelloResponse" name="searchGestTipoSportelloResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestModPresentIstanza">
+
+         <wsdl:input message="impl:searchGestModPresentIstanzaRequest" name="searchGestModPresentIstanzaRequest"/>
+
+         <wsdl:output message="impl:searchGestModPresentIstanzaResponse" name="searchGestModPresentIstanzaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipologieSpesa">
+
+         <wsdl:input message="impl:getElencoTipologieSpesaRequest" name="getElencoTipologieSpesaRequest"/>
+
+         <wsdl:output message="impl:getElencoTipologieSpesaResponse" name="getElencoTipologieSpesaResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiProcedimento">
+
+         <wsdl:input message="impl:getElencoTipiProcedimentoRequest" name="getElencoTipiProcedimentoRequest"/>
+
+         <wsdl:output message="impl:getElencoTipiProcedimentoResponse" name="getElencoTipiProcedimentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoRegolamentiByTipoProcedimento">
+
+         <wsdl:input message="impl:getElencoRegolamentiByTipoProcedimentoRequest" name="getElencoRegolamentiByTipoProcedimentoRequest"/>
+
+         <wsdl:output message="impl:getElencoRegolamentiByTipoProcedimentoResponse" name="getElencoRegolamentiByTipoProcedimentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoObiettiviByRegolamento">
+
+         <wsdl:input message="impl:getElencoObiettiviByRegolamentoRequest" name="getElencoObiettiviByRegolamentoRequest"/>
+
+         <wsdl:output message="impl:getElencoObiettiviByRegolamentoResponse" name="getElencoObiettiviByRegolamentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSettoriByTipoProcedimentoCodRegolamento">
+
+         <wsdl:input message="impl:getElencoSettoriByTipoProcedimentoCodRegolamentoRequest" name="getElencoSettoriByTipoProcedimentoCodRegolamentoRequest"/>
+
+         <wsdl:output message="impl:getElencoSettoriByTipoProcedimentoCodRegolamentoResponse" name="getElencoSettoriByTipoProcedimentoCodRegolamentoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiSIEG">
+
+         <wsdl:input message="impl:getElencoTipiSIEGRequest" name="getElencoTipiSIEGRequest"/>
+
+         <wsdl:output message="impl:getElencoTipiSIEGResponse" name="getElencoTipiSIEGResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiStrumentiAiuto">
+
+         <wsdl:input message="impl:getElencoTipiStrumentiAiutoRequest" name="getElencoTipiStrumentiAiutoRequest"/>
+
+         <wsdl:output message="impl:getElencoTipiStrumentiAiutoResponse" name="getElencoTipiStrumentiAiutoResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoCodiciATECOSecondoLivello">
+
+         <wsdl:input message="impl:getElencoCodiciATECOSecondoLivelloRequest" name="getElencoCodiciATECOSecondoLivelloRequest"/>
+
+         <wsdl:output message="impl:getElencoCodiciATECOSecondoLivelloResponse" name="getElencoCodiciATECOSecondoLivelloResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="infoBilancioGestAmmResp">
+
+         <wsdl:input message="impl:infoBilancioGestAmmRespRequest" name="infoBilancioGestAmmRespRequest"/>
+
+         <wsdl:output message="impl:infoBilancioGestAmmRespResponse" name="infoBilancioGestAmmRespResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestDirezioniOI">
+
+         <wsdl:input message="impl:searchGestDirezioniOIRequest" name="searchGestDirezioniOIRequest"/>
+
+         <wsdl:output message="impl:searchGestDirezioniOIResponse" name="searchGestDirezioniOIResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonteOI">
+
+         <wsdl:input message="impl:searchGestFonteOIRequest" name="searchGestFonteOIRequest"/>
+
+         <wsdl:output message="impl:searchGestFonteOIResponse" name="searchGestFonteOIResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLivelliGestProgrammazione">
+
+         <wsdl:input message="impl:getLivelliGestProgrammazioneRequest" name="getLivelliGestProgrammazioneRequest"/>
+
+         <wsdl:output message="impl:getLivelliGestProgrammazioneResponse" name="getLivelliGestProgrammazioneResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchComboV2GestClassiADI">
+
+         <wsdl:input message="impl:searchComboV2GestClassiADIRequest" name="searchComboV2GestClassiADIRequest"/>
+
+         <wsdl:output message="impl:searchComboV2GestClassiADIResponse" name="searchComboV2GestClassiADIResponse"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamentoV3">
+
+         <wsdl:input message="impl:searchGestAffidamentoV3Request" name="searchGestAffidamentoV3Request"/>
+
+         <wsdl:output message="impl:searchGestAffidamentoV3Response" name="searchGestAffidamentoV3Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoAggiudicaz2127">
+
+         <wsdl:input message="impl:searchGestTipoAggiudicaz2127Request" name="searchGestTipoAggiudicaz2127Request"/>
+
+         <wsdl:output message="impl:searchGestTipoAggiudicaz2127Response" name="searchGestTipoAggiudicaz2127Response"/>
+
+         <wsdl:fault message="impl:SystemException" name="SystemException"/>
+
+         <wsdl:fault message="impl:CSIException" name="CSIException"/>
+
+         <wsdl:fault message="impl:CommonException" name="CommonException"/>
+
+         <wsdl:fault message="impl:UnrecoverableException" name="UnrecoverableException"/>
+
+         <wsdl:fault message="impl:InvalidParameterCommonException" name="InvalidParameterCommonException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="budgetbilservCommonSoapBinding" type="impl:budgetbilservCommon">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getPrimaryKey">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPrimaryKeyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPrimaryKeyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestClassiADI">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestClassiADIRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestClassiADIResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testResources">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testResourcesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testResourcesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchComboGestClassiADI">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchComboGestClassiADIRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchComboGestClassiADIResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestProgrammazione">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestProgrammazioneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestProgrammazioneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAllAmmResponsabili">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchAllAmmResponsabiliRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchAllAmmResponsabiliResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchOriginiFonti">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchOriginiFontiRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchOriginiFontiResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAmmResp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestAmmRespRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestAmmRespResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonte">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestFonteRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestFonteResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchClassificazioniGAM">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchClassificazioniGAMRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchClassificazioniGAMResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAzioniGAM">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchAzioniGAMRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchAzioniGAMResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestOrigini">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestOriginiRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestOriginiResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAnnoEser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestAnnoEserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestAnnoEserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestDirezioni">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestDirezioniRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestDirezioniResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDocumento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDocumentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDocumentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoDetermina">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipoDeterminaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipoDeterminaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestMateria">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestMateriaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestMateriaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestCicliFin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestCicliFinRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestCicliFinResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipiAzioni">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipiAzioniRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipiAzioniResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestAffidamentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestAffidamentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchAttoApprov">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchAttoApprovRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchAttoApprovResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipolDocumenti">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipolDocumentiRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipolDocumentiResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonteByFonte">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestFonteByFonteRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestFonteByFonteResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchTipiAttiAmm">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchTipiAttiAmmRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchTipiAttiAmmResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="verificaCollegamentoImpegno">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="verificaCollegamentoImpegnoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="verificaCollegamentoImpegnoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamentoV2">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestAffidamentoV2Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestAffidamentoV2Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestMotAssCig">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestMotAssCigRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestMotAssCigResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoAggiudicaz">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipoAggiudicazRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipoAggiudicazResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoSportello">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipoSportelloRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipoSportelloResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestModPresentIstanza">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestModPresentIstanzaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestModPresentIstanzaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipologieSpesa">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoTipologieSpesaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoTipologieSpesaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiProcedimento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoTipiProcedimentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoTipiProcedimentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoRegolamentiByTipoProcedimento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoRegolamentiByTipoProcedimentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoRegolamentiByTipoProcedimentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoObiettiviByRegolamento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoObiettiviByRegolamentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoObiettiviByRegolamentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoSettoriByTipoProcedimentoCodRegolamento">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoSettoriByTipoProcedimentoCodRegolamentoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoSettoriByTipoProcedimentoCodRegolamentoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiSIEG">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoTipiSIEGRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoTipiSIEGResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoTipiStrumentiAiuto">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoTipiStrumentiAiutoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoTipiStrumentiAiutoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getElencoCodiciATECOSecondoLivello">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getElencoCodiciATECOSecondoLivelloRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getElencoCodiciATECOSecondoLivelloResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="infoBilancioGestAmmResp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="infoBilancioGestAmmRespRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="infoBilancioGestAmmRespResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestDirezioniOI">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestDirezioniOIRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestDirezioniOIResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestFonteOI">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestFonteOIRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestFonteOIResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getLivelliGestProgrammazione">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getLivelliGestProgrammazioneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getLivelliGestProgrammazioneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchComboV2GestClassiADI">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchComboV2GestClassiADIRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchComboV2GestClassiADIResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestAffidamentoV3">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestAffidamentoV3Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestAffidamentoV3Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchGestTipoAggiudicaz2127">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchGestTipoAggiudicaz2127Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchGestTipoAggiudicaz2127Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="SystemException">
+
+            <wsdlsoap:fault name="SystemException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CSIException">
+
+            <wsdlsoap:fault name="CSIException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="CommonException">
+
+            <wsdlsoap:fault name="CommonException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="UnrecoverableException">
+
+            <wsdlsoap:fault name="UnrecoverableException" use="literal"/>
+
+         </wsdl:fault>
+
+         <wsdl:fault name="InvalidParameterCommonException">
+
+            <wsdlsoap:fault name="InvalidParameterCommonException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="budgetbilservCommonService">
+
+      <wsdl:port binding="impl:budgetbilservCommonSoapBinding" name="budgetbilservCommon">
+
+         <wsdlsoap:address location="http://tst-applogic.reteunitaria.piemonte.it/budgetbilservexpApplCommonWsfad/services/budgetbilservCommon"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

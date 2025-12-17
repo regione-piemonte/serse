@@ -1,0 +1,63 @@
+
+HELP.md
+target/
+target/*.class
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+##lgspaspb.log
+/*.log
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-INT-CDU-010-V01-Ricerca Intervento ed eliminazione.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-INT-CDU-011-V01-Inserisci e modifica Dati identificativi Intervento.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-INT-CDU-019-V01-Gestione Enti Coinvolti Intervento.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-MOD-CDU-005-V02-Gestione Tipologie servizi Modello.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-MOD-CDU-006-V01-Gestione Enti Coinvolti Modello.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-MOD-CDU-010-V02-Inserisci e Modifica Dati identificativi Modello.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-MON-Registro CdU Progetto Serse_2023-03-10.xlsx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-TRA-CDU-007-V02-Ricerca enti coinvolti.docx
+/doc/Fwd Consegna Lotto 5, 6,7 (priorità 0) in sviluppo/FPL-SERSE-TRA-CDU-016-V01-Gestione Anagrafe Destinatari.docx
+/doc/Fwd SERSE- consegna Lotto 1/FPL-SERSE-MON-Registro CdU Progetto Serse_2023-01-25.xlsx
+/doc/Fwd SERSE- consegna Lotto 1/FPL-SERSE-TRA-CDU-001-V01-Selezione_Avviso_Competente.docx
+/doc/Fwd SERSE- consegna Lotto 1/FPL-SERSE-TRA-SFU-001-V01-Accesso_Flaidoor.doc
+/doc/Fwd SERSE- consegna Lotto 1/FPL-SERSE-TRA-SFU-002-V01-Gestione Estremi Avviso e Utente collegato.doc
+/doc/Fwd SERSE- consegna Lotto 1/SERSE_modello_dati_20230127.jpg
+/doc/Fwd SERSE- consegna Lotto 1/URL_prototipo.txt
+/doc/Fwd SERSE- consegna Lotto 2, 3/FPL-SERSE-MOD-CDU-002-V01-Gestione Target Destinatari Modello.docx
+/doc/Fwd SERSE- consegna Lotto 2, 3/FPL-SERSE-MOD-CDU-003-V01-Gestione Caratteristiche.docx
+/doc/Fwd SERSE- consegna Lotto 2, 3/FPL-SERSE-MOD-CDU-004-V01-Ricerca Modello di Intervento ed eliminazione.docx
+/doc/Fwd SERSE- consegna Lotto 2, 3/FPL-SERSE-MOD-CDU-005-V01-Gestione Tipologie servizi Modello.docx
+/doc/Fwd SERSE- consegna Lotto 2, 3/FPL-SERSE-MOD-CDU-010-V01-Inserisci e Modifica Dati identificativi Modello.docx
+/doc/Fwd SERSE- consegna Lotto 2, 3/SERSE_modello_dati_20230210.jpg
+/*.gz
+/src/main/java/META-INF/MANIFEST.MF
+*.log

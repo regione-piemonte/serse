@@ -1,0 +1,140 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<h2 mat-dialog-title>Ricerca operatore</h2>
+<hr>
+
+<div class="container-fluid">
+  <form [formGroup]="formRicercaOperatore">
+    <ng-container *ngIf="erroreRicercaOperatore" class="row justify-content-center">
+      <mat-error>{{erroreRicercaOperatore}}</mat-error>
+    </ng-container>
+
+    <div class="row mt-2">  <!-- Container form input -->
+      <!-- Gruppo & Codice -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Gruppo e codice</mat-label>
+          <input matInput formControlName="gruppoCodice" [textMask]="{mask:grppCodMask, guide:false}">
+          <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="toolTipGrpCod">info</mat-icon>
+          <mat-error>
+            <app-control-messages [control]="formRicercaOperatore.controls['gruppoCodice']" ></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div> <!-- /Gruppo & Codice -->
+
+      <!-- Denominazione -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Denominazione</mat-label>
+          <input matInput formControlName="denominazione" maxlength="250">
+          <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="toolTipDenomi">info</mat-icon>
+          <mat-error>
+            <app-control-messages [control]="formRicercaOperatore.controls['denominazione']" ></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div> <!-- /Denominazione -->
+
+      <!-- Codice fiscale -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Codice fiscale</mat-label>
+          <input matInput maxlength="16" formControlName="codiceFiscale">
+          <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="toolTipCodFsc">info</mat-icon>
+          <mat-error>
+            <app-control-messages [control]="formRicercaOperatore.controls['codiceFiscale']" ></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div> <!-- /Codice fiscale -->
+
+      <!-- Partita IVA -->
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-label>Partita IVA</mat-label>
+          <input matInput formControlName="partitaIva" [textMask]="{mask:ivaMask, guide:false}">
+          <mat-icon matSuffix [matTooltipPosition]="'above'" [matTooltip]="toolTipPrtIva">info</mat-icon>
+          <mat-error>
+            <app-control-messages [control]="formRicercaOperatore.controls['partitaIva']" ></app-control-messages>
+          </mat-error>
+        </mat-form-field>
+      </div> <!-- /Partita IVA -->
+    </div> <!-- /Container form input -->
+  </form>
+
+  <div class="row justify-content-between mt-2"> <!-- buttons container -->
+    <div class="ms-auto col-auto">
+      <button mat-raised-button
+              class="btn btn--primary"
+              matTooltip="Compilare almeno un campo per procedere"
+              aria-label="cerca operatore, compilare almeno un campo"
+              (click)="onCercaOperatore()">
+        Cerca
+      </button>
+    </div>
+  </div> <!-- /buttons container -->
+
+</div>
+
+<div mat-dialog-content class="dailog-content">
+  <div *ngIf="showTableRiceOperatore"
+        class="container-fluid mt-3">
+    <app-table  #table
+        [buttonList]="buttonsTabellaROperatore"
+        [tableSettings]="tableSettingsROperatore"
+        [rowData]="rowDataROperatore"
+        [columnList]="columnListROperatore"
+        [keepPagination]="true">
+    </app-table>
+  </div> <!-- /container-fluid -->
+</div> <!-- /mat-dialog-content  -->
+
+
+<mat-dialog-actions class="dialog-bottom-actions">
+  <button mat-dialog-close
+         mat-raised-button
+         aria-label="annulla"
+         class="btn btn--outline-primary">
+    ANNULLA
+  </button>
+
+  <button
+          *ngIf="this.dialogSettings!.buttons![1]"
+          mat-dialog-close
+          aria-label="aggiungi nuovo ente"
+          class="btn btn--outline-primary"
+          (click)="onAggiungiNuovoEnte()">
+    AGGIUNGI NUOVO ENTE
+  </button>
+ <div  [matTooltip]="'Selezionare un riga sulla tabella per procedere'"
+       [matTooltipPosition]="'above'">
+  <button mat-button
+          class="btn btn--primary"
+          aria-label="conferma operatore selezionato"
+          (click)="onConfermaModale()"
+          [disabled]="!showTableRiceOperatore">
+    Conferma
+  </button>
+ </div>
+</mat-dialog-actions>
+
+

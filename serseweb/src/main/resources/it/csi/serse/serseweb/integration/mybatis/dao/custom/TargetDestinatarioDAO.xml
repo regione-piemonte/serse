@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.csi.serse.serseweb.integration.mybatis.dao.custom.TargetDestinatarioDAO">
+	<resultMap type="it.csi.serse.serseweb.integration.mybatis.dto.custom.TargetDestinatarioDTO" id="targetDestinatario">
+		<id column="id_target_destinatario" javaType="long" property="idTargetDestinatario"/>
+		<result column="descr_target_destinatario" javaType="string" property="descrDestinatario" />
+	</resultMap>
+	
+	<select id="getElencoTargetDestinatariForModello" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_modello_intervento_pso_target_destinatario miptd 
+				ON dtd.id_target_destinatario = miptd.id_target_destinatario 
+		WHERE miptd.id_pso = #{idPso}
+		AND miptd.id_modello_di_intervento = #{idModelloIntervento}
+	
+	</select>
+	
+	<select id="getElencoTargetDestinatariForModelloServizioPso" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	distinct dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_modello_intervento_pso_target_destinatario miptd 
+				ON dtd.id_target_destinatario = miptd.id_target_destinatario 
+				JOIN serse_t_intervento inter
+				ON inter.id_modello_di_intervento = miptd.id_modello_di_intervento
+				JOIN serse_t_servizio serv
+				ON serv.id_intervento = inter.id_intervento
+		WHERE miptd.id_pso = #{idPso}
+		AND miptd.id_modello_di_intervento = #{idModelloIntervento}
+	
+	</select>
+	
+	<select id="getElencoTargetDestinatariForPSO" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_pso_target_destinatario ptd 
+				ON dtd.id_target_destinatario = ptd.id_target_destinatario 
+		WHERE ptd.id_pso = #{idPso}
+	</select>
+	
+	
+	<select id="getElencoTargetDestinatariServizioForModello" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_modello_intervento_pso_target_destinatario miptd 
+				ON dtd.id_target_destinatario = miptd.id_target_destinatario 
+		WHERE miptd.id_pso = #{idPso}
+		AND miptd.id_modello_di_intervento = #{idModelloIntervento}
+	
+	</select>
+	
+	<select id="getElencoTargetDestinatariServizioForPSO" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	distinct dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_servizio_pso_target_destinatario sptd
+				ON dtd.id_target_destinatario = sptd.id_target_destinatario
+		WHERE sptd.id_pso = #{idPso}
+	</select>
+	
+	<select id="getElencoTargetDestinatariForPSOServizio" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	distinct dtd.id_target_destinatario, 
+				dtd.descr_target_destinatario 
+		FROM 	
+				serse.serse_d_target_destinatario dtd
+				JOIN serse_r_servizio_pso_target_destinatario sptd 
+				ON dtd.id_target_destinatario = sptd.id_target_destinatario
+		WHERE sptd.id_pso = #{idPso}
+		AND sptd.id_servizio = #{idServizio}
+	</select>
+
+	<select id="getElencoTargetDestinatariForIdServizio" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	distinct dtd.id_target_destinatario,
+		dtd.descr_target_destinatario
+		FROM
+		serse.serse_d_target_destinatario dtd
+		JOIN serse_r_servizio_pso_target_destinatario sptd
+		ON dtd.id_target_destinatario = sptd.id_target_destinatario
+		WHERE sptd.id_servizio = #{idServizio}
+	</select>
+
+	<select id="getElencoTargetDestinatariForIdIntervento" parameterType="map" resultMap="targetDestinatario">
+		SELECT 	distinct dtd.id_target_destinatario,
+		dtd.descr_target_destinatario
+		FROM
+		serse.serse_d_target_destinatario dtd
+		JOIN serse_r_servizio_pso_target_destinatario sptd
+		ON dtd.id_target_destinatario = sptd.id_target_destinatario
+		JOIN serse_t_servizio ser
+		ON sptd.id_servizio = ser.id_servizio
+		WHERE ser.id_intervento = #{idIntervento}
+	</select>
+</mapper>

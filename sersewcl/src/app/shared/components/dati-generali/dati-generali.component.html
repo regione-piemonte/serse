@@ -1,0 +1,116 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- <mat-card class="border mb-3"> -->
+
+<mat-card-header>
+  <mat-card-title>
+    <!-- Titolo -->
+      <h3 class="mb-5">Dati generali</h3>
+  </mat-card-title>
+
+    <!-- Descrizione titolo -->
+  <!-- <mat-card-subtitle>
+    <div class="row mb-3">
+      <p>Identificativo {{riferimentoA}}: <strong>{{ identificativo ? identificativo:'N.D.'}}</strong></p>
+    </div>
+  </mat-card-subtitle> -->
+</mat-card-header>
+
+
+<mat-card-content>
+<form [formGroup]="formGrup">
+
+<!-- Form -->
+<div class="container-fluid">
+  <!-- Titolo -->
+  <div class="row">
+    <mat-form-field appearance="legacy">
+      <mat-label>Titolo</mat-label>
+      <input matInput formControlName ="titolo" maxlength="100">
+      <mat-error>
+        <app-control-messages [control]="formGrup.controls['titolo']|castFromControl"></app-control-messages>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Descrizione -->
+  <div class="row">
+    <mat-form-field appearance="legacy">
+      <mat-label>Descrizione</mat-label>
+      <textarea matInput formControlName ="descrizione" [maxlength]="maxLengthDescrizione" ></textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- IstanzaCand | tipoMod -->
+  <div class="row">
+
+    <!-- IstanzaCand -->
+    <div class="col-12">
+      <mat-form-field
+            appearance="legacy"
+            style="width: 100%;">
+        <mat-label>Seleziona un'istanza di candidatura</mat-label>
+
+        <mat-select formControlName ="candidatura"
+                      [value]="null">
+          <mat-option [value]="null">--</mat-option>
+          <mat-option *ngFor="let istanza of candidaturaList;
+                              index as i;" [value]="i.toString()">
+            {{istanza}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-control-messages [control]="formGrup.controls['candidatura']|castFromControl"></app-control-messages>
+        </mat-error>
+
+      </mat-form-field>
+    </div>
+
+
+    <!-- Tipo Modello/Intervento-->
+    <div class="col-6">
+      <mat-form-field
+          appearance="legacy"
+          style="width: 100%;">
+        <mat-label>Seleziona un tipo di {{riferimentoA}}</mat-label>
+        <mat-select formControlName ="tipo"
+                      [value]="null">
+            <mat-option [value]="null">--</mat-option>
+              <mat-option *ngFor="let tipo of tipoList;
+                            index as i;" [value]="i.toString()">
+                {{tipo}}
+            </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-control-messages [control]="formGrup.controls['tipo']|castFromControl"></app-control-messages>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+</div>
+</form>
+</mat-card-content>
+
+<!-- </mat-card> -->

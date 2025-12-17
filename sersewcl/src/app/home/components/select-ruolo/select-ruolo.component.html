@@ -1,0 +1,121 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- Selezione Ruolo  -->
+<mat-card>
+  <form [formGroup]="ruoloForm">
+  <mat-card-content class="p-3">
+
+
+<!--widget error-->
+<app-widget-error
+  *ngIf="error"
+  class="mb-2"
+  [title]="'Errore'"
+  [message]="[error.message]"
+  [contentClass]="'card-body--danger'">
+</app-widget-error>
+
+
+    <!-- Lista Ruoli da selezionare con un formControl -->
+    <div class="row">
+      <mat-form-field class="w-100" appearance="legacy">
+        <mat-select placeholder="Selezionare un Ruolo"
+                  formControlName="ruoloSelect">
+          <mat-option *ngFor="let ruolo of ruoli "
+                      [value]="ruolo.codiceRuolo"
+                      (onSelectionChange)="onSelectionRuolo(ruolo, $event)">
+            {{ruolo.descrizione}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+    <!-- Un container che permette di visualizzare gli input nel caso la condizione sia corretta -->
+    <ng-container *ngIf="ruoloForm.get('ruoloSelect')?.value==='SERVIZIO_ASSISTENZA_SERSE' || ruoloForm.get('ruoloSelect')?.value==='FUNZIONARIO_MASTER_SERSE' ;
+                       else notAssistenza">
+      <form formGroupName="operatoreGroup">
+        <fieldset>
+          <div class="row mt-4 align-items-center">
+
+            <div class="col-md-12 col-lg-3"><legend>Operatore:</legend></div>
+            <div class="col-md-12 col-lg-3">
+              <mat-form-field class="w-100"appearance="legacy">
+                <mat-label>Gruppo</mat-label>
+                <input matInput
+                        placeholder="Ex. A"
+                        formControlName="gruppo"
+                        [textMask]="{mask:gruppoMask}">
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 col-lg-3">
+              <mat-form-field class="w-100" appearance="legacy">
+                <mat-label>Codice</mat-label>
+                <input matInput
+                        placeholder="Ex. 666666"
+                        formControlName="codice"
+                        [textMask]="{mask:operatoreMask, guide:false}">
+
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+
+      </form>
+    </ng-container>
+
+    <!-- ng template ch visualizza l'alternativa e cioè la lista degli operatori -->
+    <ng-template #notAssistenza>
+      <div class="row mt-4">
+        <mat-form-field class="w-100" appearance="legacy">
+          <mat-select placeholder="Selezionare un operatore"
+                    formControlName="operatoreSelect">
+            <mat-option *ngFor="let operatore of infoOperatoriList;"
+                                [value]="operatore.codOperatore"
+                                (onSelectionChange)="onSelectionOperatore(operatore, $event)">
+              {{operatore.descrOperatore}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-template>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions [align]="'end'" class="pe-4 pb-2">
+    <button
+        class="btn btn--primary"
+        aria-label="conferma scelta ruolo"
+        (click)="onConferma()">
+      CONFERMA</button>
+  </mat-card-actions>
+  </form>
+
+  <!-- TODO -->
+  <!-- Da Gestire il caso di nessun ruolo -->
+  <!-- Attenzione: nessun ruolo previsto per questo applicativo -->
+</mat-card>
+
+

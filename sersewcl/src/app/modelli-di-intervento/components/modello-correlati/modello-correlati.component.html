@@ -1,0 +1,91 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<!-- -------------------------------Target Destinatari------------------------------- -->
+<app-target-destinatari
+    [targetDestinatariElenco$]="(targetDestinatari$)"
+    [targetDestinatariAssociatiElenco$]="(targetDestinatariAssociati$)"
+
+    [isModificabile]="isModificabileCorrelati"
+
+    (elencoTargetDaInserire)="insertTargetDestinatari($event)"
+    (elencoTargetDaCancellare)="deleteTargetDestinatari($event)"
+></app-target-destinatari>
+
+<!-- -------------------------------Caratteristiche------------------------------- -->
+<app-caratteristiche
+  [caratteristiche$]="(caratteristiche$)"
+  [caratteristicheAssociate$]="(caratteristicheAssociate$)"
+
+  [isModificabile]="isModificabileCorrelati"
+  [id]="idModello"
+
+  [userCase]="'MDI'"
+  [idPso]="idPso"
+  [codFisc]="codFisc"
+
+
+  (salvaCaratteristiche)="insertCaratteristiche($event)"
+  (cancellaCaratteristiche)="deleteCaratteristiche($event)"
+></app-caratteristiche>
+
+
+<!-- -------------------------------Enti coinvolti------------------------------- -->
+<app-enti-coinvolti
+  [entiCoinvoltiAssociati$]="(entiCoinvoltiModelloAssociati$)"
+  [canAddEnte]="isModificabilePubblicato"
+  [isModificabile]="isModificabileCorrelati"
+  [isEliminabile]="isModificabileCorrelati"
+  [userCase]="'MDI'"
+  [backTo]="backToURl"
+
+  (enteDaAggiornare)="updateEnteCoinvolto($event)"
+  (enteDaCancellare)="deleteEnteCoinvolto($event)">
+</app-enti-coinvolti>
+
+<!-- -------------------------------Tipologie di servizi------------------------------- -->
+<app-tipologie-di-servizi
+    [idModello]="idModello"
+
+    [individuale]="individuale=='S' ?true :false"
+
+    [tipologieServizi$]="tipologieServiziModello$"
+    [serviziRegionali$]="serviziRegionali$"
+    [serviziRegionaliModello$]="serviziRegionaliModello$"
+    [servizioEsterno$]="servizioEsterno$"
+
+    [isModificabile]="isModificabilePubblicato"
+    [isModificabileEsterni]="stato!=40 && isModificabile"
+    [isPubblico]="stato==20"
+    (elencoRegionaliDaAggiornare)="updateServiziRegionali($event)"
+    (elencoRegionaliDaCancellare)="deleteServiziRegionali($event)"
+    (elencoRegionaliDaInserire)="insertServiziRegionali($event)"
+
+
+    (getServizioEsterno)="getServizioEsterno($event)"
+
+
+    (servizioEsternoDaAggiornare)="updateServiziEsterno($event)"
+    (servizioEsternoDaInserire)="insertServiziEsterno($event)"
+    (servizioEsternoDaCancellare)="deleteServiziEsterno($event)">
+</app-tipologie-di-servizi>

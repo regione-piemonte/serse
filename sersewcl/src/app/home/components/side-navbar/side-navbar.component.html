@@ -1,0 +1,80 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+
+      <mat-list-item  (click)="isExpanded = !isExpanded"
+                      [attr.aria-label]="isExpanded ? 'chiudi menù' : 'apri menù'"
+                      [ngClass]="isExpanded ? 'px-5' : ''"
+                      class="list-menu--openclose">
+        <img [src]="'../serseweb/assets/icons/' + (isExpanded ? 'menu-close.svg' : 'menu-open.svg')" [attr.alt]="isExpanded ? 'chiudi menù' : 'apri menù'">
+      </mat-list-item>
+
+      <div *ngFor="let singleItem of navbarItemsList" >
+        <a class="matListItem"
+          [routerLink]="null"
+          href="#"
+        >
+        <mat-list-item
+        class="matListItem2"
+        routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive"
+        [class.list-item--home]="singleItem.label === 'Home'"
+        [class.list-item-active]="routerLinkActiveInstance.isActive"
+        [attr.aria-label]="routerLinkActiveInstance.isActive ? 'La voce di menu ' + singleItem.label + ' è attiva' : 'La voce di menu ' + singleItem.label + ' non è attiva'"
+        *ngIf="!singleItem.isSubSection || isExpanded"
+
+        (click)="!singleItem.isSubSection && singleItem.label!=='Home'
+                ?'javascript:void(0)'
+                :navigate(singleItem.path, singleItem.isSubSection || singleItem.label=== 'Home')"
+        [ngClass]="{'categoriaSideMenu':!singleItem.isSubSection && singleItem.label!=='Home', 'menu-expanded px-4': isExpanded}">
+
+        <mat-icon  mat-list-icon
+                   svgIcon={{singleItem.icon}}
+                   [ngClass]="{'me-2' : singleItem.icon}"
+                   style="height: 50px;"></mat-icon>
+        <span [hidden] = "!isExpanded"
+              class="menu-item">
+              {{singleItem.label}}</span>
+      </mat-list-item>
+    </a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Content - rendered Content for the current router path into the <router-outlet>, e.g. /dashboard or /info-->
+  <mat-sidenav-content class="pt-4 pb-5 px-3">
+    <!-- Handle pso selected -->
+    <app-info-scelta></app-info-scelta>
+    <div class="mb-4"></div>
+
+    <router-outlet>
+    </router-outlet>
+
+
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

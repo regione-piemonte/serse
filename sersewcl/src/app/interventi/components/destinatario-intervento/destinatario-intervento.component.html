@@ -1,0 +1,101 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="border mb-3">
+<mat-card-header>
+  <h5 mat-card-title>
+    Destinatario intervento
+  </h5>
+</mat-card-header>
+<mat-divider></mat-divider>
+
+<mat-card-content class="ps-5 pe-5 mt-3">
+<ng-container *ngIf="!destinatario; else infoDestinatario">
+  Nessun destinatario selezionato
+</ng-container>
+<ng-template #infoDestinatario>
+<div class="container-fluid">
+  <div class="row border-bottom mb-2">
+    <div class="col-2"><Strong>Codice fiscale</Strong></div>
+    <div class="col-1"><Strong>Cognome</Strong></div>
+    <div class="col-1"><Strong>Nome</Strong></div>
+    <div class="col-2"><Strong>Data di nascita</Strong></div>
+    <div class="col-2"><Strong>Luogo di nascita</Strong></div>
+    <div class="col-2 me-auto"></div>
+    <div class="col-2"></div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-2"> {{destinatario?.codiceFiscaleDestinatario}} </div>
+    <div class="col-1"> {{destinatario?.cognomeDestinatario}} </div>
+    <div class="col-1"> {{destinatario?.nomeDestinatario}}</div>
+    <div class="col-2"> {{destinatario?.dNascita! | customDate}}</div>
+    <div class="col-2"> {{destinatario?.comuneNascita
+                                      ?destinatario?.comuneNascita?.descrizioneComune
+                                      :destinatario?.statoEsteroNascita?.decrizioneStato}}</div>
+    <div class="col-2 me-auto"></div>
+    <div class="col-2">
+      <button *ngIf="isModificabile && stato == 10"
+              (click)="apriModaleModificaDestinatario()"
+              aria-label="modifica dati destinatario"
+              mat-icon-button
+              class="btn btn-link--primary"
+              matTooltip="modifica destinatario">
+        <mat-icon>{{penIcon}}</mat-icon>
+      </button>
+      <button *ngIf="!isModificabile || stato != 10"
+              (click)="apriModaleVisualizzaDestinatario()"
+              aria-label="visualizza dati destinatario"
+              class="btn btn-link--primary"
+              mat-icon-button>
+        <mat-icon>{{eyeIcon}}</mat-icon>
+      </button>
+      <button *ngIf="isModificabile && stato == 10"
+              (click)="navigateToGeastioneDestinatari()"
+              aria-label="sostituisci destinatario"
+              class="btn btn-link--primary"
+              mat-icon-button
+              matTooltip="sostituisci destinatario">
+        <mat-icon>{{swapIcon}}</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+</ng-template>
+</mat-card-content>
+
+<mat-divider></mat-divider>
+<mat-card-actions
+    [align]="'start'">
+  <button *ngIf="!destinatario"
+          mat-button
+          (click)="navigateToGeastioneDestinatari()"
+          aria-label="aggiungi destinatario"
+          class="btn btn--plain-text--primary">
+    AGGIUNGI DESTINATARI
+  </button>
+</mat-card-actions>
+
+
+
+
+</mat-card>

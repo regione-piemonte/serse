@@ -1,0 +1,76 @@
+<!--
+ * @license
+ *
+ * Copyright © 2025 Regione Piemonte
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ * or
+ * https://opensource.org/license/EUPL-1.2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ -->
+
+<mat-card class="btn shadow-lg"
+          cdkMenuItem
+          [cdkMenuTriggerFor]="menu"
+          class="card-btn--menu">
+  <mat-card-content>
+    <div class="container d-flex">
+      <div class="row justify-content-center align-self-center w-100 ps-2"
+          style="min-height: 100px;">
+        <div class="col-2 align-self-center">
+          <mat-icon svgIcon={{selectedIcon}} class="icon-card--service">
+          </mat-icon>
+        </div>
+        <div class="col-xl-9 col-6 align-self-center me-auto">
+          <span class="h5" >{{label}}</span>
+        </div>
+        <div class="col-1 align-self-center">
+          <mat-icon svgIcon={{downRowIcon}}
+                    class="me-5 icon-arrow"
+                    [ngClass]="{'up': isOpened, 'down':!isOpened}">
+          </mat-icon>
+        </div>
+        </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- <div class="p-0 shadow">
+  <button mat-button
+
+          class="btn-home-link"
+          style="min-height: 100px;">
+
+    <mat-icon class="me-5 icon-card-section">home</mat-icon>
+
+  </button>
+</div> -->
+
+<ng-template #menu>
+  <div class="menu-home border shadow" cdkMenu role="list" [ngStyle]="{'width': menuWidth + 'px', 'max-width': menuWidth + 'px'}">
+    <button class="menu-home-item"
+      attr.aria-label="{{labelMenu[0]}}"
+      role="listitem"
+      cdkMenuItem (click)="navigate(true)">
+      {{labelMenu[0]}}</button>
+    <button
+      *ngIf="labelMenu[1]"
+      role="listitem"
+      class="menu-home-item"
+      attr.aria-label="{{labelMenu[1]}}"
+      cdkMenuItem (click)="navigate(false)">
+      {{labelMenu[1]}}
+    </button>
+  </div>
+</ng-template>
