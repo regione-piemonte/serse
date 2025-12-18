@@ -13,18 +13,20 @@ categories:
   - customer-service-and-support
 organisation:
   uri: urn:x-italian-pa:r_piemon
+fundedBy:
+  - name: Regione Piemonte
+    uri: urn:x-italian-pa:r_piemon
 developmentStatus: stable
 softwareType: standalone/web
 description:
   it:
     shortDescription: SERSE - Sistema di Erogazione Servizi
-    longDescription: >-
-      Serse è un nuovo sistema dedicato all’erogazione dei servizi individuali
-      e di gruppo. Le funzioni comprese nel sistema saranno ad uso dei
-      “soggetti attuatori”, ossia dei soggetti deputati all’erogazione dei servizi
-      oggetto di finanziamento, nell’ambito delle candidature in cui sono
-      coinvolti in qualità di Beneficiari o di eventuali Componenti del
-      Raggruppamento Temporaneo. 
+    longDescription: "Serse è un nuovo sistema dedicato all’erogazione dei servizi
+      individuali e di gruppo. Le funzioni comprese nel sistema saranno ad uso
+      dei “soggetti attuatori”, ossia dei soggetti deputati all’erogazione dei
+      servizi oggetto di finanziamento, nell’ambito delle candidature in cui
+      sono coinvolti in qualità di Beneficiari o di eventuali Componenti del
+      Raggruppamento Temporaneo. "
     features:
       - Gestione Servizi
       - Gestione Interventi
@@ -43,6 +45,10 @@ localisation:
 IT:
   countryExtensionVersion: "1.0"
   piattaforme:
+    spid: false
+    cie: false
     anpr: false
     pagopa: false
     io: false
+  riuso:
+    codiceIPA: r_piemon
